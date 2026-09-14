@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>方向 A · Ops Console — AI Mange</title>
+<style>
+  :root {
+    --bg: #0B0D10;
+    --panel: #12161B;
+    --panel-2: #181D24;
+    --line: #252B33;
+    --text: #E8EAED;
+    --muted: #8B949E;
+    --dim: #6E7681;
+    --ok: #3FB950;
+    --warn: #D29922;
+    --err: #F85149;
+    --accent: #58A6FF;
+    --claude: #D97706;
+    --codex: #10A37F;
+    --trae: #6366F1;
+    --qoder: #0EA5E9;
+    --mimo: #FF6900;
+    --zcode: #8B5CF6;
+    --mono: "SF Mono", "Cascadia Code", Consolas, ui-monospace, monospace;
+    --sans: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+  .shell {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: 100vh;
+  }
+
+  /* sidebar */
+  .side {
+    border-right: 1px solid var(--line);
+    background: #0E1116;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .mark {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: linear-gradient(145deg, #1F6FEB, #0B3D91);
+    display: grid; place-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .brand strong { font-size: 13px; font-weight: 600; }
+  .brand span { display: block; color: var(--dim); font-size: 11px; }
+
+  .nav { padding: 12px 8px; display: flex; flex-direction: column; gap: 2px; }
+  .nav-label {
+    padding: 8px 10px 4px;
+    color: var(--dim);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    color: var(--muted);
+  }
+  .nav-item:hover { background: var(--panel-2); color: var(--text); }
+  .nav-item.active { background: #1A2332; color: var(--text); }
+  .nav-item .count {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dim); flex-shrink: 0; }
+
+  .side-foot {
+    margin-top: auto;
+    padding: 12px;
+    border-top: 1px solid var(--line);
+    color: var(--dim);
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+
+  /* main */
+  .main { min-width: 0; }
+  .top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(11,13,16,0.9);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+  .search {
+    flex: 1;
+    max-width: 420px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 7px 10px;
+    color: var(--dim);
+  }
+  .search input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+  }
+  .search kbd {
+    font-family: var(--mono);
+    font-size: 10px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1px 5px;
+    color: var(--dim);
+  }
+  .btn {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--text);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn:hover { background: var(--panel-2); border-color: #3A424C; }
+  .btn.primary {
+    background: #1F6FEB;
+    border-color: #1F6FEB;
+    color: white;
+  }
+  .btn.primary:hover { background: #388BFD; }
+
+  .content { padding: 18px; }
+
+  .page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .page-head h1 {
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .page-head p { margin: 0; color: var(--muted); }
+  .path {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 4px 8px;
+  }
+
+  /* metrics strip */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .metric {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .metric .k { color: var(--dim); font-size: 11px; margin-bottom: 4px; }
+  .metric .v {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+  .metric .v small { font-size: 12px; color: var(--muted); font-weight: 400; margin-left: 4px; }
+
+  /* toolbar */
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+  .chip {
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .chip:hover { color: var(--text); border-color: #3A424C; }
+  .chip.on {
+    background: #1A2332;
+    border-color: #2F4A6E;
+    color: var(--text);
+  }
+  .sep { width: 1px; height: 18px; background: var(--line); margin: 0 4px; }
+
+  /* table */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--dim);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    background: #0F1318;
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 11px 12px;
+    border-bottom: 1px solid #1A1F26;
+    vertical-align: middle;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:hover { background: #161B22; }
+  .name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .avatar {
+    width: 32px; height: 32px;
+    border-radius: 6px;
+    object-fit: cover;
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+  .name strong { display: block; font-weight: 600; font-size: 13px; }
+  .name span {
+    display: block;
+    color: var(--dim);
+    font-size: 11px;
+    font-family: var(--mono);
+    max-width: 280px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .agent-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .agent-tag i {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: currentColor;
+    font-style: normal;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    padding: 0 7px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-family: var(--mono);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    margin: 1px 3px 1px 0;
+  }
+  .score {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .score .bar {
+    width: 56px; height: 4px;
+    border-radius: 999px;
+    background: #21262D;
+    overflow: hidden;
+  }
+  .score .bar i {
+    display: block; height: 100%;
+    background: var(--ok);
+  }
+  .score.warn .bar i { background: var(--warn); }
+  .score.err .bar i { background: var(--err); }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    padding: 0 7px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge.ok { background: rgba(63,185,80,0.15); color: var(--ok); }
+  .badge.warn { background: rgba(210,153,34,0.15); color: var(--warn); }
+  .badge.err { background: rgba(248,81,73,0.15); color: var(--err); }
+
+  .row-actions {
+    opacity: 0;
+    transition: opacity .12s ease;
+  }
+  tr:hover .row-actions { opacity: 1; }
+  .icon-btn {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    display: inline-grid; place-items: center;
+  }
+  .icon-btn:hover { color: var(--text); background: var(--panel-2); }
+
+  @media (max-width: 960px) {
+    .shell { grid-template-columns: 1fr; }
+    .side { display: none; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand">
+      <div class="mark">AM</div>
+      <div>
+        <strong>AI Mange</strong>
+        <span>Ops Console</span>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nav-label">Workspace</div>
+      <a class="nav-item active" href="#"><span class="dot" style="background:#58A6FF"></span>All artifacts<span class="count">51</span></a>
+      <a class="nav-item" href="#"><span class="dot" style="background:#3FB950"></span>Passed<span class="count">47</span></a>
+      <a class="nav-item" href="#"><span class="dot" style="background:#F85149"></span>Failed<span class="count">4</span></a>
+      <div class="nav-label">Agents</div>
+      <a class="nav-item" href="#"><span class="dot" style="background:var(--claude)"></span>Claude Code<span class="count">18</span></a>
+      <a class="nav-item" href="#"><span class="dot" style="background:var(--codex)"></span>Codex<span class="count">9</span></a>
+      <a class="nav-item" href="#"><span class="dot" style="background:var(--trae)"></span>Trae<span class="count">6</span></a>
+      <a class="nav-item" href="#"><span class="dot" style="background:var(--qoder)"></span>Qoder<span class="count">5</span></a>
+      <a class="nav-item" href="#"><span class="dot" style="background:var(--mimo)"></span>MiMo<span class="count">8</span></a>
+      <a class="nav-item" href="#"><span class="dot" style="background:var(--zcode)"></span>ZCode<span class="count">5</span></a>
+    </nav>
+    <div class="side-foot">project · D:\2workspace\codex\ai-mange</div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <div class="search">
+        <span>⌕</span>
+        <input placeholder="搜索 skill / subagent / 路径…" />
+        <kbd>/</kbd>
+      </div>
+      <button class="btn">Rescan</button>
+      <button class="btn primary">Generate</button>
+    </header>
+
+    <div class="content">
+      <div class="page-head">
+        <div>
+          <h1>Artifacts</h1>
+          <p>统一扫描 6 个 Agent 的 skill 与 subagent，按规范校验。</p>
+        </div>
+        <div class="path">~/.claude · ~/.codex · ~/.trae · ~/.qoder · ~/.zcode</div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric"><div class="k">TOTAL</div><div class="v">51</div></div>
+        <div class="metric"><div class="k">PASS</div><div class="v" style="color:var(--ok)">47<small>/ 92%</small></div></div>
+        <div class="metric"><div class="k">FAIL</div><div class="v" style="color:var(--err)">4</div></div>
+        <div class="metric"><div class="k">ISSUES</div><div class="v">12<small>e3 w6 i3</small></div></div>
+      </div>
+
+      <div class="toolbar">
+        <button class="chip on">All</button>
+        <button class="chip">Skill</button>
+        <button class="chip">Subagent</button>
+        <span class="sep"></span>
+        <button class="chip">Global</button>
+        <button class="chip">Project</button>
+        <span class="sep"></span>
+        <button class="chip" style="border-color:#2F4A6E;color:var(--accent)">Needs review · 4</button>
+      </div>
+
+      <div class="panel">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:34%">NAME</th>
+              <th>AGENT</th>
+              <th>TYPE</th>
+              <th>TOOLS / SKILLS</th>
+              <th>SCORE</th>
+              <th>STATUS</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="name">
+                  <img class="avatar" src="../../../public/avatars/avatar-01-reviewer.jpg" alt="" />
+                  <div>
+                    <strong>code-reviewer</strong>
+                    <span>~/.claude/agents/code-reviewer.md</span>
+                  </div>
+                </div>
+              </td>
+              <td><span class="agent-tag" style="color:var(--claude)"><i></i>Claude</span></td>
+              <td>subagent</td>
+              <td>
+                <span class="pill">Read</span><span class="pill">Grep</span><span class="pill">Bash</span>
+              </td>
+              <td><span class="score"><span class="bar"><i style="width:100%"></i></span>100</span></td>
+              <td><span class="badge ok">PASS</span></td>
+              <td><div class="row-actions"><button class="icon-btn">›</button></div></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="name">
+                  <img class="avatar" src="../../../public/avatars/avatar-07-builder.jpg" alt="" />
+                  <div>
+                    <strong>pdf</strong>
+                    <span>~/.codex/skills/pdf/SKILL.md</span>
+                  </div>
+                </div>
+              </td>
+              <td><span class="agent-tag" style="color:var(--codex)"><i></i>Codex</span></td>
+              <td>skill</td>
+              <td><span class="pill">agents/openai.yaml</span></td>
+              <td><span class="score"><span class="bar"><i style="width:100%"></i></span>100</span></td>
+              <td><span class="badge ok">PASS</span></td>
+              <td><div class="row-actions"><button class="icon-btn">›</button></div></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="name">
+                  <img class="avatar" src="../../../public/avatars/avatar-13-cnagent.jpg" alt="" />
+                  <div>
+                    <strong>demo-cn-agent</strong>
+                    <span>~/.qoder/agents/demo-cn-agent.md</span>
+                  </div>
+                </div>
+              </td>
+              <td><span class="agent-tag" style="color:var(--qoder)"><i></i>Qoder</span></td>
+              <td>subagent</td>
+              <td><span class="pill">Read, Write</span></td>
+              <td><span class="score warn"><span class="bar"><i style="width:84%"></i></span>84</span></td>
+              <td><span class="badge warn">WARN</span></td>
+              <td><div class="row-actions"><button class="icon-btn">›</button></div></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="name">
+                  <img class="avatar" src="../../../public/avatars/avatar-04-illustrator.jpg" alt="" />
+                  <div>
+                    <strong>retro-avatar-illustrator</strong>
+                    <span>~/.config/mimocode/skills/retro-avatar-illustrator</span>
+                  </div>
+                </div>
+              </td>
+              <td><span class="agent-tag" style="color:var(--mimo)"><i></i>MiMo</span></td>
+              <td>skill</td>
+              <td><span class="pill">locales/zh-CN</span><span class="pill">locales/en-US</span></td>
+              <td><span class="score"><span class="bar"><i style="width:100%"></i></span>100</span></td>
+              <td><span class="badge ok">PASS</span></td>
+              <td><div class="row-actions"><button class="icon-btn">›</button></div></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="name">
+                  <img class="avatar" src="../../../public/avatars/avatar-09-bugfinder.jpg" alt="" />
+                  <div>
+                    <strong>example-plugin</strong>
+                    <span>~/.zcode/skills/example-plugin/SKILL.md</span>
+                  </div>
+                </div>
+              </td>
+              <td><span class="agent-tag" style="color:var(--zcode)"><i></i>ZCode</span></td>
+              <td>skill</td>
+              <td><span class="pill">openai.yaml missing</span></td>
+              <td><span class="score warn"><span class="bar"><i style="width:76%"></i></span>76</span></td>
+              <td><span class="badge warn">WARN</span></td>
+              <td><div class="row-actions"><button class="icon-btn">›</button></div></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="name">
+                  <img class="avatar" src="../../../public/avatars/avatar-05-tester.jpg" alt="" />
+                  <div>
+                    <strong>demo-badge-writer</strong>
+                    <span>project/.claude/skills/demo-badge-writer</span>
+                  </div>
+                </div>
+              </td>
+              <td><span class="agent-tag" style="color:var(--claude)"><i></i>Claude</span></td>
+              <td>skill</td>
+              <td><span class="pill">project</span></td>
+              <td><span class="score err"><span class="bar"><i style="width:50%"></i></span>50</span></td>
+              <td><span class="badge err">FAIL</span></td>
+              <td><div class="row-actions"><button class="icon-btn">›</button></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
