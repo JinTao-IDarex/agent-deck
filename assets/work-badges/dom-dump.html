@@ -1,0 +1,1831 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN"><head>
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="/@vite/client"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mange · Subagent / Skill 管理台</title>
+  <style type="text/css" data-vite-dev-id="D:/2workspace/codex/ai-mange/src/index.css">*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}/*
+! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com
+*//*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e5e7eb; /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+html,
+:host {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  -o-tab-size: 4;
+     tab-size: 4; /* 3 */
+  font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: "SF Mono", "Cascadia Code", Consolas, ui-monospace, monospace; /* 1 */
+  font-feature-settings: normal; /* 2 */
+  font-variation-settings: normal; /* 3 */
+  font-size: 1em; /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  letter-spacing: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+dialog {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+:disabled {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none;
+}
+  :root {
+    /* 工卡样例：外层略深暖纸 + 卡片米白 */
+    --background: 34 20% 88%;
+    --foreground: 28 10% 11%;
+    --card: 38 32% 96%;
+    --card-foreground: 28 10% 11%;
+    --popover: 38 32% 96%;
+    --popover-foreground: 28 10% 11%;
+    --primary: 28 8% 13%;
+    --primary-foreground: 38 32% 96%;
+    --secondary: 36 18% 92%;
+    --secondary-foreground: 28 10% 18%;
+    --muted: 36 16% 90%;
+    --muted-foreground: 30 8% 38%;
+    --accent: 36 20% 90%;
+    --accent-foreground: 28 10% 14%;
+    --destructive: 8 65% 42%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 34 18% 84%;
+    --input: 34 18% 84%;
+    --ring: 28 8% 16%;
+    --radius: 18px;
+    --ok: 158 35% 30%;
+    --warn: 28 65% 36%;
+    --err: 8 65% 42%;
+    --rule: 34 16% 84%;
+    --paper-edge: 34 18% 86%;
+    --ink-soft: 30 10% 32%;
+    --ink-mute: 30 8% 48%;
+  }
+
+  * {
+  border-color: hsl(var(--border));
+}
+
+  body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+}
+
+  code,
+  .font-mono {
+    font-family: "SF Mono", "Cascadia Code", Consolas, ui-monospace, monospace;
+  }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+.pointer-events-none {
+  pointer-events: none;
+}
+.fixed {
+  position: fixed;
+}
+.absolute {
+  position: absolute;
+}
+.relative {
+  position: relative;
+}
+.sticky {
+  position: sticky;
+}
+.inset-0 {
+  inset: 0px;
+}
+.inset-\[5px\] {
+  inset: 5px;
+}
+.inset-y-0 {
+  top: 0px;
+  bottom: 0px;
+}
+.left-0 {
+  left: 0px;
+}
+.left-\[50\%\] {
+  left: 50%;
+}
+.right-0 {
+  right: 0px;
+}
+.right-2 {
+  right: 0.5rem;
+}
+.right-4 {
+  right: 1rem;
+}
+.top-0 {
+  top: 0px;
+}
+.top-4 {
+  top: 1rem;
+}
+.top-\[50\%\] {
+  top: 50%;
+}
+.z-20 {
+  z-index: 20;
+}
+.z-50 {
+  z-index: 50;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+.mb-8 {
+  margin-bottom: 2rem;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mt-1\.5 {
+  margin-top: 0.375rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-2\.5 {
+  margin-top: 0.625rem;
+}
+.mt-3 {
+  margin-top: 0.75rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mt-auto {
+  margin-top: auto;
+}
+.block {
+  display: block;
+}
+.flex {
+  display: flex;
+}
+.inline-flex {
+  display: inline-flex;
+}
+.grid {
+  display: grid;
+}
+.hidden {
+  display: none;
+}
+.h-1 {
+  height: 0.25rem;
+}
+.h-1\.5 {
+  height: 0.375rem;
+}
+.h-10 {
+  height: 2.5rem;
+}
+.h-3 {
+  height: 0.75rem;
+}
+.h-3\.5 {
+  height: 0.875rem;
+}
+.h-4 {
+  height: 1rem;
+}
+.h-8 {
+  height: 2rem;
+}
+.h-9 {
+  height: 2.25rem;
+}
+.h-\[3px\] {
+  height: 3px;
+}
+.h-\[var\(--radix-select-trigger-height\)\] {
+  height: var(--radix-select-trigger-height);
+}
+.h-full {
+  height: 100%;
+}
+.max-h-64 {
+  max-height: 16rem;
+}
+.max-h-96 {
+  max-height: 24rem;
+}
+.max-h-\[60vh\] {
+  max-height: 60vh;
+}
+.max-h-\[90vh\] {
+  max-height: 90vh;
+}
+.min-h-\[80px\] {
+  min-height: 80px;
+}
+.min-h-screen {
+  min-height: 100vh;
+}
+.w-1\.5 {
+  width: 0.375rem;
+}
+.w-10 {
+  width: 2.5rem;
+}
+.w-3\.5 {
+  width: 0.875rem;
+}
+.w-4 {
+  width: 1rem;
+}
+.w-8 {
+  width: 2rem;
+}
+.w-9 {
+  width: 2.25rem;
+}
+.w-\[42\%\] {
+  width: 42%;
+}
+.w-\[min\(280px\2c 60vw\)\] {
+  width: min(280px, 60vw);
+}
+.w-full {
+  width: 100%;
+}
+.w-px {
+  width: 1px;
+}
+.min-w-0 {
+  min-width: 0px;
+}
+.min-w-\[200px\] {
+  min-width: 200px;
+}
+.min-w-\[8rem\] {
+  min-width: 8rem;
+}
+.min-w-\[var\(--radix-select-trigger-width\)\] {
+  min-width: var(--radix-select-trigger-width);
+}
+.max-w-2xl {
+  max-width: 42rem;
+}
+.max-w-6xl {
+  max-width: 72rem;
+}
+.max-w-sm {
+  max-width: 24rem;
+}
+.flex-1 {
+  flex: 1 1 0%;
+}
+.shrink-0 {
+  flex-shrink: 0;
+}
+.translate-x-\[-50\%\] {
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.translate-y-\[-50\%\] {
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.cursor-default {
+  cursor: default;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.select-none {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-\[100px_1fr\] {
+  grid-template-columns: 100px 1fr;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.items-start {
+  align-items: flex-start;
+}
+.items-center {
+  align-items: center;
+}
+.justify-start {
+  justify-content: flex-start;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-1\.5 {
+  gap: 0.375rem;
+}
+.gap-2 {
+  gap: 0.5rem;
+}
+.gap-3 {
+  gap: 0.75rem;
+}
+.gap-4 {
+  gap: 1rem;
+}
+.gap-x-3 {
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
+}
+.gap-y-1\.5 {
+  row-gap: 0.375rem;
+}
+.space-y-1\.5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.375rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.375rem * var(--tw-space-y-reverse));
+}
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+.space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
+}
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+.overflow-auto {
+  overflow: auto;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.overflow-y-auto {
+  overflow-y: auto;
+}
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+.break-all {
+  word-break: break-all;
+}
+.rounded-\[12px\] {
+  border-radius: 12px;
+}
+.rounded-\[13px\] {
+  border-radius: 13px;
+}
+.rounded-\[16px\] {
+  border-radius: 16px;
+}
+.rounded-\[18px\] {
+  border-radius: 18px;
+}
+.rounded-\[20px\] {
+  border-radius: 20px;
+}
+.rounded-\[8px\] {
+  border-radius: 8px;
+}
+.rounded-full {
+  border-radius: 9999px;
+}
+.rounded-lg {
+  border-radius: var(--radius);
+}
+.rounded-sm {
+  border-radius: calc(var(--radius) - 8px);
+}
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+.rounded-l-2xl {
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+.border {
+  border-width: 1px;
+}
+.border-0 {
+  border-width: 0px;
+}
+.border-b {
+  border-bottom-width: 1px;
+}
+.border-l {
+  border-left-width: 1px;
+}
+.border-l-2 {
+  border-left-width: 2px;
+}
+.border-r {
+  border-right-width: 1px;
+}
+.border-t {
+  border-top-width: 1px;
+}
+.border-dashed {
+  border-style: dashed;
+}
+.border-\[\#D4CBBB\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(212 203 187 / var(--tw-border-opacity, 1));
+}
+.border-\[\#E0D8C8\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(224 216 200 / var(--tw-border-opacity, 1));
+}
+.border-\[\#E4DDD0\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(228 221 208 / var(--tw-border-opacity, 1));
+}
+.border-\[\#E8E0D2\]\/70 {
+  border-color: rgb(232 224 210 / 0.7);
+}
+.border-\[\#F0C4B4\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(240 196 180 / var(--tw-border-opacity, 1));
+}
+.border-border {
+  border-color: hsl(var(--border));
+}
+.border-input {
+  border-color: hsl(var(--input));
+}
+.border-primary {
+  border-color: hsl(var(--primary));
+}
+.border-transparent {
+  border-color: transparent;
+}
+.bg-\[\#1C1917\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(28 25 23 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#E07A5F\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(224 122 95 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#E0D8C8\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(224 216 200 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#EDE6D8\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(237 230 216 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#F0EBE1\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(240 235 225 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#F6F1E8\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(246 241 232 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#F6F1E8\]\/60 {
+  background-color: rgb(246 241 232 / 0.6);
+}
+.bg-\[\#FDF0EA\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(253 240 234 / var(--tw-bg-opacity, 1));
+}
+.bg-\[hsl\(var\(--secondary\)\)\] {
+  background-color: hsl(var(--secondary));
+}
+.bg-amber-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 251 235 / var(--tw-bg-opacity, 1));
+}
+.bg-card {
+  background-color: hsl(var(--card));
+}
+.bg-destructive {
+  background-color: hsl(var(--destructive));
+}
+.bg-emerald-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(236 253 245 / var(--tw-bg-opacity, 1));
+}
+.bg-foreground\/35 {
+  background-color: hsl(var(--foreground) / 0.35);
+}
+.bg-muted {
+  background-color: hsl(var(--muted));
+}
+.bg-popover {
+  background-color: hsl(var(--popover));
+}
+.bg-primary {
+  background-color: hsl(var(--primary));
+}
+.bg-red-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));
+}
+.bg-secondary {
+  background-color: hsl(var(--secondary));
+}
+.bg-transparent {
+  background-color: transparent;
+}
+.bg-white\/70 {
+  background-color: rgb(255 255 255 / 0.7);
+}
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.object-center {
+  -o-object-position: center;
+     object-position: center;
+}
+.p-1 {
+  padding: 0.25rem;
+}
+.p-2 {
+  padding: 0.5rem;
+}
+.p-3 {
+  padding: 0.75rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+.p-5 {
+  padding: 1.25rem;
+}
+.p-6 {
+  padding: 1.5rem;
+}
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.px-3\.5 {
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.px-\[3\%\] {
+  padding-left: 3%;
+  padding-right: 3%;
+}
+.py-0\.5 {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.py-1\.5 {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.py-\[5\%\] {
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+.py-\[6\%\] {
+  padding-top: 6%;
+  padding-bottom: 6%;
+}
+.pb-20 {
+  padding-bottom: 5rem;
+}
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+.pl-2 {
+  padding-left: 0.5rem;
+}
+.pl-3 {
+  padding-left: 0.75rem;
+}
+.pr-12 {
+  padding-right: 3rem;
+}
+.pr-8 {
+  padding-right: 2rem;
+}
+.pr-\[5\%\] {
+  padding-right: 5%;
+}
+.pt-0 {
+  padding-top: 0px;
+}
+.pt-1\.5 {
+  padding-top: 0.375rem;
+}
+.pt-10 {
+  padding-top: 2.5rem;
+}
+.pt-2 {
+  padding-top: 0.5rem;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.font-mono {
+  font-family: "SF Mono", "Cascadia Code", Consolas, ui-monospace, monospace;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+.text-\[10px\] {
+  font-size: 10px;
+}
+.text-\[11px\] {
+  font-size: 11px;
+}
+.text-\[12px\] {
+  font-size: 12px;
+}
+.text-\[13px\] {
+  font-size: 13px;
+}
+.text-\[14px\] {
+  font-size: 14px;
+}
+.text-\[15px\] {
+  font-size: 15px;
+}
+.text-\[16px\] {
+  font-size: 16px;
+}
+.text-\[28px\] {
+  font-size: 28px;
+}
+.text-\[clamp\(10px\2c 0\.95vw\2c 12px\)\] {
+  font-size: clamp(10px, 0.95vw, 12px);
+}
+.text-\[clamp\(10px\2c 0\.9vw\2c 12px\)\] {
+  font-size: clamp(10px, 0.9vw, 12px);
+}
+.text-\[clamp\(12px\2c 1\.1vw\2c 15px\)\] {
+  font-size: clamp(12px, 1.1vw, 15px);
+}
+.text-\[clamp\(14px\2c 1\.5vw\2c 20px\)\] {
+  font-size: clamp(14px, 1.5vw, 20px);
+}
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.font-bold {
+  font-weight: 700;
+}
+.font-medium {
+  font-weight: 500;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.tabular-nums {
+  --tw-numeric-spacing: tabular-nums;
+  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}
+.leading-none {
+  line-height: 1;
+}
+.leading-relaxed {
+  line-height: 1.625;
+}
+.leading-tight {
+  line-height: 1.25;
+}
+.tracking-\[0\.18em\] {
+  letter-spacing: 0.18em;
+}
+.tracking-\[0\.28em\] {
+  letter-spacing: 0.28em;
+}
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
+.tracking-wide {
+  letter-spacing: 0.025em;
+}
+.text-\[\#1C1917\] {
+  --tw-text-opacity: 1;
+  color: rgb(28 25 23 / var(--tw-text-opacity, 1));
+}
+.text-\[\#2A2622\] {
+  --tw-text-opacity: 1;
+  color: rgb(42 38 34 / var(--tw-text-opacity, 1));
+}
+.text-\[\#3D3A34\] {
+  --tw-text-opacity: 1;
+  color: rgb(61 58 52 / var(--tw-text-opacity, 1));
+}
+.text-\[\#3E6B5A\] {
+  --tw-text-opacity: 1;
+  color: rgb(62 107 90 / var(--tw-text-opacity, 1));
+}
+.text-\[\#5C564E\] {
+  --tw-text-opacity: 1;
+  color: rgb(92 86 78 / var(--tw-text-opacity, 1));
+}
+.text-\[\#6B6560\] {
+  --tw-text-opacity: 1;
+  color: rgb(107 101 96 / var(--tw-text-opacity, 1));
+}
+.text-\[\#8A8078\] {
+  --tw-text-opacity: 1;
+  color: rgb(138 128 120 / var(--tw-text-opacity, 1));
+}
+.text-\[\#9A3412\] {
+  --tw-text-opacity: 1;
+  color: rgb(154 52 18 / var(--tw-text-opacity, 1));
+}
+.text-\[\#9A9188\] {
+  --tw-text-opacity: 1;
+  color: rgb(154 145 136 / var(--tw-text-opacity, 1));
+}
+.text-\[\#C2410C\] {
+  --tw-text-opacity: 1;
+  color: rgb(194 65 12 / var(--tw-text-opacity, 1));
+}
+.text-\[\#C4B8A8\] {
+  --tw-text-opacity: 1;
+  color: rgb(196 184 168 / var(--tw-text-opacity, 1));
+}
+.text-\[\#F6F1E8\] {
+  --tw-text-opacity: 1;
+  color: rgb(246 241 232 / var(--tw-text-opacity, 1));
+}
+.text-amber-800 {
+  --tw-text-opacity: 1;
+  color: rgb(146 64 14 / var(--tw-text-opacity, 1));
+}
+.text-card-foreground {
+  color: hsl(var(--card-foreground));
+}
+.text-current {
+  color: currentColor;
+}
+.text-destructive {
+  color: hsl(var(--destructive));
+}
+.text-destructive-foreground {
+  color: hsl(var(--destructive-foreground));
+}
+.text-emerald-800 {
+  --tw-text-opacity: 1;
+  color: rgb(6 95 70 / var(--tw-text-opacity, 1));
+}
+.text-foreground {
+  color: hsl(var(--foreground));
+}
+.text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+}
+.text-popover-foreground {
+  color: hsl(var(--popover-foreground));
+}
+.text-primary-foreground {
+  color: hsl(var(--primary-foreground));
+}
+.text-red-700 {
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity, 1));
+}
+.text-secondary-foreground {
+  color: hsl(var(--secondary-foreground));
+}
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.opacity-0 {
+  opacity: 0;
+}
+.opacity-50 {
+  opacity: 0.5;
+}
+.opacity-70 {
+  opacity: 0.7;
+}
+.shadow-\[0_1px_3px_rgba\(40\2c 32\2c 20\2c 0\.04\)\] {
+  --tw-shadow: 0 1px 3px rgba(40,32,20,0.04);
+  --tw-shadow-colored: 0 1px 3px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-\[0_2px_6px_rgba\(40\2c 32\2c 20\2c 0\.18\)\] {
+  --tw-shadow: 0 2px 6px rgba(40,32,20,0.18);
+  --tw-shadow-colored: 0 2px 6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-\[0_4px_12px_rgba\(40\2c 32\2c 20\2c 0\.08\)\] {
+  --tw-shadow: 0 4px 12px rgba(40,32,20,0.08);
+  --tw-shadow-colored: 0 4px 12px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-\[0_4px_16px_rgba\(40\2c 32\2c 20\2c 0\.08\)\] {
+  --tw-shadow: 0 4px 16px rgba(40,32,20,0.08);
+  --tw-shadow-colored: 0 4px 16px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-none {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-placard {
+  --tw-shadow: 0 1px 2px rgb(24 24 27 / 0.04), 0 8px 24px rgb(24 24 27 / 0.04);
+  --tw-shadow-colored: 0 1px 2px var(--tw-shadow-color), 0 8px 24px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.outline {
+  outline-style: solid;
+}
+.ring-offset-background {
+  --tw-ring-offset-color: hsl(var(--background));
+}
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.backdrop-blur-md {
+  --tw-backdrop-blur: blur(12px);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+.transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.duration-200 {
+  transition-duration: 200ms;
+}
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes enter {
+
+  from {
+    opacity: var(--tw-enter-opacity, 1);
+    transform: translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0) scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), var(--tw-enter-scale, 1)) rotate(var(--tw-enter-rotate, 0));
+  }
+}
+@keyframes exit {
+
+  to {
+    opacity: var(--tw-exit-opacity, 1);
+    transform: translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0) scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), var(--tw-exit-scale, 1)) rotate(var(--tw-exit-rotate, 0));
+  }
+}
+.duration-200 {
+  animation-duration: 200ms;
+}
+.ease-in-out {
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.file\:border-0::file-selector-button {
+  border-width: 0px;
+}
+.file\:bg-transparent::file-selector-button {
+  background-color: transparent;
+}
+.file\:text-sm::file-selector-button {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.file\:font-medium::file-selector-button {
+  font-weight: 500;
+}
+.placeholder\:text-\[\#9A9188\]::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(154 145 136 / var(--tw-text-opacity, 1));
+}
+.placeholder\:text-\[\#9A9188\]::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(154 145 136 / var(--tw-text-opacity, 1));
+}
+.placeholder\:text-muted-foreground::-moz-placeholder {
+  color: hsl(var(--muted-foreground));
+}
+.placeholder\:text-muted-foreground::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+.hover\:border-\[\#E0D8C8\]:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(224 216 200 / var(--tw-border-opacity, 1));
+}
+.hover\:bg-\[\#2A2622\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(42 38 34 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-\[\#EDE6D8\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(237 230 216 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-accent:hover {
+  background-color: hsl(var(--accent));
+}
+.hover\:bg-destructive\/90:hover {
+  background-color: hsl(var(--destructive) / 0.9);
+}
+.hover\:bg-primary\/90:hover {
+  background-color: hsl(var(--primary) / 0.9);
+}
+.hover\:bg-secondary\/80:hover {
+  background-color: hsl(var(--secondary) / 0.8);
+}
+.hover\:text-\[\#1C1917\]:hover {
+  --tw-text-opacity: 1;
+  color: rgb(28 25 23 / var(--tw-text-opacity, 1));
+}
+.hover\:text-accent-foreground:hover {
+  color: hsl(var(--accent-foreground));
+}
+.hover\:opacity-100:hover {
+  opacity: 1;
+}
+.focus\:bg-accent:focus {
+  background-color: hsl(var(--accent));
+}
+.focus\:text-accent-foreground:focus {
+  color: hsl(var(--accent-foreground));
+}
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.focus\:ring-1:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+.focus\:ring-2:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+.focus\:ring-ring:focus {
+  --tw-ring-color: hsl(var(--ring));
+}
+.focus\:ring-ring\/30:focus {
+  --tw-ring-color: hsl(var(--ring) / 0.3);
+}
+.focus-visible\:outline-none:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.focus-visible\:ring-0:focus-visible {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+.focus-visible\:ring-1:focus-visible {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+.focus-visible\:ring-2:focus-visible {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+.focus-visible\:ring-\[\#1C1917\]\/20:focus-visible {
+  --tw-ring-color: rgb(28 25 23 / 0.2);
+}
+.focus-visible\:ring-ring:focus-visible {
+  --tw-ring-color: hsl(var(--ring));
+}
+.focus-visible\:ring-ring\/30:focus-visible {
+  --tw-ring-color: hsl(var(--ring) / 0.3);
+}
+.focus-visible\:ring-ring\/40:focus-visible {
+  --tw-ring-color: hsl(var(--ring) / 0.4);
+}
+.disabled\:pointer-events-none:disabled {
+  pointer-events: none;
+}
+.disabled\:cursor-not-allowed:disabled {
+  cursor: not-allowed;
+}
+.disabled\:opacity-50:disabled {
+  opacity: 0.5;
+}
+.group:hover .group-hover\:-translate-y-0\.5 {
+  --tw-translate-y: -0.125rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.group:hover .group-hover\:border-\[\#D4CBBB\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(212 203 187 / var(--tw-border-opacity, 1));
+}
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+.group:hover .group-hover\:shadow-\[0_14px_32px_rgba\(40\2c 32\2c 20\2c 0\.12\)\] {
+  --tw-shadow: 0 14px 32px rgba(40,32,20,0.12);
+  --tw-shadow-colored: 0 14px 32px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.group:focus-visible .group-focus-visible\:opacity-100 {
+  opacity: 1;
+}
+.group:focus-visible .group-focus-visible\:outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.group:focus-visible .group-focus-visible\:ring-2 {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+.group:focus-visible .group-focus-visible\:ring-\[\#3F3F46\]\/30 {
+  --tw-ring-color: rgb(63 63 70 / 0.3);
+}
+.peer:disabled ~ .peer-disabled\:cursor-not-allowed {
+  cursor: not-allowed;
+}
+.peer:disabled ~ .peer-disabled\:opacity-70 {
+  opacity: 0.7;
+}
+.data-\[disabled\]\:pointer-events-none[data-disabled] {
+  pointer-events: none;
+}
+.data-\[side\=bottom\]\:translate-y-1[data-side="bottom"] {
+  --tw-translate-y: 0.25rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.data-\[side\=left\]\:-translate-x-1[data-side="left"] {
+  --tw-translate-x: -0.25rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.data-\[side\=right\]\:translate-x-1[data-side="right"] {
+  --tw-translate-x: 0.25rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.data-\[side\=top\]\:-translate-y-1[data-side="top"] {
+  --tw-translate-y: -0.25rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.data-\[state\=active\]\:border[data-state="active"] {
+  border-width: 1px;
+}
+.data-\[state\=active\]\:border-border[data-state="active"] {
+  border-color: hsl(var(--border));
+}
+.data-\[state\=active\]\:bg-card[data-state="active"] {
+  background-color: hsl(var(--card));
+}
+.data-\[state\=checked\]\:bg-primary[data-state="checked"] {
+  background-color: hsl(var(--primary));
+}
+.data-\[state\=active\]\:text-foreground[data-state="active"] {
+  color: hsl(var(--foreground));
+}
+.data-\[state\=checked\]\:text-primary-foreground[data-state="checked"] {
+  color: hsl(var(--primary-foreground));
+}
+.data-\[disabled\]\:opacity-50[data-disabled] {
+  opacity: 0.5;
+}
+.data-\[state\=closed\]\:duration-200[data-state="closed"] {
+  transition-duration: 200ms;
+}
+.data-\[state\=open\]\:duration-300[data-state="open"] {
+  transition-duration: 300ms;
+}
+.data-\[state\=open\]\:animate-in[data-state="open"] {
+  animation-name: enter;
+  animation-duration: 150ms;
+  --tw-enter-opacity: initial;
+  --tw-enter-scale: initial;
+  --tw-enter-rotate: initial;
+  --tw-enter-translate-x: initial;
+  --tw-enter-translate-y: initial;
+}
+.data-\[state\=closed\]\:animate-out[data-state="closed"] {
+  animation-name: exit;
+  animation-duration: 150ms;
+  --tw-exit-opacity: initial;
+  --tw-exit-scale: initial;
+  --tw-exit-rotate: initial;
+  --tw-exit-translate-x: initial;
+  --tw-exit-translate-y: initial;
+}
+.data-\[state\=closed\]\:fade-out-0[data-state="closed"] {
+  --tw-exit-opacity: 0;
+}
+.data-\[state\=open\]\:fade-in-0[data-state="open"] {
+  --tw-enter-opacity: 0;
+}
+.data-\[state\=closed\]\:zoom-out-95[data-state="closed"] {
+  --tw-exit-scale: .95;
+}
+.data-\[state\=open\]\:zoom-in-95[data-state="open"] {
+  --tw-enter-scale: .95;
+}
+.data-\[state\=closed\]\:slide-out-to-left[data-state="closed"] {
+  --tw-exit-translate-x: -100%;
+}
+.data-\[state\=closed\]\:slide-out-to-right[data-state="closed"] {
+  --tw-exit-translate-x: 100%;
+}
+.data-\[state\=open\]\:slide-in-from-left[data-state="open"] {
+  --tw-enter-translate-x: -100%;
+}
+.data-\[state\=open\]\:slide-in-from-right[data-state="open"] {
+  --tw-enter-translate-x: 100%;
+}
+.data-\[state\=closed\]\:duration-200[data-state="closed"] {
+  animation-duration: 200ms;
+}
+.data-\[state\=open\]\:duration-300[data-state="open"] {
+  animation-duration: 300ms;
+}
+@media (min-width: 640px) {
+
+  .sm\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
+  .sm\:block {
+    display: block;
+  }
+
+  .sm\:max-w-2xl {
+    max-width: 42rem;
+  }
+
+  .sm\:max-w-xl {
+    max-width: 36rem;
+  }
+
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+
+  .sm\:justify-end {
+    justify-content: flex-end;
+  }
+
+  .sm\:justify-between {
+    justify-content: space-between;
+  }
+
+  .sm\:space-x-2 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .sm\:text-\[36px\] {
+    font-size: 36px;
+  }
+
+  .sm\:leading-\[1\.15\] {
+    line-height: 1.15;
+  }
+}
+@media (min-width: 768px) {
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1280px) {
+
+  .xl\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .xl\:gap-5 {
+    gap: 1.25rem;
+  }
+}
+.\[\&\>span\]\:line-clamp-1>span {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.\[\&_svg\]\:pointer-events-none svg {
+  pointer-events: none;
+}
+.\[\&_svg\]\:size-4 svg {
+  width: 1rem;
+  height: 1rem;
+}
+.\[\&_svg\]\:shrink-0 svg {
+  flex-shrink: 0;
+}
+</style></head>
+  <body>
+    <div id="root"><div class="min-h-screen"><header class="sticky top-0 z-20 border-b border-[#E0D8C8] bg-[#F6F1E8]/92 backdrop-blur-md"><div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-4"><div class="flex items-center gap-3"><div class="flex h-10 w-10 items-center justify-center rounded-[12px] bg-[#1C1917] text-[12px] font-bold tracking-wide text-[#F6F1E8] shadow-[0_2px_6px_rgba(40,32,20,0.18)]">AM</div><div><h1 class="text-[16px] font-bold tracking-tight text-[#1C1917]">AI Mange 工卡墙</h1><p class="text-[12px] text-[#6B6560]">Subagent &amp; Skill · 横向工卡目录</p></div></div><div class="flex flex-wrap items-center gap-2"><input class="flex border px-3 py-1 shadow-none transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 disabled:cursor-not-allowed disabled:opacity-50 h-9 w-[min(280px,60vw)] rounded-full border-[#E0D8C8] bg-white/70 text-[13px] placeholder:text-[#9A9188] focus-visible:ring-[#1C1917]/20" placeholder="搜索姓名、职责或工具…" value=""><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 px-4 h-9 rounded-full text-[13px] text-[#5C564E] hover:bg-[#EDE6D8] hover:text-[#1C1917]">生成</button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-9 rounded-full bg-[#1C1917] px-4 text-[13px] text-[#F6F1E8] hover:bg-[#2A2622]">扫描</button></div></div></header><main class="mx-auto max-w-6xl px-6 pb-20 pt-10"><section class="mb-10 max-w-2xl"><div class="mb-3 flex items-center gap-3"><span class="h-1 w-10 rounded-full bg-[#E07A5F]" aria-hidden="true"></span><p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8A8078]">Directory</p></div><h2 class="text-3xl font-bold tracking-tight text-[#1C1917] sm:text-[36px] sm:leading-[1.15]">每位 Agent<br class="hidden sm:block">一张横放纸牌工卡</h2><p class="mt-3 text-[15px] leading-relaxed text-[#5C564E]">7:5 纸牌横放比例，左侧肖像、右侧职责与工具。点击卡片打开完整档案。</p></section><section class="mb-8 flex flex-wrap items-center gap-3 rounded-[16px] border border-[#E4DDD0] bg-[#F6F1E8] px-4 py-3 shadow-[0_1px_3px_rgba(40,32,20,0.04)]"><span class="text-[12px] font-medium text-[#8A8078]">项目</span><input class="flex w-full rounded-lg border-input py-1 transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring/30 disabled:cursor-not-allowed disabled:opacity-50 h-8 min-w-[200px] flex-1 border-0 bg-transparent px-0 font-mono text-[12px] text-[#3D3A34] shadow-none focus-visible:ring-0" spellcheck="false" value="D:\2workspace\codex\ai-mange"><div class="flex items-center gap-3 text-[12px] text-[#6B6560]"><span><strong class="font-semibold text-[#1C1917]">51</strong> 件</span><span class="h-3 w-px bg-[#E0D8C8]"></span><span class="text-[#3E6B5A]">47 通过</span><span class="text-[#C2410C]">4 异常</span></div></section><section class="mb-8 flex flex-col gap-3"><div class="flex flex-wrap items-center gap-2"><button type="button" class="rounded-full px-3.5 py-1.5 text-[13px] transition-colors bg-[#1C1917] text-[#F6F1E8]">全部</button><button type="button" class="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[13px] transition-colors text-[#6B6560] hover:bg-[#EDE6D8] hover:text-[#1C1917]"><span class="h-1.5 w-1.5 rounded-full" style="background-color: rgb(217, 119, 6);"></span>Claude Code</button><button type="button" class="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[13px] transition-colors text-[#6B6560] hover:bg-[#EDE6D8] hover:text-[#1C1917]"><span class="h-1.5 w-1.5 rounded-full" style="background-color: rgb(16, 163, 127);"></span>Codex</button><button type="button" class="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[13px] transition-colors text-[#6B6560] hover:bg-[#EDE6D8] hover:text-[#1C1917]"><span class="h-1.5 w-1.5 rounded-full" style="background-color: rgb(99, 102, 241);"></span>Trae</button><button type="button" class="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[13px] transition-colors text-[#6B6560] hover:bg-[#EDE6D8] hover:text-[#1C1917]"><span class="h-1.5 w-1.5 rounded-full" style="background-color: rgb(14, 165, 233);"></span>Qoder</button><button type="button" class="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[13px] transition-colors text-[#6B6560] hover:bg-[#EDE6D8] hover:text-[#1C1917]"><span class="h-1.5 w-1.5 rounded-full" style="background-color: rgb(255, 105, 0);"></span>MiMo</button><button type="button" class="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[13px] transition-colors text-[#6B6560] hover:bg-[#EDE6D8] hover:text-[#1C1917]"><span class="h-1.5 w-1.5 rounded-full" style="background-color: rgb(139, 92, 246);"></span>ZCode</button></div><div class="flex flex-wrap gap-2"><button type="button" class="rounded-full border px-3 py-1 text-[12px] transition-colors border-transparent text-[#8A8078] hover:border-[#E0D8C8] hover:text-[#1C1917]">Skill</button><button type="button" class="rounded-full border px-3 py-1 text-[12px] transition-colors border-transparent text-[#8A8078] hover:border-[#E0D8C8] hover:text-[#1C1917]">Subagent</button><button type="button" class="rounded-full border px-3 py-1 text-[12px] transition-colors border-transparent text-[#8A8078] hover:border-[#E0D8C8] hover:text-[#1C1917]">全局</button><button type="button" class="rounded-full border px-3 py-1 text-[12px] transition-colors border-transparent text-[#8A8078] hover:border-[#E0D8C8] hover:text-[#1C1917]">项目级</button></div></section><section class="grid grid-cols-1 items-start gap-4 md:grid-cols-2 xl:grid-cols-2 xl:gap-5"><article role="button" tabindex="0" aria-label="打开 Open Peeps 形象" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="open-peeps-identity" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p28-bangs-mustard.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">Open Peeps 形象</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(224, 122, 95);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="待修复" style="border-color: rgb(224, 122, 95); color: rgb(194, 65, 12);">50</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Claude Code</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(224, 122, 95); color: rgb(224, 122, 95);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(224, 122, 95); color: rgb(224, 122, 95);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(194, 65, 12);">待修复</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(224, 122, 95);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 技术解说页" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="tech-explainer-page" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p05-silver-purple.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">技术解说页</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(224, 122, 95);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(224, 122, 95); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Claude Code</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(224, 122, 95); color: rgb(224, 122, 95);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(224, 122, 95); color: rgb(224, 122, 95);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(224, 122, 95);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 工卡文案" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="demo-badge-writer" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p25-polo-teal.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">工卡文案</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(224, 122, 95);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(224, 122, 95); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Claude Code</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(224, 122, 95); color: rgb(224, 122, 95);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(224, 122, 95); color: rgb(224, 122, 95);">项目级</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(224, 122, 95);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 demo-code-reviewer" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="demo-code-reviewer" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/portrait-02-glasses-indigo.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">demo-code-rev…</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(224, 122, 95);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(224, 122, 95); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Claude Code</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(224, 122, 95); color: rgb(224, 122, 95);">Subagent</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(224, 122, 95); color: rgb(224, 122, 95);">项目级</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Read · Grep · Glob</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(224, 122, 95);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 hatch-pet" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="hatch-pet" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p27-cap-indigo.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">hatch-pet</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(42, 157, 143);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(42, 157, 143); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Codex</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(42, 157, 143); color: rgb(42, 157, 143);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(42, 157, 143); color: rgb(42, 157, 143);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(42, 157, 143);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 pdf" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="pdf" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/portrait-05-casual-purple.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">pdf</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(42, 157, 143);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(42, 157, 143); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Codex</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(42, 157, 143); color: rgb(42, 157, 143);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(42, 157, 143); color: rgb(42, 157, 143);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(42, 157, 143);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 TRAE-code-review" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="TRAE-code-review" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p30-shaved-terracotta.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">TRAE-code-rev…</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(61, 90, 128); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 TRAE-debugger" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="TRAE-debugger" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p30-shaved-terracotta.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">TRAE-debugger</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(61, 90, 128); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 TRAE-generate-mini-app" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="TRAE-generate-mini-app" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p11-locs-terracotta.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">TRAE-generate…</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(61, 90, 128); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-approval" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-approval" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p27-cap-indigo.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-approval</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-attendance" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-attendance" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p21-cans-purple.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-attendan…</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="一般" style="border-color: rgb(61, 90, 128); color: rgb(188, 108, 37);">84</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(188, 108, 37);">一般</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-base" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-base" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p27-cap-indigo.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-base</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-calendar" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-calendar" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/portrait-04-blazer-brown.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-calendar</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-contact" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-contact" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p20-curly-mustard2.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-contact</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-doc" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-doc" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p24-collarbone-purple.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-doc</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-drive" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-drive" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/portrait-02-glasses-indigo.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-drive</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-event" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-event" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p01-crew-coral.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-event</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-im" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-im" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/portrait-02-glasses-indigo.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-im</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-mail" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-mail" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p11-locs-terracotta.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-mail</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-markdown" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-markdown" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p05-silver-purple.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-markdown</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-minutes" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-minutes" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p19-glasses-hoodie.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-minutes</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-note" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-note" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p12-crew-indigo.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-note</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-okr" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-okr" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p15-streak-clay.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-okr</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-openapi-explorer" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-openapi-explorer" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p30-shaved-terracotta.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-openapi-…</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-shared" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-shared" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p20-curly-mustard2.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-shared</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-sheets" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-sheets" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p15-streak-clay.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-sheets</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-skill-maker" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-skill-maker" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p05-silver-purple.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-skill-ma…</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-slides" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-slides" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p11-locs-terracotta.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-slides</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-task" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-task" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p10-part-slate.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-task</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-vc" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-vc" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p27-cap-indigo.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-vc</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-vc-agent" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-vc-agent" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p07-bangs-terracotta.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-vc-agent</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-whiteboard" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-whiteboard" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p12-crew-indigo.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-whiteboa…</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-wiki" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-wiki" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p19-glasses-hoodie.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-wiki</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-workflow-meeting-summary" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-workflow-meeting-summary" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p04-vest-indigo.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-workflow…</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 lark-workflow-standup-report" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="lark-workflow-standup-report" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p10-part-slate.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">lark-workflow…</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(61, 90, 128); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 retro-avatar-illustrator" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="retro-avatar-illustrator" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p24-collarbone-purple.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">retro-avatar-…</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(61, 90, 128);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(61, 90, 128); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Trae</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(61, 90, 128); color: rgb(61, 90, 128);">项目级</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(61, 90, 128);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 commit-message" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="commit-message" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p15-streak-clay.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">commit-message</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(212, 163, 115);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(212, 163, 115); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Qoder</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(212, 163, 115); color: rgb(212, 163, 115);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(212, 163, 115); color: rgb(212, 163, 115);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(212, 163, 115);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 demo-cn-agent" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="demo-cn-agent" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p05-silver-purple.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">demo-cn-agent</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(212, 163, 115);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(212, 163, 115); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">Qoder</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(212, 163, 115); color: rgb(212, 163, 115);">Subagent</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(212, 163, 115); color: rgb(212, 163, 115);">项目级</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Read · Write · Edit</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(212, 163, 115);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 Open Peeps 形象" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="open-peeps-identity" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p28-bangs-mustard.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">Open Peeps 形象</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(231, 111, 81);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="待修复" style="border-color: rgb(231, 111, 81); color: rgb(194, 65, 12);">50</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">MiMo</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(194, 65, 12);">待修复</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(231, 111, 81);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 技术解说页" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="tech-explainer-page" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p05-silver-purple.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">技术解说页</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(231, 111, 81);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(231, 111, 81); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">MiMo</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(231, 111, 81);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 3D 创作" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="3D Creation" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p03-buns-clay.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">3D 创作</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(231, 111, 81);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="待修复" style="border-color: rgb(231, 111, 81); color: rgb(194, 65, 12);">50</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">MiMo</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(194, 65, 12);">待修复</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(231, 111, 81);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 Figma Design" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="Figma Design" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p09-bun-brown.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">Figma Design</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(231, 111, 81);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="待修复" style="border-color: rgb(231, 111, 81); color: rgb(194, 65, 12);">42</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">MiMo</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(194, 65, 12);">待修复</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(231, 111, 81);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 imagegen" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="imagegen" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p18-straight-slate.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">imagegen</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(231, 111, 81);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(231, 111, 81); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">MiMo</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(231, 111, 81);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 mimo-desktop-guide" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="mimo-desktop-guide" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p18-straight-slate.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">mimo-desktop-…</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(231, 111, 81);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(231, 111, 81); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">MiMo</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(231, 111, 81);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 mimo-skill-authoring" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="mimo-skill-authoring" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/portrait-01-knit-sage.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">mimo-skill-au…</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(231, 111, 81);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(231, 111, 81); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">MiMo</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(231, 111, 81);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 session-chat" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="session-chat" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p15-streak-clay.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">session-chat</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(231, 111, 81);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(231, 111, 81); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">MiMo</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(231, 111, 81);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 visualizer" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="visualizer" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p22-pony-coral.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">visualizer</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(231, 111, 81);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="良好" style="border-color: rgb(231, 111, 81); color: rgb(42, 157, 143);">92</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">MiMo</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(42, 157, 143);">良好</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(231, 111, 81);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 工卡文案" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="demo-badge-writer" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p25-polo-teal.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">工卡文案</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(231, 111, 81);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(231, 111, 81); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">MiMo</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">项目级</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(231, 111, 81);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 demo-code-reviewer" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="demo-code-reviewer" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/portrait-02-glasses-indigo.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">demo-code-rev…</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(231, 111, 81);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(231, 111, 81); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">MiMo</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">Subagent</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(231, 111, 81); color: rgb(231, 111, 81);">项目级</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Read · Grep · Glob</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(231, 111, 81);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 hatch-pet" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="hatch-pet" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p27-cap-indigo.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">hatch-pet</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(109, 89, 122);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(109, 89, 122); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">ZCode</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(109, 89, 122); color: rgb(109, 89, 122);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(109, 89, 122); color: rgb(109, 89, 122);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(109, 89, 122);">详情</span></div></div></div></article><article role="button" tabindex="0" aria-label="打开 imagegen" class="group relative w-full cursor-pointer" style="padding-bottom: 71.4286%;"><div class="absolute inset-0 flex overflow-hidden rounded-[18px] border border-[#E4DDD0] bg-[#F6F1E8] shadow-[0_4px_16px_rgba(40,32,20,0.08)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#D4CBBB] group-hover:shadow-[0_14px_32px_rgba(40,32,20,0.12)] group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-[#3F3F46]/30"><div class="pointer-events-none absolute inset-[5px] rounded-[13px] border border-[#E8E0D2]/70" aria-hidden="true"></div><div class="relative h-full w-[42%] shrink-0 px-[3%] py-[6%]"><div class="relative h-full w-full overflow-hidden rounded-[12px] bg-[#F0EBE1] shadow-[0_4px_12px_rgba(40,32,20,0.08)]"><img alt="imagegen" decoding="async" class="block h-full w-full object-contain object-center" src="/avatars/p18-straight-slate.jpg"></div></div><div class="flex h-full min-w-0 flex-1 flex-col justify-center overflow-hidden py-[5%] pr-[5%]"><div class="flex items-start justify-between gap-2"><div class="min-w-0 flex-1"><h3 class="truncate text-[clamp(14px,1.5vw,20px)] font-bold leading-tight tracking-tight text-[#1C1917]">imagegen</h3><div class="mt-1.5 h-[3px] w-8 rounded-full" aria-hidden="true" style="background: rgb(109, 89, 122);"></div></div><span class="shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold tabular-nums" title="完美" style="border-color: rgb(109, 89, 122); color: rgb(62, 107, 90);">100</span></div><p class="mt-2 truncate text-[clamp(12px,1.1vw,15px)] font-medium text-[#2A2622]">ZCode</p><ul class="mt-2.5 flex flex-wrap gap-1.5"><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(109, 89, 122); color: rgb(109, 89, 122);">Skill</li><li class="rounded-[8px] border px-2 py-0.5 text-[clamp(10px,0.95vw,12px)] font-medium leading-tight" style="border-color: rgb(109, 89, 122); color: rgb(109, 89, 122);">全局</li></ul><p class="mt-2.5 truncate border-t border-[#E0D8C8] pt-2 font-mono text-[clamp(10px,0.9vw,12px)] text-[#3D3A34]">Skill</p><div class="mt-auto flex items-center justify-between gap-2 pt-1.5 text-[10px] text-[#8A8078]"><span class="truncate" style="color: rgb(62, 107, 90);">完美</span><span class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" style="background: rgb(109, 89, 122);">详情</span></div></div></div></article></section></main><footer class="border-t border-[#E0D8C8] py-8 text-center"><p class="font-mono text-[11px] tracking-[0.28em] text-[#9A9188]">—— ◈ AI MANGE · WORK BADGES ◈ ——</p></footer></div></div>
+    <script type="module" src="/src/main.tsx"></script>
+  
+
+</body></html>
