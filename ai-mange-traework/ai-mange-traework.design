@@ -1,0 +1,40 @@
+{
+  "data": [
+    {
+      "id": "page-dashboard",
+      "title": "AI Mange 管理台",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1789091000000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 900,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-a9924864",
+          "measuredAt": 1789091085938
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/dashboard.html",
+        "interactions": []
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "desktop",
+    "projectName": "AI Mange 管理台",
+    "designLibrary": {
+      "name": "TraeWork",
+      "id": "dl_builtin_trae_work",
+      "version": 0,
+      "scope": "built-in-global",
+      "path": "c:\\Users\\apple\\.trae-cn\\design_libraries\\TraeWork",
+      "versionSource": "metadata.json"
+    }
+  }
+}

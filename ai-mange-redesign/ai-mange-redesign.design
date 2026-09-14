@@ -1,0 +1,40 @@
+{
+  "data": [
+    {
+      "id": "page-dashboard",
+      "title": "AI Mange 管理台",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1789087617850,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 900,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-86912e9c",
+          "measuredAt": 1789188482875
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/dashboard.html",
+        "interactions": []
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "desktop",
+    "projectName": "AI Mange 管理台",
+    "designLibrary": {
+      "name": "Apple",
+      "id": "dl_builtin_apple",
+      "version": 0,
+      "scope": "built-in-global",
+      "path": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple",
+      "versionSource": "metadata.json"
+    }
+  }
+}

@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mange 管理台</title>
+    <style id="theme-vars">
+/*
+ * Pinguo design tokens
+ * Brand: Pinguo
+ * Domain: Consumer imaging product
+ * Style: Restrained, elegant, Apple-inspired
+ * Theme mode: light-dark
+ * Source language: zh
+ * Output language: en
+ *
+ * Color architecture (two layers):
+ *   1. Primitive palette - six categories. brand / background / text / icon
+ *      are each a 10-step scale (50 lightest to 900 darkest). state-success and
+ *      state-error are functional colors anchored on Apple system colors.
+ *      Anchors follow Apple Human Interface Guidelines system colors
+ *      (System Blue #007AFF, System Green #34C759, System Red #FF3B30,
+ *      system grays / label / background colors).
+ *   2. Semantic tokens - :root (light) and .dark map roles onto primitives.
+ *      Components and UI kits must only consume the semantic tokens below.
+ */
+
+/* @group-priority: brand, background, text, icon, state-success, state-error */
+
+:root {
+  
+  /* solo-design consumption aliases: explicit prefix for fill-html-head.mjs */
+  --apple-background: var(--background, #ffffff);
+  --apple-foreground: var(--foreground, #0f172a);
+  --apple-card: var(--card, var(--background));
+  --apple-card-foreground: var(--card-foreground, var(--foreground));
+  --apple-popover: var(--popover, var(--card));
+  --apple-popover-foreground: var(--popover-foreground, var(--card-foreground, var(--foreground)));
+  --apple-primary: var(--primary, #111827);
+  --apple-primary-foreground: var(--primary-foreground, #ffffff);
+  --apple-secondary: var(--secondary, var(--muted, var(--card)));
+  --apple-secondary-foreground: var(--secondary-foreground, var(--foreground));
+  --apple-muted: var(--muted, var(--card));
+  --apple-muted-foreground: var(--muted-foreground, var(--foreground));
+  --apple-accent: var(--accent, var(--secondary, var(--muted, var(--card))));
+  --apple-accent-foreground: var(--accent-foreground, var(--foreground));
+  --apple-destructive: var(--destructive, #ef4444);
+  --apple-destructive-foreground: var(--destructive-foreground, #ffffff);
+  --apple-border: var(--border, currentColor);
+  --apple-input: var(--input, var(--border));
+  --apple-ring: var(--ring, var(--primary));
+  --apple-chart-1: var(--chart-1, var(--primary));
+  --apple-chart-2: var(--chart-2, var(--secondary, var(--primary)));
+  --apple-chart-3: var(--chart-3, var(--accent, var(--primary)));
+  --apple-chart-4: var(--chart-4, var(--muted-foreground, var(--foreground)));
+  --apple-chart-5: var(--chart-5, var(--foreground));
+  --apple-sidebar: var(--sidebar, var(--background));
+  --apple-sidebar-foreground: var(--sidebar-foreground, var(--foreground));
+  --apple-sidebar-primary: var(--sidebar-primary, var(--primary));
+  --apple-sidebar-primary-foreground: var(--sidebar-primary-foreground, var(--primary-foreground));
+  --apple-sidebar-accent: var(--sidebar-accent, var(--accent, var(--muted, var(--card))));
+  --apple-sidebar-accent-foreground: var(--sidebar-accent-foreground, var(--accent-foreground, var(--foreground)));
+
+/* ===== PRIMITIVE PALETTE ===== */
+
+  /* brand */
+  --brand-50: #e8f2ff;
+  --brand-100: #cfe5ff;
+  --brand-200: #9fcbff;
+  --brand-300: #66abff;
+  --brand-400: #2e8dff;
+  --brand-500: #007aff; /* @primary */
+  --brand-600: #0064d6;
+  --brand-700: #004fad;
+  --brand-800: #003b82;
+  --brand-900: #00275a;
+
+  /* background */
+  --background-50: #ffffff;
+  --background-100: #f7f7fa;
+  --background-200: #f2f2f7;
+  --background-300: #e5e5ea;
+  --background-400: #d1d1d6;
+  --background-500: #aeaeb2;
+  --background-600: #8e8e93;
+  --background-700: #3a3a3c;
+  --background-800: #1c1c1e;
+  --background-900: #000000;
+
+  /* text */
+  --text-50: #f5f5f7;
+  --text-100: #e3e3e8;
+  --text-200: #c7c7cc;
+  --text-300: #aeaeb2;
+  --text-400: #8e8e93;
+  --text-500: #6e6e73;
+  --text-600: #48484a;
+  --text-700: #3c3c43;
+  --text-800: #1d1d1f;
+  --text-900: #000000;
+
+  /* icon */
+  --icon-50: #f5f5f7;
+  --icon-100: #e5e5ea;
+  --icon-200: #d1d1d6;
+  --icon-300: #c7c7cc;
+  --icon-400: #aeaeb2;
+  --icon-500: #8e8e93;
+  --icon-600: #6e6e73;
+  --icon-700: #48484a;
+  --icon-800: #2c2c2e;
+  --icon-900: #1d1d1f;
+
+  /* state-success */
+  --state-success: #34c759; /* @primary */
+  --state-success-dark: #30d158;
+  --state-success-surface: #e9f9ee;
+  --state-success-foreground: #ffffff;
+
+  /* state-error */
+  --state-error: #ff3b30; /* @primary */
+  --state-error-dark: #ff453a;
+  --state-error-surface: #ffecea;
+  --state-error-foreground: #ffffff;
+
+  /* ===== SEMANTIC ROLES ===== */
+
+  /* semantic */
+  --background: var(--background-50);
+  --foreground: var(--text-800);
+  --card: var(--background-50);
+  --card-foreground: var(--text-800);
+  --popover: var(--background-50);
+  --popover-foreground: var(--text-900);
+
+  --primary: var(--brand-500);
+  --primary-foreground: var(--background-50);
+  --secondary: var(--background-200);
+  --secondary-foreground: var(--text-800);
+  --muted: var(--background-200);
+  --muted-foreground: var(--text-400);
+  --accent: var(--background-100);
+  --accent-foreground: var(--text-800);
+  --destructive: var(--state-error);
+  --destructive-foreground: var(--state-error-foreground);
+  --success: var(--state-success);
+  --success-foreground: var(--state-success-foreground);
+  --border: var(--background-300);
+  --input: var(--background-400);
+  --ring: var(--brand-500);
+
+  --icon: var(--icon-900);
+  --icon-muted: var(--icon-500);
+
+  /* chart */
+  --chart-1: var(--state-success);
+  --chart-2: var(--brand-500);
+  --chart-3: #ff9500;
+  --chart-4: #5856d6;
+  --chart-5: #af52de;
+
+  /* sidebar */
+  --sidebar: var(--background-200);
+  --sidebar-foreground: var(--text-800);
+  --sidebar-primary: var(--brand-500);
+  --sidebar-primary-foreground: var(--background-50);
+  --sidebar-accent: var(--background-300);
+  --sidebar-accent-foreground: var(--text-800);
+  --sidebar-border: var(--background-300);
+  --sidebar-ring: var(--brand-500);
+
+  /* TYPOGRAPHY */
+  --font-sans: DM Sans, ui-sans-serif, sans-serif, system-ui;
+  --font-serif: DM Sans, ui-sans-serif, sans-serif, system-ui;
+  --font-mono: JetBrains Mono, monospace;
+  --tracking-normal: 0em;
+
+  /* RADIUS */
+  --radius: 1.2rem;
+  --radius-sm: 0.6rem;
+  --radius-md: 1.2rem;
+  --radius-lg: 1.8rem;
+  --apple-radius-sm: var(--radius-sm);
+  --apple-radius-md: var(--radius-md);
+  --apple-radius-lg: var(--radius-lg);
+
+  /* SHADOWS */
+  --shadow-2xs: 0 1px 2px -1px rgba(0, 0, 0, 0.04); /* Hairline */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.04); /* Subtle */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px -1px rgba(0, 0, 0, 0.05); /* Card */
+  --shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.05); /* Raised */
+  --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.05); /* Card Hover */
+  --shadow-lg: 0 8px 24px -8px rgba(0, 0, 0, 0.08), 0 4px 8px -4px rgba(0, 0, 0, 0.05); /* Float */
+  --shadow-xl: 0 16px 40px -10px rgba(0, 0, 0, 0.10), 0 8px 16px -8px rgba(0, 0, 0, 0.06); /* Overlay */
+  --shadow-2xl: 0 24px 64px -12px rgba(0, 0, 0, 0.12); /* Modal */
+
+  /* SPACING */
+  --spacing: 0.24rem;
+
+  /* Agent brand colors */
+  --agent-claude: #D97706;
+  --agent-claude-light: #F59E0B;
+  --agent-codex: #10A37F;
+  --agent-codex-light: #14B8A6;
+  --agent-trae: #6366F1;
+  --agent-trae-light: #818CF8;
+  --agent-qoder: #0EA5E9;
+  --agent-qoder-light: #38BDF8;
+  --agent-mimo: #FF6900;
+  --agent-mimo-light: #FF9500;
+  --agent-zcode: #8B5CF6;
+  --agent-zcode-light: #A78BFA;
+
+  /* Warning state */
+  --state-warn: #FF9500;
+  --state-warn-surface: #FFF4E6;
+  --state-warn-foreground: #ffffff;
+}
+
+/* ===== SEMANTIC ROLES - dark (primitive palette inherited) ===== */
+.dark {
+  --background: var(--background-900);
+  --foreground: var(--text-50);
+  --card: var(--background-800);
+  --card-foreground: var(--text-50);
+  --popover: var(--background-700);
+  --popover-foreground: var(--text-50);
+
+  --primary: var(--brand-400);
+  --primary-foreground: var(--background-900);
+  --secondary: var(--background-800);
+  --secondary-foreground: var(--text-50);
+  --muted: var(--background-800);
+  --muted-foreground: var(--text-400);
+  --accent: var(--background-700);
+  --accent-foreground: var(--text-50);
+  --destructive: var(--state-error-dark);
+  --destructive-foreground: var(--state-error-foreground);
+  --success: var(--state-success-dark);
+  --success-foreground: var(--state-success-foreground);
+  --border: var(--background-700);
+  --input: var(--background-700);
+  --ring: var(--brand-400);
+
+  --icon: var(--icon-50);
+  --icon-muted: var(--icon-500);
+
+  --chart-1: var(--state-success-dark);
+  --chart-2: var(--brand-400);
+  --chart-3: #ff9f0a;
+  --chart-4: #5e5ce6;
+  --chart-5: #bf5af2;
+
+  --sidebar: var(--background-800);
+  --sidebar-foreground: var(--text-50);
+  --sidebar-primary: var(--brand-400);
+  --sidebar-primary-foreground: var(--background-900);
+  --sidebar-accent: var(--background-700);
+  --sidebar-accent-foreground: var(--text-50);
+  --sidebar-border: var(--background-700);
+  --sidebar-ring: var(--brand-400);
+
+  --shadow-2xs: 0 1px 2px -1px rgba(0, 0, 0, 0.30);
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.30);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.36), 0 1px 3px -1px rgba(0, 0, 0, 0.36);
+  --shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.40), 0 1px 2px -1px rgba(0, 0, 0, 0.36);
+  --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.44), 0 2px 4px -2px rgba(0, 0, 0, 0.36);
+  --shadow-lg: 0 8px 24px -8px rgba(0, 0, 0, 0.50), 0 4px 8px -4px rgba(0, 0, 0, 0.40);
+  --shadow-xl: 0 16px 40px -10px rgba(0, 0, 0, 0.55), 0 8px 16px -8px rgba(0, 0, 0, 0.44);
+  --shadow-2xl: 0 24px 64px -12px rgba(0, 0, 0, 0.60);
+
+  /* Warning state (dark) */
+  --state-warn: #FF9F0A;
+  --state-warn-surface: rgba(255, 144, 10, 0.18);
+  --state-warn-foreground: #ffffff;
+}
+
+    </style>
+    <style id="component-vars">
+/* ═══════════════════════════════════════════════════════════════
+   components.css — Design System Component Definitions
+   Auto-extracted from preview/component-*.html
+   DO NOT EDIT MANUALLY — regenerate via extract-components-css.mjs
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Button ────────────────────────────────────────────────── */
+/* @anatomy
+   <div class="row"><span class="label">Primary 56</span><button class="btn btn-primary btn-lg">Buy now</button><button class="btn btn-primary btn-lg" disabled>Buy now</button></div>
+   <hr class="divider">
+   <div class="row"><span class="label">Secondary 48</span><button class="btn btn-secondary">Shop the latest</button><button class="btn btn-secondary" disabled>Shop the latest</button></div>
+   <div class="row"><span class="label">Text 48</span><button class="btn btn-text">Learn more ›</button><button class="btn btn-text" disabled>Learn more ›</button></div>
+*/
+body{margin:0;padding:12px;background:var(--background);color:var(--foreground);font-family:var(--font-sans);letter-spacing:var(--tracking-normal)}.row{display:flex;align-items:center;gap:calc(var(--spacing)*3);flex-wrap:wrap;margin:0 0 calc(var(--spacing)*3)}.label{min-width:72px;color:var(--muted-foreground);font:600 10px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase}.btn{display:inline-flex;align-items:center;justify-content:center;gap:calc(var(--spacing)*1.5);height:40px;padding:0 20px;border:none;border-radius:calc(var(--radius)*2);background:transparent;color:var(--foreground);font:600 14px/1 var(--font-sans);letter-spacing:var(--tracking-normal);white-space:nowrap;box-shadow:var(--shadow-sm);cursor:pointer;transition:background-color .18s ease,color .18s ease,opacity .18s ease,filter .18s ease}.btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px}.btn:disabled{opacity:.42;cursor:not-allowed}.btn-primary{background:var(--primary);color:var(--primary-foreground)}.btn-primary:hover{filter:brightness(.96)}.btn-secondary{height:48px;padding:0 24px;background:var(--secondary);color:var(--secondary-foreground)}.btn-secondary:hover{background:var(--muted)}.btn-text{height:48px;padding:0 4px;box-shadow:none}.btn-text:hover{color:var(--primary)}.btn-lg{height:56px;padding:0 28px;font-size:16px}.divider{border:0;border-top:1px solid var(--border);margin:calc(var(--spacing)*4) 0}
+
+/* ── Card ──────────────────────────────────────────────────── */
+/* @anatomy
+   <div class="row">
+   <span class="label">Info</span>
+   <article class="card">
+   <div><div class="eyebrow">Pinguo Apple</div><h1 class="title">Built for creators</h1><p class="body-copy">A calm surface for comparing cameras, storage tiers, and bundle benefits across the ecosystem.</p></div>
+   <a class="cta" href="#">Compare models</a>
+   </article>
+   <article class="card disabled" aria-disabled="true">
+   <div><div class="eyebrow">Campus Store</div><h1 class="title">Education pricing</h1><p class="body-copy">Student bundles stay visible while unavailable purchase actions remain clearly disabled.</p></div>
+   <span class="cta">Compare models</span>
+   </article>
+   </div>
+   <hr class="divider">
+   <div class="row">
+   <span class="label">Media</span>
+   <article class="card media-card">
+   <div class="media"></div>
+   <div><div class="meta">Creator bundle</div><h1 class="title">Studio kit with Lens Sync</h1><div class="price">From $799 with Education pricing</div></div>
+   </article>
+   <article class="card media-card dark">
+   <div class="media"></div>
+   <div><div class="meta">Consumer imaging ecosystem</div><h1 class="title">Built for creators</h1><div class="price">Compare models across camera, app, and cloud plans</div></div>
+   </article>
+   </div>
+*/
+body{margin:0;padding:12px;background:var(--background);color:var(--foreground);font:500 14px/1.45 var(--font-sans);letter-spacing:var(--tracking-normal)}.row{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}.label{width:72px;padding-top:10px;color:var(--muted-foreground);font:700 10px/1 var(--font-sans);letter-spacing:.12em;text-transform:uppercase}.divider{margin:12px 0;border:0;border-top:1px solid var(--border)}.card{width:188px;min-height:148px;padding:calc(var(--spacing)*5);display:flex;flex-direction:column;justify-content:space-between;background:var(--card);color:var(--card-foreground);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-md);transition:transform .18s ease,box-shadow .18s ease}.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}.card.disabled,.card.disabled:hover{opacity:.5;transform:none;box-shadow:var(--shadow-md)}.eyebrow,.meta{color:var(--muted-foreground);font-size:11px;letter-spacing:.08em;text-transform:uppercase}.title{margin:6px 0 8px;font-size:18px;line-height:1.15}.body-copy{margin:0;color:var(--muted-foreground);font-size:13px}.cta{display:inline-flex;align-items:center;justify-content:center;width:max-content;margin-top:12px;padding:calc(var(--spacing)*2) calc(var(--spacing)*3.5);border-radius:999px;background:var(--primary);color:var(--primary-foreground);font-size:12px;font-weight:700;text-decoration:none}.media{aspect-ratio:4/3;border-radius:calc(var(--radius) - 4px);background:linear-gradient(135deg,var(--secondary),var(--accent));border:1px solid var(--border)}.media-card{min-height:212px;padding:calc(var(--spacing)*4)}.media-card .title{font-size:16px;margin:10px 0 6px}.price{font-size:12px;color:var(--muted-foreground)}.dark{background:var(--card);color:var(--card-foreground)}
+
+/* ── Comparison Table ──────────────────────────────────────── */
+/* @anatomy
+   <div class="row"><span class="label">Default</span><div class="t"><div class="c m">Compare models</div><div class="c h"><span class="k">Mini</span><span class="s">Pinguo Apple</span></div><div class="c h"><span class="k">Air</span><span class="s">Popular</span></div><div class="c h b"><span class="k">Pro</span><span class="s">Creator</span></div><div class="c m">Battery life</div><div class="c v">12h</div><div class="c v">16h</div><div class="c v">20h</div><div class="c m">Storage</div><div class="c v">256GB</div><div class="c v">512GB</div><div class="c v">1TB</div><div class="c m">Camera system</div><div class="c n">Dual</div><div class="c n">48MP</div><div class="c n">48MP+T</div></div><div class="t x" aria-disabled="true"><div class="c m">Compare models</div><div class="c h"><span class="k">Mini</span><span class="s">Pinguo Apple</span></div><div class="c h"><span class="k">Air</span><span class="s">Popular</span></div><div class="c h b"><span class="k">Pro</span><span class="s">Creator</span></div><div class="c m">Battery life</div><div class="c v">12h</div><div class="c v">16h</div><div class="c v">20h</div><div class="c m">Storage</div><div class="c v">256GB</div><div class="c v">512GB</div><div class="c v">1TB</div><div class="c m">Camera system</div><div class="c n">Dual</div><div class="c n">48MP</div><div class="c n">48MP+T</div></div></div>
+   <hr class="divider">
+   <div class="row"><span class="label">Compact</span><div class="t q dark"><div class="c m">Compare models</div><div class="c h"><span class="k">Mini</span></div><div class="c h"><span class="k">Air</span></div><div class="c h b"><span class="k">Pro</span></div><div class="c h"><span class="k">Ultra</span></div><div class="c m">Battery life</div><div class="c v">12h</div><div class="c v">16h</div><div class="c v">20h</div><div class="c v">24h</div><div class="c m">Storage</div><div class="c v">256GB</div><div class="c v">512GB</div><div class="c v">1TB</div><div class="c v">2TB</div><div class="c m">Camera system</div><div class="c n">Dual</div><div class="c n">48MP</div><div class="c n">48MP+T</div><div class="c n">Triple</div></div></div>
+*/
+body{margin:0;padding:12px;background:var(--background);color:var(--foreground);font:500 13px/1.4 var(--font-sans);letter-spacing:var(--tracking-normal)}.row{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:8px}.label{width:72px;padding-top:10px;color:var(--muted-foreground);font:700 10px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase}.divider{margin:12px 0;border:0;border-top:1px solid var(--border)}.t{display:grid;grid-template-columns:96px repeat(3,1fr);overflow:hidden;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);color:var(--card-foreground);box-shadow:var(--shadow-sm)}.q{grid-template-columns:82px repeat(4,1fr)}.c{padding:10px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}.t>.c:nth-child(4n),.q>.c:nth-child(5n){border-right:0}.t>.c:nth-last-child(-n+4),.q>.c:nth-last-child(-n+5){border-bottom:0}.m{background:var(--background);color:var(--muted-foreground);font:700 10px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase}.h{background:var(--background);font-weight:700}.k{display:block;font-size:14px;line-height:1.1}.s{display:block;margin-top:4px;color:var(--chart-2);font-size:11px;font-weight:700}.b .k{color:var(--chart-2)}.v{font-weight:600}.n{color:var(--muted-foreground);font-size:12px}.x{opacity:.45}
+
+/* ── Input ─────────────────────────────────────────────────── */
+/* @anatomy
+   <div class="row">
+   <span class="label">Search 44</span>
+   <div class="field">
+   <span class="icon">⌕</span>
+   <input class="control" aria-label="Search products" placeholder="Search products">
+   <button class="clear" type="button" aria-label="Clear search">×</button>
+   </div>
+   <div class="field disabled">
+   <span class="icon">⌕</span>
+   <input class="control" aria-label="Search products disabled" placeholder="Search products" disabled>
+   <button class="clear" type="button" aria-label="Clear search disabled" disabled>×</button>
+   </div>
+   </div>
+   <hr class="divider">
+   <div class="row">
+   <span class="label">Dark 40</span>
+   <div class="surface dark">
+   <div class="field small">
+   <input class="control" aria-label="Email address" placeholder="Email address">
+   </div>
+   </div>
+   <div class="surface dark">
+   <div class="field small disabled">
+   <input class="control" aria-label="Track your order disabled" placeholder="Track your order" disabled>
+   </div>
+   </div>
+   </div>
+*/
+body{margin:0;padding:12px;background:var(--background);color:var(--foreground);font:500 13px/1.4 var(--font-sans)}.row{display:flex;align-items:center;gap:calc(var(--spacing)*3);flex-wrap:wrap;margin-bottom:8px}.label{min-width:58px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-foreground)}.divider{border:0;border-top:1px solid var(--border);margin:10px 0}.surface{display:flex;gap:calc(var(--spacing)*2);padding:calc(var(--spacing)*3);border:1px solid var(--border);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow-sm)}.dark{background:var(--background);color:var(--foreground)}.field{display:flex;align-items:center;gap:calc(var(--spacing)*2);min-width:240px;height:44px;padding:0 calc(var(--spacing)*3);border:1px solid var(--input);border-radius:var(--radius);background:var(--background);color:var(--foreground);box-shadow:var(--shadow-xs)}.field.small{height:40px}.field:focus-within{border-color:var(--ring);box-shadow:0 0 0 1px var(--ring)}.field.disabled{opacity:.55}.icon,.clear{padding:0;border:0;background:transparent;color:var(--icon-muted);font:inherit}.icon{font-size:13px}.control{flex:1;border:0;outline:0;background:transparent;color:inherit;font:inherit}.control::placeholder{color:var(--muted-foreground)}
+
+/* ── Navigation ────────────────────────────────────────────── */
+/* @anatomy
+   <div class="row"><span class="label">Global 44</span><nav class="webbar dark" aria-label="Pinguo Apple global navigation"><span class="brand">Pinguo Apple</span><div class="rail"><a class="link" href="#">Store</a><a class="link" href="#">Explore</a><a class="link" href="#">Community</a><a class="link" href="#">Support</a></div></nav><nav class="webbar dark disabled" aria-label="Pinguo Apple global navigation disabled"><span class="brand">Pinguo Apple</span><div class="rail"><span class="link">Store</span><span class="link">Explore</span><span class="link">Community</span><span class="link">Support</span></div></nav></div>
+   <hr class="divider">
+   <div class="row"><span class="label">Tab Bar</span><div class="mobile"><div class="screen"><nav class="tabbar" aria-label="Pinguo Apple tab bar"><a class="tab" href="#"><span class="dot"></span><span>Store</span></a><a class="tab" href="#"><span class="dot"></span><span>Explore</span></a><a class="tab" href="#"><span class="dot"></span><span>Community</span></a><a class="tab" href="#"><span class="dot"></span><span>Support</span></a></nav></div></div><div class="mobile disabled"><div class="screen"><nav class="tabbar" aria-label="Pinguo Apple tab bar disabled"><span class="tab"><span class="dot"></span><span>Store</span></span><span class="tab"><span class="dot"></span><span>Explore</span></span><span class="tab"><span class="dot"></span><span>Community</span></span><span class="tab"><span class="dot"></span><span>Support</span></span></nav></div></div></div>
+*/
+body{margin:0;padding:12px;background:var(--background);color:var(--foreground);font:500 13px/1.4 var(--font-sans);letter-spacing:var(--tracking-normal)}.row{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:8px}.label{width:72px;padding-top:10px;color:var(--muted-foreground);font:700 10px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase}.divider{margin:12px 0;border:0;border-top:1px solid var(--border)}.webbar,.mobile{border:1px solid var(--border);box-shadow:var(--shadow-sm)}.webbar{display:flex;align-items:center;gap:calc(var(--spacing)*2);min-width:320px;height:44px;padding:0 calc(var(--spacing)*3);border-radius:var(--radius);background:var(--sidebar)}.brand{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}.rail{display:flex;gap:calc(var(--spacing)*1.5);margin-left:auto}.link,.tab{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;color:inherit;text-decoration:none;white-space:nowrap;transition:background-color .18s ease,color .18s ease,opacity .18s ease}.link{height:32px;padding:0 calc(var(--spacing)*2.5)}.link:hover,.tab:hover{background:var(--secondary)}.link:focus-visible,.tab:focus-visible{outline:2px solid var(--ring);outline-offset:2px}.dark{background:var(--sidebar);color:var(--foreground)}.disabled{opacity:.48}.disabled .link,.disabled .tab{pointer-events:none}.mobile{padding:calc(var(--spacing)*2);border-radius:calc(var(--radius)*1.1);background:var(--card)}.screen{display:flex;align-items:flex-end;justify-content:center;width:188px;height:164px;padding:calc(var(--spacing)*3);border-radius:calc(var(--radius)*.9);background:linear-gradient(180deg,var(--background),var(--secondary))}.tabbar{display:flex;gap:calc(var(--spacing)*1.5);padding:calc(var(--spacing)*1.5);border:1px solid var(--border);border-radius:999px;background:var(--card);box-shadow:var(--shadow-md)}.tab{flex-direction:column;gap:2px;min-width:56px;height:56px;padding:0 calc(var(--spacing)*1.5);font-size:11px;text-align:center}.dot{width:18px;height:18px;border-radius:999px;background:var(--secondary);box-shadow:inset 0 0 0 1px var(--border)}.tab:hover .dot{background:var(--primary)}
+
+/* ── Product Grid ──────────────────────────────────────────── */
+/* @anatomy
+   <div class="row">
+   <span class="label">4-up</span>
+   <div class="grid grid-4">
+   <article class="card"><div class="media"></div><span class="eyebrow">New this season</span><strong class="title">Pinguo Lens Pro</strong><span class="price">From $999</span><a class="cta" href="/">Compare all models</a></article>
+   <article class="card"><div class="media"></div><span class="eyebrow">Creator kit</span><strong class="title">Pinguo Air Cam</strong><span class="price">From $749</span><a class="cta" href="/">Build your setup</a></article>
+   <article class="card"><div class="media"></div><span class="eyebrow">Studio ready</span><strong class="title">Pinguo Dock One</strong><span class="price">From $299</span><a class="cta" href="/">See accessories</a></article>
+   <article class="card is-disabled"><div class="media"></div><span class="eyebrow">Coming soon</span><strong class="title">Pinguo Vision Mini</strong><span class="price muted">Notify me</span><span class="cta">Unavailable</span></article>
+   </div>
+   </div>
+   <hr class="divider">
+   <div class="row">
+   <span class="label">Story</span>
+   <div class="grid grid-2">
+   <article class="card story"><div class="media"></div><span class="eyebrow">Consumer imaging product ecosystem</span><strong class="title">Travel light with one camera, one dock, and one cloud-ready edit flow.</strong><span class="price muted">Pinguo Apple picks for weekend shoots</span><a class="cta" href="/">Shop the story</a></article>
+   <article class="card story"><div class="media"></div><span class="eyebrow">Compare lineup</span><strong class="title">Choose between compact capture, pro optics, and desktop-grade finishing tools.</strong><span class="price muted">Made for photo-first households</span><a class="cta" href="/">Compare all models</a></article>
+   </div>
+   </div>
+*/
+body{margin:0;padding:12px;background:var(--background);color:var(--foreground);font:500 14px/1.4 var(--font-sans)}.row{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px}.label{width:72px;padding-top:6px;color:var(--muted-foreground);font-size:10px;letter-spacing:.12em;text-transform:uppercase;flex:0 0 auto}.grid{display:grid;gap:8px;flex:1}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.card{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);color:var(--card-foreground);box-shadow:var(--shadow-xs);transition:border-color .2s ease,transform .2s ease}.card:hover{border-color:var(--primary);transform:translateY(-1px)}.media{aspect-ratio:1;border-radius:calc(var(--radius) - 4px);background:linear-gradient(135deg,var(--secondary),var(--background));border:1px solid var(--border)}.story .media{aspect-ratio:1.25;background:linear-gradient(135deg,var(--foreground),var(--secondary))}.eyebrow{color:var(--muted-foreground);font-size:10px;letter-spacing:.08em;text-transform:uppercase}.title{font-size:15px;line-height:1.25}.price{font-variant-numeric:tabular-nums}.cta{display:inline-flex;align-self:flex-start;padding:7px 10px;border-radius:999px;background:var(--primary);color:var(--primary-foreground);font-size:12px;text-decoration:none}.muted{color:var(--muted-foreground)}.is-disabled{opacity:.55}.divider{margin:10px 0;border:0;border-top:1px solid var(--border)}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--apple-background);
+    --color-foreground: var(--apple-foreground);
+    --color-card: var(--apple-card);
+    --color-card-foreground: var(--apple-card-foreground);
+    --color-popover: var(--apple-popover);
+    --color-popover-foreground: var(--apple-popover-foreground);
+    --color-primary: var(--apple-primary);
+    --color-primary-foreground: var(--apple-primary-foreground);
+    --color-secondary: var(--apple-secondary);
+    --color-secondary-foreground: var(--apple-secondary-foreground);
+    --color-muted: var(--apple-muted);
+    --color-muted-foreground: var(--apple-muted-foreground);
+    --color-accent: var(--apple-accent);
+    --color-accent-foreground: var(--apple-accent-foreground);
+    --color-destructive: var(--apple-destructive);
+    --color-destructive-foreground: var(--apple-destructive-foreground);
+    --color-border: var(--apple-border);
+    --color-input: var(--apple-input);
+    --color-ring: var(--apple-ring);
+    --color-chart-1: var(--apple-chart-1);
+    --color-chart-2: var(--apple-chart-2);
+    --color-chart-3: var(--apple-chart-3);
+    --color-chart-4: var(--apple-chart-4);
+    --color-chart-5: var(--apple-chart-5);
+    --color-sidebar: var(--apple-sidebar);
+    --color-sidebar-foreground: var(--apple-sidebar-foreground);
+    --color-sidebar-primary: var(--apple-sidebar-primary);
+    --color-sidebar-primary-foreground: var(--apple-sidebar-primary-foreground);
+    --color-sidebar-accent: var(--apple-sidebar-accent);
+    --color-sidebar-accent-foreground: var(--apple-sidebar-accent-foreground);
+    --radius-sm: var(--apple-radius-sm);
+    --radius-md: var(--apple-radius-md);
+    --radius-lg: var(--apple-radius-lg);
+  }
+  @layer base {
+    body { background: var(--apple-background); color: var(--apple-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--apple-background); }
+      .text-background { color: var(--apple-background); }
+      .border-background { border-color: var(--apple-background); }
+      .ring-background { --tw-ring-color: var(--apple-background); }
+      .bg-foreground { background-color: var(--apple-foreground); }
+      .text-foreground { color: var(--apple-foreground); }
+      .border-foreground { border-color: var(--apple-foreground); }
+      .ring-foreground { --tw-ring-color: var(--apple-foreground); }
+      .bg-card { background-color: var(--apple-card); }
+      .text-card { color: var(--apple-card); }
+      .border-card { border-color: var(--apple-card); }
+      .ring-card { --tw-ring-color: var(--apple-card); }
+      .bg-card-foreground { background-color: var(--apple-card-foreground); }
+      .text-card-foreground { color: var(--apple-card-foreground); }
+      .border-card-foreground { border-color: var(--apple-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--apple-card-foreground); }
+      .bg-popover { background-color: var(--apple-popover); }
+      .text-popover { color: var(--apple-popover); }
+      .border-popover { border-color: var(--apple-popover); }
+      .ring-popover { --tw-ring-color: var(--apple-popover); }
+      .bg-popover-foreground { background-color: var(--apple-popover-foreground); }
+      .text-popover-foreground { color: var(--apple-popover-foreground); }
+      .border-popover-foreground { border-color: var(--apple-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--apple-popover-foreground); }
+      .bg-primary { background-color: var(--apple-primary); }
+      .text-primary { color: var(--apple-primary); }
+      .border-primary { border-color: var(--apple-primary); }
+      .ring-primary { --tw-ring-color: var(--apple-primary); }
+      .bg-primary-foreground { background-color: var(--apple-primary-foreground); }
+      .text-primary-foreground { color: var(--apple-primary-foreground); }
+      .border-primary-foreground { border-color: var(--apple-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--apple-primary-foreground); }
+      .bg-secondary { background-color: var(--apple-secondary); }
+      .text-secondary { color: var(--apple-secondary); }
+      .border-secondary { border-color: var(--apple-secondary); }
+      .ring-secondary { --tw-ring-color: var(--apple-secondary); }
+      .bg-secondary-foreground { background-color: var(--apple-secondary-foreground); }
+      .text-secondary-foreground { color: var(--apple-secondary-foreground); }
+      .border-secondary-foreground { border-color: var(--apple-secondary-foreground); }
+      .ring-secondary-foreground { --tw-ring-color: var(--apple-secondary-foreground); }
+      .bg-muted { background-color: var(--apple-muted); }
+      .text-muted { color: var(--apple-muted); }
+      .border-muted { border-color: var(--apple-muted); }
+      .ring-muted { --tw-ring-color: var(--apple-muted); }
+      .bg-muted-foreground { background-color: var(--apple-muted-foreground); }
+      .text-muted-foreground { color: var(--apple-muted-foreground); }
+      .border-muted-foreground { border-color: var(--apple-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--apple-muted-foreground); }
+      .bg-accent { background-color: var(--apple-accent); }
+      .text-accent { color: var(--apple-accent); }
+      .border-accent { border-color: var(--apple-accent); }
+      .ring-accent { --tw-ring-color: var(--apple-accent); }
+      .bg-accent-foreground { background-color: var(--apple-accent-foreground); }
+      .text-accent-foreground { color: var(--apple-accent-foreground); }
+      .border-accent-foreground { border-color: var(--apple-accent-foreground); }
+      .ring-accent-foreground { --tw-ring-color: var(--apple-accent-foreground); }
+      .bg-destructive { background-color: var(--apple-destructive); }
+      .text-destructive { color: var(--apple-destructive); }
+      .border-destructive { border-color: var(--apple-destructive); }
+      .ring-destructive { --tw-ring-color: var(--apple-destructive); }
+      .bg-destructive-foreground { background-color: var(--apple-destructive-foreground); }
+      .text-destructive-foreground { color: var(--apple-destructive-foreground); }
+      .border-destructive-foreground { border-color: var(--apple-destructive-foreground); }
+      .ring-destructive-foreground { --tw-ring-color: var(--apple-destructive-foreground); }
+      .bg-border { background-color: var(--apple-border); }
+      .text-border { color: var(--apple-border); }
+      .border-border { border-color: var(--apple-border); }
+      .ring-border { --tw-ring-color: var(--apple-border); }
+      .bg-input { background-color: var(--apple-input); }
+      .text-input { color: var(--apple-input); }
+      .border-input { border-color: var(--apple-input); }
+      .ring-input { --tw-ring-color: var(--apple-input); }
+      .bg-ring { background-color: var(--apple-ring); }
+      .text-ring { color: var(--apple-ring); }
+      .border-ring { border-color: var(--apple-ring); }
+      .ring-ring { --tw-ring-color: var(--apple-ring); }
+      .bg-chart-1 { background-color: var(--apple-chart-1); }
+      .text-chart-1 { color: var(--apple-chart-1); }
+      .border-chart-1 { border-color: var(--apple-chart-1); }
+      .ring-chart-1 { --tw-ring-color: var(--apple-chart-1); }
+      .bg-chart-2 { background-color: var(--apple-chart-2); }
+      .text-chart-2 { color: var(--apple-chart-2); }
+      .border-chart-2 { border-color: var(--apple-chart-2); }
+      .ring-chart-2 { --tw-ring-color: var(--apple-chart-2); }
+      .bg-chart-3 { background-color: var(--apple-chart-3); }
+      .text-chart-3 { color: var(--apple-chart-3); }
+      .border-chart-3 { border-color: var(--apple-chart-3); }
+      .ring-chart-3 { --tw-ring-color: var(--apple-chart-3); }
+      .bg-chart-4 { background-color: var(--apple-chart-4); }
+      .text-chart-4 { color: var(--apple-chart-4); }
+      .border-chart-4 { border-color: var(--apple-chart-4); }
+      .ring-chart-4 { --tw-ring-color: var(--apple-chart-4); }
+      .bg-chart-5 { background-color: var(--apple-chart-5); }
+      .text-chart-5 { color: var(--apple-chart-5); }
+      .border-chart-5 { border-color: var(--apple-chart-5); }
+      .ring-chart-5 { --tw-ring-color: var(--apple-chart-5); }
+      .bg-sidebar { background-color: var(--apple-sidebar); }
+      .text-sidebar { color: var(--apple-sidebar); }
+      .border-sidebar { border-color: var(--apple-sidebar); }
+      .ring-sidebar { --tw-ring-color: var(--apple-sidebar); }
+      .bg-sidebar-foreground { background-color: var(--apple-sidebar-foreground); }
+      .text-sidebar-foreground { color: var(--apple-sidebar-foreground); }
+      .border-sidebar-foreground { border-color: var(--apple-sidebar-foreground); }
+      .ring-sidebar-foreground { --tw-ring-color: var(--apple-sidebar-foreground); }
+      .bg-sidebar-primary { background-color: var(--apple-sidebar-primary); }
+      .text-sidebar-primary { color: var(--apple-sidebar-primary); }
+      .border-sidebar-primary { border-color: var(--apple-sidebar-primary); }
+      .ring-sidebar-primary { --tw-ring-color: var(--apple-sidebar-primary); }
+      .bg-sidebar-primary-foreground { background-color: var(--apple-sidebar-primary-foreground); }
+      .text-sidebar-primary-foreground { color: var(--apple-sidebar-primary-foreground); }
+      .border-sidebar-primary-foreground { border-color: var(--apple-sidebar-primary-foreground); }
+      .ring-sidebar-primary-foreground { --tw-ring-color: var(--apple-sidebar-primary-foreground); }
+      .bg-sidebar-accent { background-color: var(--apple-sidebar-accent); }
+      .text-sidebar-accent { color: var(--apple-sidebar-accent); }
+      .border-sidebar-accent { border-color: var(--apple-sidebar-accent); }
+      .ring-sidebar-accent { --tw-ring-color: var(--apple-sidebar-accent); }
+      .bg-sidebar-accent-foreground { background-color: var(--apple-sidebar-accent-foreground); }
+      .text-sidebar-accent-foreground { color: var(--apple-sidebar-accent-foreground); }
+      .border-sidebar-accent-foreground { border-color: var(--apple-sidebar-accent-foreground); }
+      .ring-sidebar-accent-foreground { --tw-ring-color: var(--apple-sidebar-accent-foreground); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="h-screen font-sans antialiased">
+    <main>
+      <style id="critical-layout">
+        body { margin: 0 !important; padding: 0 !important; height: 100vh; overflow: hidden; }
+
+        .app-shell {
+          display: grid;
+          grid-template-columns: 260px 1fr;
+          grid-template-rows: auto 1fr;
+          height: 100vh;
+          overflow: hidden;
+        }
+        .topbar {
+          grid-column: 1 / -1;
+          grid-row: 1;
+          position: sticky;
+          top: 0;
+          z-index: 30;
+          background: var(--apple-card);
+          border-bottom: 1px solid var(--apple-border);
+        }
+        .sidebar {
+          grid-column: 1;
+          grid-row: 2;
+          overflow-y: auto;
+          overflow-x: hidden;
+          background: var(--apple-sidebar);
+          border-right: 1px solid var(--apple-border);
+        }
+        .main-content {
+          grid-column: 2;
+          grid-row: 2;
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+        .card-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+          gap: 16px;
+        }
+        .id-card {
+          display: flex;
+          gap: 14px;
+          padding: 18px;
+          background: var(--apple-card);
+          border: 1px solid var(--apple-border);
+          border-radius: var(--radius);
+          box-shadow: var(--shadow-sm);
+          transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+          cursor: pointer;
+        }
+        .id-card:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-lg);
+          border-color: var(--apple-primary);
+        }
+        .chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          height: 30px;
+          padding: 0 12px;
+          border: 1px solid var(--apple-border);
+          border-radius: 999px;
+          font-size: 12px;
+          font-weight: 500;
+          color: var(--apple-foreground);
+          background: transparent;
+          cursor: pointer;
+          transition: all 0.18s ease;
+          white-space: nowrap;
+        }
+        .chip:hover { background: var(--apple-secondary); }
+        .chip.active {
+          border-color: var(--apple-primary);
+          background: var(--brand-50);
+          color: var(--apple-primary);
+          font-weight: 600;
+        }
+        .chip .dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 999px;
+          background: var(--c, var(--apple-muted-foreground));
+          flex-shrink: 0;
+        }
+        .root-chip {
+          display: inline-flex;
+          align-items: center;
+          height: 26px;
+          padding: 0 10px;
+          border-radius: 8px;
+          background: var(--apple-secondary);
+          color: var(--apple-secondary-foreground);
+          font-family: var(--font-mono);
+          font-size: 11px;
+          white-space: nowrap;
+        }
+        .agent-badge {
+          display: inline-flex;
+          align-items: center;
+          height: 20px;
+          padding: 0 8px;
+          border-radius: 999px;
+          color: var(--apple-primary-foreground);
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          white-space: nowrap;
+        }
+        .type-badge {
+          display: inline-flex;
+          align-items: center;
+          height: 20px;
+          padding: 0 8px;
+          border-radius: 999px;
+          background: var(--apple-secondary);
+          color: var(--apple-secondary-foreground);
+          font-size: 10px;
+          font-weight: 600;
+          white-space: nowrap;
+        }
+        .status-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          height: 20px;
+          padding: 0 8px;
+          border-radius: 999px;
+          font-size: 10px;
+          font-weight: 700;
+          font-variant-numeric: tabular-nums;
+          white-space: nowrap;
+        }
+        .status-pass { background: var(--state-success-surface); color: var(--state-success); }
+        .status-warn { background: var(--state-warn-surface); color: var(--state-warn); }
+        .status-fail { background: var(--state-error-surface); color: var(--state-error); }
+        .tool-pill {
+          display: inline-flex;
+          align-items: center;
+          height: 20px;
+          padding: 0 7px;
+          border-radius: 6px;
+          background: var(--apple-secondary);
+          color: var(--apple-secondary-foreground);
+          font-family: var(--font-mono);
+          font-size: 11px;
+          white-space: nowrap;
+        }
+        .scope-tag {
+          position: absolute;
+          top: -2px;
+          left: -2px;
+          padding: 1px 6px;
+          border-radius: 999px;
+          background: var(--apple-card);
+          border: 1px solid var(--apple-border);
+          font-size: 9px;
+          font-weight: 600;
+          color: var(--apple-muted-foreground);
+          white-space: nowrap;
+          z-index: 1;
+        }
+        .detail-drawer {
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 520px;
+          z-index: 50;
+          background: var(--apple-card);
+          box-shadow: var(--shadow-xl);
+          display: flex;
+          flex-direction: column;
+          border-left: 1px solid var(--apple-border);
+        }
+        .modal-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 60;
+          background: rgba(0, 0, 0, 0.35);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+        }
+        .modal-dialog {
+          width: 100%;
+          max-width: 640px;
+          max-height: 90vh;
+          overflow-y: auto;
+          background: var(--apple-card);
+          border: 1px solid var(--apple-border);
+          border-radius: var(--radius);
+          box-shadow: var(--shadow-2xl);
+        }
+        .form-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+        }
+        .form-label {
+          display: block;
+          font-size: 11px;
+          font-weight: 600;
+          color: var(--apple-muted-foreground);
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          margin-bottom: 5px;
+        }
+        .form-input {
+          width: 100%;
+          height: 38px;
+          padding: 0 12px;
+          border: 1px solid var(--apple-input);
+          border-radius: var(--radius-sm);
+          background: var(--apple-background);
+          color: var(--apple-foreground);
+          font-size: 13px;
+          font-family: var(--font-sans);
+          outline: none;
+          transition: border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+        .form-input:focus {
+          border-color: var(--apple-ring);
+          box-shadow: 0 0 0 1px var(--apple-ring);
+        }
+        .form-textarea {
+          width: 100%;
+          min-height: 68px;
+          padding: 9px 12px;
+          border: 1px solid var(--apple-input);
+          border-radius: var(--radius-sm);
+          background: var(--apple-background);
+          color: var(--apple-foreground);
+          font-size: 13px;
+          font-family: var(--font-sans);
+          outline: none;
+          resize: vertical;
+          transition: border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+        .form-textarea:focus {
+          border-color: var(--apple-ring);
+          box-shadow: 0 0 0 1px var(--apple-ring);
+        }
+        .tab {
+          padding: 8px 14px;
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--apple-muted-foreground);
+          border-bottom: 2px solid transparent;
+          cursor: pointer;
+          transition: all 0.18s ease;
+          white-space: nowrap;
+        }
+        .tab:hover { color: var(--apple-foreground); }
+        .tab.active {
+          color: var(--apple-primary);
+          border-bottom-color: var(--apple-primary);
+          font-weight: 600;
+        }
+        .kv-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 12px;
+          padding: 8px 0;
+          border-bottom: 1px solid var(--apple-border);
+        }
+        .kv-row:last-child { border-bottom: 0; }
+        .kv-key {
+          font-size: 12px;
+          color: var(--apple-muted-foreground);
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+        .kv-val {
+          font-size: 12px;
+          font-weight: 500;
+          color: var(--apple-foreground);
+          text-align: right;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .score-bar-track {
+          height: 8px;
+          border-radius: 999px;
+          background: var(--apple-secondary);
+          overflow: hidden;
+        }
+        .score-bar-fill {
+          height: 100%;
+          border-radius: 999px;
+          background: var(--state-success);
+        }
+        .icon-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border: none;
+          border-radius: 999px;
+          background: transparent;
+          color: var(--apple-muted-foreground);
+          cursor: pointer;
+          transition: all 0.18s ease;
+        }
+        .icon-btn:hover {
+          background: var(--apple-secondary);
+          color: var(--apple-foreground);
+        }
+        .text-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 13px;
+          font-weight: 600;
+          color: var(--apple-primary);
+          cursor: pointer;
+          transition: opacity 0.18s ease;
+        }
+        .text-link:hover { opacity: 0.8; }
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after {
+            transition: none !important;
+            animation: none !important;
+          }
+          .id-card:hover { transform: none; }
+        }
+        @media (max-width: 900px) {
+          .app-shell { grid-template-columns: 1fr; }
+          .sidebar { display: none; }
+          .main-content { grid-column: 1; }
+          .card-grid { grid-template-columns: 1fr; }
+          .form-grid { grid-template-columns: 1fr; }
+          .detail-drawer { width: 100%; }
+        }
+      </style>
+
+      <div class="app-shell" data-viewport-mode="app-shell">
+        <!-- ===== TOP BAR ===== -->
+        <header class="topbar">
+          <div class="flex items-center justify-between px-6 py-2.5 gap-4">
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="flex items-center justify-center w-10 h-10 rounded-[10px] text-white font-bold text-sm" style="background: linear-gradient(135deg, var(--apple-primary), var(--brand-400));">AM</div>
+              <div>
+                <div class="text-[16px] font-bold leading-tight" style="color: var(--apple-foreground);">AI Mange</div>
+                <div class="text-[12px] leading-tight" style="color: var(--apple-muted-foreground);">Subagent &amp; Skill 管理台</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 flex-1 max-w-[580px]">
+              <div class="field flex-1" style="min-width: 0;">
+                <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/folder-open.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/folder-open.svg');" class="w-4 h-4 text-muted-foreground"></span>
+                <input class="control text-[13px]" style="font-family: var(--font-mono);" placeholder="D:\path\to\project" value="D:\workspace\demo">
+              </div>
+              <button class="btn btn-primary shrink-0">扫描</button>
+            </div>
+          </div>
+        </header>
+
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sidebar">
+          <div class="p-4 space-y-5">
+            <!-- Agent -->
+            <div>
+              <div class="eyebrow mb-2.5">Agent</div>
+              <div class="flex flex-wrap gap-1.5">
+                <button class="chip active">全部</button>
+                <button class="chip"><span class="dot" style="--c:var(--agent-claude);"></span>Claude</button>
+                <button class="chip"><span class="dot" style="--c:var(--agent-codex);"></span>Codex</button>
+                <button class="chip"><span class="dot" style="--c:var(--agent-trae);"></span>Trae</button>
+                <button class="chip"><span class="dot" style="--c:var(--agent-qoder);"></span>Qoder</button>
+                <button class="chip"><span class="dot" style="--c:var(--agent-mimo);"></span>MiMo</button>
+                <button class="chip"><span class="dot" style="--c:var(--agent-zcode);"></span>ZCode</button>
+              </div>
+            </div>
+            <!-- Scope -->
+            <div>
+              <div class="eyebrow mb-2.5">范围</div>
+              <div class="flex flex-wrap gap-1.5">
+                <button class="chip active">全部</button>
+                <button class="chip">全局</button>
+                <button class="chip">项目</button>
+              </div>
+            </div>
+            <!-- Type -->
+            <div>
+              <div class="eyebrow mb-2.5">类型</div>
+              <div class="flex flex-wrap gap-1.5">
+                <button class="chip active">全部</button>
+                <button class="chip">Subagent</button>
+                <button class="chip">Skill</button>
+              </div>
+            </div>
+            <!-- Search -->
+            <div>
+              <div class="eyebrow mb-2.5">搜索</div>
+              <div class="field small" style="min-width: 0;">
+                <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/funnel.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/funnel.svg');" class="w-4 h-4 text-muted-foreground"></span>
+                <input class="control text-[13px]" placeholder="搜索条目名称或路径">
+              </div>
+            </div>
+            <!-- Stats -->
+            <div>
+              <div class="eyebrow mb-2.5">统计</div>
+              <div class="rounded-[var(--radius-sm)] border bg-card p-3 space-y-1.5" style="border-color: var(--apple-border);">
+                <div class="flex items-center justify-between text-[12px]">
+                  <span class="flex items-center gap-2" style="color: var(--apple-muted-foreground);">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/box.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/box.svg');" class="w-3.5 h-3.5"></span>
+                    条目
+                  </span>
+                  <span class="font-semibold tabular-nums" style="color: var(--apple-foreground);">24</span>
+                </div>
+                <div class="flex items-center justify-between text-[12px]">
+                  <span class="flex items-center gap-2" style="color: var(--apple-muted-foreground);">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg'); color: var(--state-success);" class="w-3.5 h-3.5"></span>
+                    通过
+                  </span>
+                  <span class="font-semibold tabular-nums" style="color: var(--state-success);">18</span>
+                </div>
+                <div class="flex items-center justify-between text-[12px]">
+                  <span class="flex items-center gap-2" style="color: var(--apple-muted-foreground);">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/circle-alert.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/circle-alert.svg'); color: var(--state-error);" class="w-3.5 h-3.5"></span>
+                    失败
+                  </span>
+                  <span class="font-semibold tabular-nums" style="color: var(--state-error);">3</span>
+                </div>
+                <div class="flex items-center justify-between text-[12px]">
+                  <span class="flex items-center gap-2" style="color: var(--apple-muted-foreground);">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/triangle-alert.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/triangle-alert.svg'); color: var(--state-error);" class="w-3.5 h-3.5"></span>
+                    Error
+                  </span>
+                  <span class="font-semibold tabular-nums" style="color: var(--apple-foreground);">5</span>
+                </div>
+                <div class="flex items-center justify-between text-[12px]">
+                  <span class="flex items-center gap-2" style="color: var(--apple-muted-foreground);">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/triangle-alert.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/triangle-alert.svg'); color: var(--agent-mimo-light);" class="w-3.5 h-3.5"></span>
+                    Warn
+                  </span>
+                  <span class="font-semibold tabular-nums" style="color: var(--apple-foreground);">7</span>
+                </div>
+                <div class="flex items-center justify-between text-[12px]">
+                  <span class="flex items-center gap-2" style="color: var(--apple-muted-foreground);">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/circle-question-mark.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/circle-question-mark.svg');" class="w-3.5 h-3.5"></span>
+                    Info
+                  </span>
+                  <span class="font-semibold tabular-nums" style="color: var(--apple-foreground);">2</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <section class="main-content overflow-y-auto" data-scroll-region="primary">
+          <div class="p-6">
+            <!-- Header row -->
+            <div class="flex items-end justify-between mb-4 gap-4">
+              <div>
+                <h1 class="text-[18px] font-bold" style="color: var(--apple-foreground);">全部条目</h1>
+                <p class="text-[12px] mt-0.5" style="color: var(--apple-muted-foreground);">24 / 24 条 · 项目 <span style="font-family: var(--font-mono);">D:\workspace\demo</span></p>
+              </div>
+              <button class="text-link">
+                <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/pen-line.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/pen-line.svg');" class="w-4 h-4"></span>
+                生成新条目
+              </button>
+            </div>
+
+            <!-- Root chips -->
+            <div class="flex flex-wrap gap-2 mb-5">
+              <span class="root-chip">claude/global/skill · 6</span>
+              <span class="root-chip">codex/project/skill · 3</span>
+              <span class="root-chip">trae/global/skill · 4</span>
+            </div>
+
+            <!-- Card grid -->
+            <div class="card-grid">
+              <!-- Card 1: demo-code-reviewer (Claude, Subagent, PASS 92) -->
+              <article class="id-card">
+                <div class="relative shrink-0 flex items-start justify-center pt-1" style="width: 72px;">
+                  <span class="scope-tag">全局</span>
+                  <img src="../../assets/ui/avatars/code-reviewer.jpg" alt="demo-code-reviewer" class="w-[60px] h-[60px] rounded-full object-cover shrink-0">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap mb-1.5">
+                    <h3 class="text-[15px] font-bold truncate" style="color: var(--apple-foreground);">demo-code-reviewer</h3>
+                    <span class="agent-badge" style="background-color: var(--agent-claude);">Claude</span>
+                    <span class="type-badge">Subagent</span>
+                    <span class="status-badge status-pass">
+                      <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg');" class="w-3 h-3"></span>
+                      PASS 92
+                    </span>
+                  </div>
+                  <p class="text-[12.5px] leading-snug line-clamp-2 mb-2" style="color: var(--apple-muted-foreground);">自动化代码审查 Subagent，支持增量分析与风险标注</p>
+                  <div class="flex flex-wrap gap-1 mb-2">
+                    <span class="tool-pill">Read</span>
+                    <span class="tool-pill">Grep</span>
+                    <span class="tool-pill">Bash</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); color: var(--icon-500);" class="w-3 h-3 shrink-0"></span>
+                    <span class="text-[10.5px] truncate" style="font-family: var(--font-mono); color: var(--icon-500);">D:\workspace\demo\.claude\agents\demo-code-reviewer.md</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 2: TRAE-badge-writer (Trae, Skill, PASS 78) -->
+              <article class="id-card">
+                <div class="relative shrink-0 flex items-start justify-center pt-1" style="width: 72px;">
+                  <span class="scope-tag">项目</span>
+                  <img src="../../assets/ui/avatars/badge-writer.jpg" alt="TRAE-badge-writer" class="w-[60px] h-[60px] rounded-full object-cover shrink-0">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap mb-1.5">
+                    <h3 class="text-[15px] font-bold truncate" style="color: var(--apple-foreground);">TRAE-badge-writer</h3>
+                    <span class="agent-badge" style="background-color: var(--agent-trae);">Trae</span>
+                    <span class="type-badge">Skill</span>
+                    <span class="status-badge status-warn">
+                      <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg');" class="w-3 h-3"></span>
+                      PASS 78
+                    </span>
+                  </div>
+                  <p class="text-[12.5px] leading-snug line-clamp-2 mb-2" style="color: var(--apple-muted-foreground);">Badge generation skill for TRAE</p>
+                  <div class="flex flex-wrap gap-1 mb-2">
+                    <span class="tool-pill">generate</span>
+                    <span class="tool-pill">validate</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); color: var(--icon-500);" class="w-3 h-3 shrink-0"></span>
+                    <span class="text-[10.5px] truncate" style="font-family: var(--font-mono); color: var(--icon-500);">D:\workspace\demo\.trae\skills\badge-writer\skill.json</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 3: demo-cn-agent (Qoder, Subagent, FAIL 45) -->
+              <article class="id-card">
+                <div class="relative shrink-0 flex items-start justify-center pt-1" style="width: 72px;">
+                  <span class="scope-tag">全局</span>
+                  <img src="../../assets/ui/avatars/cn-agent.jpg" alt="demo-cn-agent" class="w-[60px] h-[60px] rounded-full object-cover shrink-0">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap mb-1.5">
+                    <h3 class="text-[15px] font-bold truncate" style="color: var(--apple-foreground);">demo-cn-agent</h3>
+                    <span class="agent-badge" style="background-color: var(--agent-qoder);">Qoder</span>
+                    <span class="type-badge">Subagent</span>
+                    <span class="status-badge status-fail">
+                      <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/circle-alert.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/circle-alert.svg');" class="w-3 h-3"></span>
+                      FAIL 45
+                    </span>
+                  </div>
+                  <p class="text-[12.5px] leading-snug line-clamp-2 mb-2" style="color: var(--apple-muted-foreground);">中文场景优化的通用任务 Subagent，支持多轮对话与上下文保持</p>
+                  <div class="flex flex-wrap gap-1 mb-2">
+                    <span class="tool-pill">Read</span>
+                    <span class="tool-pill">Write</span>
+                    <span class="tool-pill">Edit</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); color: var(--icon-500);" class="w-3 h-3 shrink-0"></span>
+                    <span class="text-[10.5px] truncate" style="font-family: var(--font-mono); color: var(--icon-500);">D:\workspace\demo\.qoder\agents\demo-cn-agent.md</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 4: retro-avatar-illustrator (Claude, Skill, PASS 88) -->
+              <article class="id-card">
+                <div class="relative shrink-0 flex items-start justify-center pt-1" style="width: 72px;">
+                  <span class="scope-tag">全局</span>
+                  <img src="../../assets/ui/avatars/avatar-illustrator.jpg" alt="retro-avatar-illustrator" class="w-[60px] h-[60px] rounded-full object-cover shrink-0">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap mb-1.5">
+                    <h3 class="text-[15px] font-bold truncate" style="color: var(--apple-foreground);">retro-avatar-illustrator</h3>
+                    <span class="agent-badge" style="background-color: var(--agent-claude);">Claude</span>
+                    <span class="type-badge">Skill</span>
+                    <span class="status-badge status-pass">
+                      <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg');" class="w-3 h-3"></span>
+                      PASS 88
+                    </span>
+                  </div>
+                  <p class="text-[12.5px] leading-snug line-clamp-2 mb-2" style="color: var(--apple-muted-foreground);">Generate retro-style avatar illustrations</p>
+                  <div class="flex flex-wrap gap-1 mb-2">
+                    <span class="tool-pill">generate</span>
+                    <span class="tool-pill">image</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); color: var(--icon-500);" class="w-3 h-3 shrink-0"></span>
+                    <span class="text-[10.5px] truncate" style="font-family: var(--font-mono); color: var(--icon-500);">D:\workspace\demo\.claude\skills\retro-avatar\skill.json</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 5: codex-analyzer (Codex, Skill, PASS 95) -->
+              <article class="id-card">
+                <div class="relative shrink-0 flex items-start justify-center pt-1" style="width: 72px;">
+                  <span class="scope-tag">项目</span>
+                  <img src="../../assets/ui/avatars/codex-analyzer.jpg" alt="codex-analyzer" class="w-[60px] h-[60px] rounded-full object-cover shrink-0">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap mb-1.5">
+                    <h3 class="text-[15px] font-bold truncate" style="color: var(--apple-foreground);">codex-analyzer</h3>
+                    <span class="agent-badge" style="background-color: var(--agent-codex);">Codex</span>
+                    <span class="type-badge">Skill</span>
+                    <span class="status-badge status-pass">
+                      <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg');" class="w-3 h-3"></span>
+                      PASS 95
+                    </span>
+                  </div>
+                  <p class="text-[12.5px] leading-snug line-clamp-2 mb-2" style="color: var(--apple-muted-foreground);">Code analysis and review skill</p>
+                  <div class="flex flex-wrap gap-1 mb-2">
+                    <span class="tool-pill">analyze</span>
+                    <span class="tool-pill">review</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); color: var(--icon-500);" class="w-3 h-3 shrink-0"></span>
+                    <span class="text-[10.5px] truncate" style="font-family: var(--font-mono); color: var(--icon-500);">D:\workspace\demo\.codex\skills\codex-analyzer\skill.json</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 6: mimo-translator (MiMo, Subagent, PASS 72) -->
+              <article class="id-card">
+                <div class="relative shrink-0 flex items-start justify-center pt-1" style="width: 72px;">
+                  <span class="scope-tag">项目</span>
+                  <img src="../../assets/ui/avatars/translator.jpg" alt="mimo-translator" class="w-[60px] h-[60px] rounded-full object-cover shrink-0">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap mb-1.5">
+                    <h3 class="text-[15px] font-bold truncate" style="color: var(--apple-foreground);">mimo-translator</h3>
+                    <span class="agent-badge" style="background-color: var(--agent-mimo);">MiMo</span>
+                    <span class="type-badge">Subagent</span>
+                    <span class="status-badge status-warn">
+                      <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg');" class="w-3 h-3"></span>
+                      PASS 72
+                    </span>
+                  </div>
+                  <p class="text-[12.5px] leading-snug line-clamp-2 mb-2" style="color: var(--apple-muted-foreground);">多语言翻译 Subagent，支持术语表与上下文保持</p>
+                  <div class="flex flex-wrap gap-1 mb-2">
+                    <span class="tool-pill">Read</span>
+                    <span class="tool-pill">Write</span>
+                    <span class="tool-pill">WebSearch</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); color: var(--icon-500);" class="w-3 h-3 shrink-0"></span>
+                    <span class="text-[10.5px] truncate" style="font-family: var(--font-mono); color: var(--icon-500);">D:\workspace\demo\.mimo\agents\mimo-translator.md</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 7: zcode-formatter (ZCode, Skill, PASS 85) -->
+              <article class="id-card">
+                <div class="relative shrink-0 flex items-start justify-center pt-1" style="width: 72px;">
+                  <span class="scope-tag">全局</span>
+                  <img src="../../assets/ui/avatars/formatter.jpg" alt="zcode-formatter" class="w-[60px] h-[60px] rounded-full object-cover shrink-0">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap mb-1.5">
+                    <h3 class="text-[15px] font-bold truncate" style="color: var(--apple-foreground);">zcode-formatter</h3>
+                    <span class="agent-badge" style="background-color: var(--agent-zcode);">ZCode</span>
+                    <span class="type-badge">Skill</span>
+                    <span class="status-badge status-pass">
+                      <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg');" class="w-3 h-3"></span>
+                      PASS 85
+                    </span>
+                  </div>
+                  <p class="text-[12.5px] leading-snug line-clamp-2 mb-2" style="color: var(--apple-muted-foreground);">Code formatting and linting</p>
+                  <div class="flex flex-wrap gap-1 mb-2">
+                    <span class="tool-pill">format</span>
+                    <span class="tool-pill">lint</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); color: var(--icon-500);" class="w-3 h-3 shrink-0"></span>
+                    <span class="text-[10.5px] truncate" style="font-family: var(--font-mono); color: var(--icon-500);">D:\workspace\demo\.zcode\skills\zcode-formatter\skill.json</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 8: trae-skill-builder (Trae, Skill, PASS 90) -->
+              <article class="id-card">
+                <div class="relative shrink-0 flex items-start justify-center pt-1" style="width: 72px;">
+                  <span class="scope-tag">项目</span>
+                  <img src="../../assets/ui/avatars/skill-builder.jpg" alt="trae-skill-builder" class="w-[60px] h-[60px] rounded-full object-cover shrink-0">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap mb-1.5">
+                    <h3 class="text-[15px] font-bold truncate" style="color: var(--apple-foreground);">trae-skill-builder</h3>
+                    <span class="agent-badge" style="background-color: var(--agent-trae);">Trae</span>
+                    <span class="type-badge">Skill</span>
+                    <span class="status-badge status-pass">
+                      <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/circle-check.svg');" class="w-3 h-3"></span>
+                      PASS 90
+                    </span>
+                  </div>
+                  <p class="text-[12.5px] leading-snug line-clamp-2 mb-2" style="color: var(--apple-muted-foreground);">Build and validate TRAE skills</p>
+                  <div class="flex flex-wrap gap-1 mb-2">
+                    <span class="tool-pill">build</span>
+                    <span class="tool-pill">validate</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/file.svg'); color: var(--icon-500);" class="w-3 h-3 shrink-0"></span>
+                    <span class="text-[10.5px] truncate" style="font-family: var(--font-mono); color: var(--icon-500);">D:\workspace\demo\.trae\skills\skill-builder\skill.json</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ===== DETAIL DRAWER ===== -->
+      <aside class="detail-drawer">
+        <!-- Drawer header -->
+        <div class="flex items-start justify-between gap-3 p-5 border-b" style="border-color: var(--apple-border);">
+          <div class="flex items-center gap-3 min-w-0">
+            <img src="../../assets/ui/avatars/code-reviewer.jpg" alt="demo-code-reviewer" class="w-14 h-14 rounded-full object-cover shrink-0">
+            <div class="min-w-0">
+              <h2 class="text-[16px] font-bold truncate" style="color: var(--apple-foreground);">demo-code-reviewer</h2>
+              <div class="flex items-center gap-1.5 mt-1 text-[12px]" style="color: var(--apple-muted-foreground);">
+                <span class="inline-flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full shrink-0" style="background: var(--agent-claude);"></span>Claude
+                </span>
+                <span>·</span>
+                <span>Subagent</span>
+                <span>·</span>
+                <span>全局</span>
+              </div>
+            </div>
+          </div>
+          <button class="icon-btn shrink-0" aria-label="关闭">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Drawer tabs -->
+        <div class="flex items-center gap-1 px-3 border-b" style="border-color: var(--apple-border);">
+          <button class="tab active">概览</button>
+          <button class="tab">原文</button>
+          <button class="tab">校验</button>
+          <button class="tab">跨Agent生成</button>
+        </div>
+
+        <!-- Drawer content (overview) -->
+        <div class="flex-1 overflow-y-auto p-5 space-y-5">
+          <!-- Score section -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/star.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/star.svg'); color: var(--apple-primary);" class="w-4 h-4"></span>
+                <span class="text-[13px] font-semibold" style="color: var(--apple-foreground);">校验得分</span>
+              </div>
+              <span class="text-[16px] font-bold tabular-nums" style="color: var(--state-success);">85%</span>
+            </div>
+            <div class="score-bar-track">
+              <div class="score-bar-fill" style="width: 85%;"></div>
+            </div>
+          </div>
+
+          <!-- Key-value list -->
+          <div>
+            <div class="eyebrow mb-2">基本信息</div>
+            <div>
+              <div class="kv-row">
+                <span class="kv-key">Name</span>
+                <span class="kv-val" style="font-family: var(--font-mono);">demo-code-reviewer</span>
+              </div>
+              <div class="kv-row">
+                <span class="kv-key">Agent</span>
+                <span class="kv-val">
+                  <span class="inline-flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full" style="background: var(--agent-claude);"></span>Claude
+                  </span>
+                </span>
+              </div>
+              <div class="kv-row">
+                <span class="kv-key">Type</span>
+                <span class="kv-val">Subagent</span>
+              </div>
+              <div class="kv-row">
+                <span class="kv-key">Scope</span>
+                <span class="kv-val">全局</span>
+              </div>
+              <div class="kv-row">
+                <span class="kv-key">Path</span>
+                <span class="kv-val" style="font-family: var(--font-mono);">D:\workspace\demo\.claude\agents\demo-code-reviewer.md</span>
+              </div>
+              <div class="kv-row">
+                <span class="kv-key">Tools</span>
+                <span class="kv-val">
+                  <span class="inline-flex items-center gap-1 flex-wrap justify-end">
+                    <span class="tool-pill">Read</span>
+                    <span class="tool-pill">Grep</span>
+                    <span class="tool-pill">Bash</span>
+                  </span>
+                </span>
+              </div>
+              <div class="kv-row">
+                <span class="kv-key">Skills</span>
+                <span class="kv-val">
+                  <span class="inline-flex items-center gap-1 flex-wrap justify-end">
+                    <span class="tool-pill">code-review</span>
+                    <span class="tool-pill">risk-check</span>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Agent notes -->
+          <div>
+            <div class="eyebrow mb-2">Agent 备注</div>
+            <div class="rounded-[var(--radius-sm)] p-3 text-[12.5px] leading-relaxed" style="background: var(--apple-secondary); color: var(--apple-secondary-foreground); border-left: 3px solid var(--apple-primary);">
+              该 Subagent 专注增量代码审查，支持风险标注与建议生成。建议在 PR 审查场景下使用，可配合 codex-analyzer 进行深度静态分析。
+            </div>
+          </div>
+
+          <!-- Quick actions -->
+          <div class="flex items-center gap-2">
+            <button class="btn btn-secondary" style="height: 36px; padding: 0 16px; font-size: 13px;">
+              <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/external-link.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/external-link.svg');" class="w-4 h-4"></span>
+              打开文件
+            </button>
+            <button class="btn btn-text" style="height: 36px; font-size: 13px;">
+              <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/send-horizontal.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/send-horizontal.svg');" class="w-4 h-4"></span>
+              跨Agent生成
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ===== GENERATE MODAL ===== -->
+      <div class="modal-overlay">
+        <div class="modal-dialog">
+          <!-- Modal header -->
+          <div class="flex items-center justify-between gap-3 px-5 py-4 border-b" style="border-color: var(--apple-border);">
+            <div class="flex items-center gap-2.5">
+              <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/circle-plus.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/circle-plus.svg'); color: var(--apple-primary);" class="w-5 h-5"></span>
+              <h2 class="text-[16px] font-bold" style="color: var(--apple-foreground);">生成 Subagent / Skill</h2>
+            </div>
+            <button class="icon-btn" aria-label="关闭">
+              <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="p-5 space-y-3.5">
+            <div class="form-grid">
+              <!-- Target Agent -->
+              <div>
+                <label class="form-label">目标 Agent</label>
+                <div class="relative">
+                  <select class="form-input appearance-none cursor-pointer" style="padding-right: 36px;">
+                    <option>Claude</option>
+                    <option>Codex</option>
+                    <option>Trae</option>
+                    <option>Qoder</option>
+                    <option>MiMo</option>
+                    <option>ZCode</option>
+                  </select>
+                  <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/chevron-down.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/chevron-down.svg'); color: var(--apple-muted-foreground);" class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></span>
+                </div>
+              </div>
+              <!-- Type -->
+              <div>
+                <label class="form-label">类型</label>
+                <div class="relative">
+                  <select class="form-input appearance-none cursor-pointer" style="padding-right: 36px;">
+                    <option>Subagent</option>
+                    <option>Skill</option>
+                  </select>
+                  <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/chevron-down.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/chevron-down.svg'); color: var(--apple-muted-foreground);" class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></span>
+                </div>
+              </div>
+              <!-- Scope -->
+              <div>
+                <label class="form-label">范围</label>
+                <div class="relative">
+                  <select class="form-input appearance-none cursor-pointer" style="padding-right: 36px;">
+                    <option>全局</option>
+                    <option>项目</option>
+                  </select>
+                  <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/chevron-down.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/chevron-down.svg'); color: var(--apple-muted-foreground);" class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></span>
+                </div>
+              </div>
+              <!-- Name -->
+              <div>
+                <label class="form-label">名称</label>
+                <input class="form-input" style="font-family: var(--font-mono); font-size: 12px;" placeholder="demo-new-agent" value="demo-new-agent">
+              </div>
+              <!-- Description (full width) -->
+              <div style="grid-column: span 2;">
+                <label class="form-label">描述</label>
+                <textarea class="form-textarea" placeholder="简要描述该条目的用途与能力...">新建的通用代码审查 Subagent，支持多语言分析与建议生成</textarea>
+              </div>
+              <!-- Tools -->
+              <div>
+                <label class="form-label">工具</label>
+                <input class="form-input" style="font-family: var(--font-mono); font-size: 12px;" placeholder="Read, Write, Grep" value="Read, Write, Grep">
+              </div>
+              <!-- Skills -->
+              <div>
+                <label class="form-label">技能</label>
+                <input class="form-input" style="font-family: var(--font-mono); font-size: 12px;" placeholder="code-review, lint" value="code-review">
+              </div>
+              <!-- Body (full width) -->
+              <div style="grid-column: span 2;">
+                <label class="form-label">正文</label>
+                <textarea class="form-textarea" style="font-family: var(--font-mono); font-size: 12px; min-height: 100px;" placeholder="# Agent body...">You are a code review assistant. Analyze code changes and provide actionable feedback.</textarea>
+              </div>
+              <!-- Output dir (full width) -->
+              <div style="grid-column: span 2;">
+                <label class="form-label">输出目录</label>
+                <div class="relative">
+                  <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/folder-open.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/folder-open.svg'); color: var(--apple-muted-foreground);" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></span>
+                  <input class="form-input" style="font-family: var(--font-mono); font-size: 12px; padding-left: 36px;" value="D:\workspace\demo\.claude\agents">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="flex items-center justify-between gap-3 px-5 py-4 border-t" style="border-color: var(--apple-border);">
+            <label class="flex items-center gap-2 cursor-pointer text-[13px]" style="color: var(--apple-foreground);">
+              <input type="checkbox" class="w-4 h-4 rounded" style="accent-color: var(--apple-primary);">
+              仅预览
+            </label>
+            <div class="flex items-center gap-2">
+              <button class="btn btn-secondary" style="height: 38px; padding: 0 18px; font-size: 13px;">取消</button>
+              <button class="btn btn-primary" style="height: 38px; padding: 0 20px; font-size: 13px;">
+                <span data-icon style="mask-image:url('../assets/icons/dl_builtin_apple/send-horizontal.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_apple/send-horizontal.svg');" class="w-4 h-4"></span>
+                生成
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

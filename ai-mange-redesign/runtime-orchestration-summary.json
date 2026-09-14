@@ -1,0 +1,378 @@
+{
+  "designSource": {
+    "operatingMode": "library-bound",
+    "libraryIdentity": {
+      "name": "Apple",
+      "id": "dl_builtin_apple",
+      "version": 0,
+      "scope": "built-in-global",
+      "path": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple",
+      "versionSource": "metadata.json"
+    },
+    "brandPrefix": "apple",
+    "cssPath": "colors_and_type.css",
+    "componentCssPath": "components.css",
+    "actualTokenNameReference": [
+      "--apple-background",
+      "--apple-foreground",
+      "--apple-card",
+      "--apple-card-foreground",
+      "--apple-popover",
+      "--apple-popover-foreground",
+      "--apple-primary",
+      "--apple-primary-foreground",
+      "--apple-secondary",
+      "--apple-secondary-foreground",
+      "--apple-muted",
+      "--apple-muted-foreground",
+      "--apple-accent",
+      "--apple-accent-foreground",
+      "--apple-destructive",
+      "--apple-destructive-foreground",
+      "--apple-border",
+      "--apple-input",
+      "--apple-ring",
+      "--apple-sidebar",
+      "--apple-sidebar-foreground",
+      "--apple-sidebar-primary",
+      "--apple-sidebar-primary-foreground",
+      "--apple-sidebar-accent",
+      "--apple-sidebar-accent-foreground",
+      "--background",
+      "--foreground",
+      "--card",
+      "--card-foreground",
+      "--popover",
+      "--popover-foreground",
+      "--primary",
+      "--primary-foreground",
+      "--secondary",
+      "--secondary-foreground",
+      "--muted",
+      "--muted-foreground",
+      "--accent",
+      "--accent-foreground",
+      "--destructive",
+      "--destructive-foreground",
+      "--success",
+      "--success-foreground",
+      "--border",
+      "--input",
+      "--ring",
+      "--icon",
+      "--icon-muted",
+      "--sidebar",
+      "--sidebar-foreground",
+      "--sidebar-primary",
+      "--sidebar-primary-foreground",
+      "--sidebar-accent",
+      "--sidebar-accent-foreground",
+      "--sidebar-border",
+      "--sidebar-ring",
+      "--chart-1",
+      "--chart-2",
+      "--chart-3",
+      "--chart-4",
+      "--chart-5",
+      "--font-sans",
+      "--font-serif",
+      "--font-mono",
+      "--tracking-normal",
+      "--radius",
+      "--spacing",
+      "--shadow-2xs",
+      "--shadow-xs",
+      "--shadow-sm",
+      "--shadow",
+      "--shadow-md",
+      "--shadow-lg",
+      "--shadow-xl",
+      "--shadow-2xl"
+    ],
+    "designDecisionSummary": "Apple-inspired restrained palette: System Blue #007AFF primary, Space Black #1d1d1f ink, Silver Mist #f5f5f7 background. DM Sans for UI, JetBrains Mono for technical/mono. Global radius 1.2rem, pill buttons (rounded-full). Whisper-light shadows (0 1px 2px rgba(0,0,0,0.04) at rest, 0 8px 24px on hover). Spacing base 0.24rem with scale 4/8/12/16/24/32/48/64/96/128. 1px borders define edges before shadow. App-shell desktop layout: top bar, sidebar, main content region with internal scroll.",
+    "componentPlan": [
+      {
+        "slug": "navigation",
+        "contractKind": "legacy-json",
+        "previewFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\preview\\component-navigation.html",
+        "contractFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\components\\navigation.json"
+      },
+      {
+        "slug": "card",
+        "contractKind": "legacy-json",
+        "previewFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\preview\\component-card.html",
+        "contractFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\components\\card.json"
+      },
+      {
+        "slug": "input",
+        "contractKind": "legacy-json",
+        "previewFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\preview\\component-input.html",
+        "contractFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\components\\input.json"
+      },
+      {
+        "slug": "button",
+        "contractKind": "legacy-json",
+        "previewFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\preview\\component-button.html",
+        "contractFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\components\\button.json"
+      }
+    ],
+    "componentCss": "auto",
+    "tokenFidelity": "strict",
+    "allowedComponents": [
+      "button",
+      "card",
+      "comparison-table",
+      "input",
+      "navigation",
+      "product-grid"
+    ],
+    "forbiddenInventedComponents": [],
+    "uiKitPath": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\ui_kits\\website\\index.html",
+    "iconAssets": {
+      "source": "assets/icons",
+      "projectIconDir": "assets/icons/dl_builtin_apple",
+      "libraryKey": "dl_builtin_apple",
+      "renderMethod": "css-mask",
+      "pathTemplate": "../assets/icons/dl_builtin_apple/{name}.svg",
+      "availableNames": [
+        "arrow-down",
+        "arrow-left",
+        "arrow-right",
+        "arrow-up",
+        "box",
+        "check",
+        "chevron-down",
+        "chevron-left",
+        "chevron-right",
+        "chevron-up",
+        "chevrons-down-up",
+        "chevrons-up-down",
+        "circle-alert",
+        "circle-check",
+        "circle-minus",
+        "circle-pause",
+        "circle-play",
+        "circle-plus",
+        "circle-question-mark",
+        "external-link",
+        "file",
+        "folder-open",
+        "folder",
+        "funnel",
+        "grip",
+        "heart",
+        "house",
+        "mail",
+        "map-pin",
+        "message-circle-more",
+        "mouse-pointer-click",
+        "pen-line",
+        "send-horizontal",
+        "star",
+        "tag",
+        "thumbs-down",
+        "thumbs-up",
+        "trash-2",
+        "triangle-alert",
+        "user"
+      ],
+      "totalCount": 39,
+      "coloringRule": "currentColor by default; override with Library token when needed"
+    },
+    "themeMode": "light",
+    "productContext": {
+      "kitType": "app",
+      "productType": "consumer imaging product ecosystem"
+    },
+    "styleConstraints": {
+      "radiusMax": "1.2rem",
+      "spacingBase": "0.24rem",
+      "fontSizeBody": "14px",
+      "controlHeightDefault": "44px"
+    }
+  },
+  "project": {
+    "resolvedLane": "library_bound",
+    "selectedIntentWorkflowRead": true,
+    "contextRequirementsLoaded": [
+      {
+        "path": "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/page-rendering-quality-gate.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/design-artifact-validation.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/delivery-evidence-contract.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "visual-experience/visual-experience-guidelines.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "intent-workflows/intent-page-library-bound/start-library-bound-project.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "intent-workflows/intent-page-library-bound/library-bound-page-runtime.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "intent-workflows/intent-page-library-bound/dispatch-contract.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "intent-workflows/intent-page-library-bound/orchestration-summary-fields.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "intent-workflows/intent-page-library-bound/design-library-ingestion.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "intent-workflows/intent-page-library-bound/design-token-fidelity-rules.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "intent-workflows/intent-page-library-bound/component-conformance-rules.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "intent-workflows/intent-page-library-bound/icon-source-priority-rules.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "shared-runtime/design-artifact-formats/design-project-file-format.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "shared-runtime/html-rendering-primitives/shared-html-rendering-primitives.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "shared-runtime/html-rendering-primitives/web-html-rendering-primitives.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      }
+    ],
+    "contextReadScope": "library-bound-lane-and-shared-kernel",
+    "validationRunDiscipline": "main-agent-only",
+    "lowValueCallWatchdog": {
+      "noProgressNextAction": "proceed-to-dispatch"
+    },
+    "deviceType": "desktop",
+    "dashboardMode": true,
+    "pageType": "task-driven",
+    "expectedDispatches": [
+      {
+        "nodeId": "page-dashboard",
+        "pageId": "page-dashboard",
+        "targetPageId": "page-dashboard",
+        "packetType": "LibraryBoundPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/dashboard.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "apple-dashboard-v1",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-09-11T01:00:39.845Z",
+        "source": "record-dispatch-completion.mjs"
+      }
+    ],
+    "dispatchPreflightManifest": [
+      {
+        "nodeId": "page-dashboard",
+        "packetType": "LibraryBoundPagePacket",
+        "allowedWritePaths": [
+          "pages/dashboard.html"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/dashboard.html"
+          ]
+        }
+      }
+    ],
+    "mainAgentPostDispatchMutations": []
+  },
+  "pages": [
+    {
+      "nodeId": "page-dashboard",
+      "htmlSrc": "pages/dashboard.html",
+      "title": "AI Mange 管理台",
+      "deviceType": "desktop",
+      "viewportMode": "app-shell",
+      "pageType": "task-driven",
+      "qualityRisks": [
+        "app-shell-layout",
+        "information-dense"
+      ],
+      "domIdsRequired": [],
+      "supplementaryReads": [],
+      "componentPlan": [
+        {
+          "slug": "navigation",
+          "previewFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\preview\\component-navigation.html",
+          "contractFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\components\\navigation.json"
+        },
+        {
+          "slug": "card",
+          "previewFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\preview\\component-card.html",
+          "contractFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\components\\card.json"
+        },
+        {
+          "slug": "input",
+          "previewFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\preview\\component-input.html",
+          "contractFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\components\\input.json"
+        },
+        {
+          "slug": "button",
+          "previewFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\preview\\component-button.html",
+          "contractFile": "c:\\Users\\apple\\.trae-cn\\design_libraries\\Apple\\components\\button.json"
+        }
+      ]
+    }
+  ]
+}

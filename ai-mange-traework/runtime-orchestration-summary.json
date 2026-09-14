@@ -1,0 +1,251 @@
+{
+  "project": {
+    "resolvedLane": "library_bound",
+    "selectedIntentWorkflowRead": true,
+    "contextRequirementsLoaded": [
+      {
+        "path": "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "intent-workflows/intent-page-library-bound/start-library-bound-project.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "intent-workflows/intent-page-library-bound/library-bound-page-runtime.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "intent-workflows/intent-page-library-bound/dispatch-contract.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "intent-workflows/intent-page-library-bound/design-library-ingestion.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "intent-workflows/intent-page-library-bound/design-token-fidelity-rules.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "intent-workflows/intent-page-library-bound/orchestration-summary-fields.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      }
+    ],
+    "contextReadScope": "library-bound-lane",
+    "validationRunDiscipline": {
+      "declared": true,
+      "restoreMode": false,
+      "maxFullValidationRuns": null,
+      "validationHistoryCount": 0,
+      "repairLedgerCount": 0,
+      "softWarningsTriggerRepair": null,
+      "terminalState": null,
+      "nextAction": null,
+      "violations": [],
+      "success": true
+    },
+    "lowValueCallWatchdog": {
+      "noProgressNextAction": null
+    },
+    "dispatchPreflightManifest": [
+      {
+        "nodeId": "page-dashboard",
+        "htmlSrc": "pages/dashboard.html",
+        "title": "AI Mange 管理台",
+        "deviceType": "desktop",
+        "viewportMode": "app-shell",
+        "pageType": "task-driven",
+        "qualityRisks": [
+          "app-shell-scroll",
+          "card-density",
+          "drawer-overlay"
+        ],
+        "domIdsRequired": [],
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/dashboard.html"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/dashboard.html"
+          ]
+        }
+      }
+    ],
+    "expectedDispatches": [
+      {
+        "nodeId": "page-dashboard",
+        "pageId": "page-dashboard",
+        "targetPageId": "page-dashboard",
+        "htmlSrc": "pages/dashboard.html",
+        "status": "completed",
+        "changedFiles": [
+          "pages/dashboard.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "traework-rebuild-v2",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-09-11T02:08:28.395Z",
+        "source": "record-dispatch-completion.mjs"
+      }
+    ],
+    "mainAgentPostDispatchMutations": [
+      {
+        "path": "pages/dashboard.html",
+        "reason": "rebuild-with-traework-precision-tokens",
+        "owner": "main-agent",
+        "recordedAt": "2026-09-11T02:08:28.395Z",
+        "source": "record-dispatch-completion.mjs"
+      }
+    ]
+  },
+  "designSource": {
+    "libraryIdentity": {
+      "name": "TraeWork",
+      "id": "dl_builtin_trae_work",
+      "version": 0,
+      "scope": "built-in-global",
+      "path": "c:\\Users\\apple\\.trae-cn\\design_libraries\\TraeWork",
+      "versionSource": "metadata.json"
+    },
+    "operatingMode": "library-bound",
+    "brandPrefix": "tw",
+    "cssPath": "colors_and_type.css",
+    "actualTokenNameReference": [
+      "--tw-background",
+      "--tw-foreground",
+      "--tw-card",
+      "--tw-card-foreground",
+      "--tw-popover",
+      "--tw-popover-foreground",
+      "--tw-primary",
+      "--tw-primary-foreground",
+      "--tw-secondary",
+      "--tw-secondary-foreground",
+      "--tw-muted",
+      "--tw-muted-foreground",
+      "--tw-accent",
+      "--tw-accent-foreground",
+      "--tw-destructive",
+      "--tw-destructive-foreground",
+      "--tw-border",
+      "--tw-input",
+      "--tw-ring",
+      "--tw-sidebar",
+      "--tw-sidebar-foreground",
+      "--tw-sidebar-primary",
+      "--tw-sidebar-primary-foreground",
+      "--bg-base-default",
+      "--bg-base-secondary",
+      "--bg-base-tertiary",
+      "--text-default",
+      "--text-secondary",
+      "--text-tertiary",
+      "--icon-default",
+      "--icon-secondary",
+      "--icon-tertiary",
+      "--border-neutral-l1",
+      "--border-neutral-l2",
+      "--border-neutral-l3",
+      "--status-success-default",
+      "--status-error-default",
+      "--status-warning-default",
+      "--brand-600",
+      "--brand-500",
+      "--brand-400",
+      "--brand-300",
+      "--brand-50",
+      "--font-sans",
+      "--font-heading",
+      "--font-mono",
+      "--radius",
+      "--radius-sm",
+      "--radius-md",
+      "--radius-lg",
+      "--spacing",
+      "--shadow-sm",
+      "--shadow-md",
+      "--shadow-lg"
+    ],
+    "designDecisionSummary": "TraeWork design system: purple brand (#4b3fe3), neutral grey palette, SF Pro Text font, 8px base radius, 4px base spacing, status colors (success #15a877, error #e8463a, warning #e27900, info #2f74ff). App-shell layout with fixed sidebar, topbar, scrollable main content, and detail drawer overlay.",
+    "componentIndexSummary": [],
+    "uiKitSummary": "no ui_kits directory in TraeWork library",
+    "allowedComponents": [],
+    "forbiddenInventedComponents": [],
+    "tokenFidelity": "strict",
+    "iconAssets": {
+      "source": "assets/icons",
+      "projectIconDir": "assets/icons/dl_builtin_trae_work",
+      "libraryKey": "dl_builtin_trae_work",
+      "renderMethod": "css-mask",
+      "pathTemplate": "../assets/icons/dl_builtin_trae_work/{name}.svg",
+      "availableNames": [
+        "arrow-down",
+        "arrow-left",
+        "arrow-right",
+        "arrow-up",
+        "box",
+        "check",
+        "chevron-down",
+        "chevron-left",
+        "chevron-right",
+        "chevron-up",
+        "chevrons-down-up",
+        "chevrons-up-down",
+        "circle-alert",
+        "circle-check",
+        "circle-minus",
+        "circle-pause",
+        "circle-play",
+        "circle-plus",
+        "circle-question-mark",
+        "external-link",
+        "file",
+        "folder-open",
+        "folder",
+        "funnel",
+        "grip",
+        "heart",
+        "house",
+        "mail",
+        "map-pin",
+        "message-circle-more",
+        "mouse-pointer-click",
+        "pen-line",
+        "send-horizontal",
+        "star",
+        "tag",
+        "thumbs-down",
+        "thumbs-up",
+        "trash-2",
+        "triangle-alert",
+        "user"
+      ],
+      "totalCount": 39,
+      "coloringRule": "currentColor by default; override with Library token when needed"
+    }
+  }
+}

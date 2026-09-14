@@ -1,0 +1,6 @@
+node_modules/
+output/
+.playwright-cli/
+.DS_Store
+*.log
+# assets/ 下的图片资源需要纳入版本管理，请勿忽略

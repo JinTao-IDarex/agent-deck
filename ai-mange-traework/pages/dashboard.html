@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mange 管理台</title>
+    <style id="theme-vars">
+/*
+ * TraeWork design tokens
+ * Brand: TraeWork
+ * Domain: Enterprise AI operations platform
+ * Style: Clean, professional, purple-accent
+ * Theme mode: light-dark
+ * Source language: zh
+ * Output language: zh
+ *
+ * Color architecture (two layers):
+ *   1. Primitive palette - brand (purple, 50-950), brand-grey (neutral, 50-950),
+ *      brand-red, brand-yellow, brand-blue, brand-purple, brand-neutral-grey,
+ *      brand-blue-grey, brand-green-grey (each 100-1000), accent colors (9),
+ *      status colors (5 with surface variants), code colors, viz series.
+ *   2. Semantic tokens - :root (light) and .dark map roles onto primitives.
+ *      Components and UI kits must only consume the semantic tokens below.
+ */
+
+/* @group-priority: brand, bg, text, icon, border, status, accent, code, viz */
+
+:root {
+  /* solo-design consumption aliases */
+  --tw-background: var(--bg-base-default, #ffffff);
+  --tw-foreground: var(--text-default, #171717);
+  --tw-card: var(--bg-base-secondary, #f5f5f5);
+  --tw-card-foreground: var(--text-default, #171717);
+  --tw-popover: var(--bg-menu, #ffffff);
+  --tw-popover-foreground: var(--text-default, #171717);
+  --tw-primary: var(--brand-600, #4b3fe3);
+  --tw-primary-foreground: var(--text-onbrand, #ffffff);
+  --tw-secondary: var(--bg-base-secondary, #f5f5f5);
+  --tw-secondary-foreground: var(--text-secondary, #404040);
+  --tw-muted: var(--bg-base-secondary, #f5f5f5);
+  --tw-muted-foreground: var(--text-tertiary, #737373);
+  --tw-accent: var(--brand-50, #f2f7ff);
+  --tw-accent-foreground: var(--brand-600, #4b3fe3);
+  --tw-destructive: var(--status-error-default, #e8463a);
+  --tw-destructive-foreground: var(--text-onbrand, #ffffff);
+  --tw-border: var(--border-neutral-l1, rgba(115,115,115,0.12));
+  --tw-input: var(--border-neutral-l2, rgba(115,115,115,0.18));
+  --tw-ring: var(--brand-600, #4b3fe3);
+  --tw-sidebar: var(--bg-base-secondary, #f5f5f5);
+  --tw-sidebar-foreground: var(--text-default, #171717);
+  --tw-sidebar-primary: var(--brand-600, #4b3fe3);
+  --tw-sidebar-primary-foreground: var(--text-onbrand, #ffffff);
+  --tw-sidebar-accent: var(--brand-50, #f2f7ff);
+  --tw-sidebar-accent-foreground: var(--brand-600, #4b3fe3);
+  --tw-radius-sm: var(--radius-sm, 4px);
+  --tw-radius-md: var(--radius-md, 6px);
+  --tw-radius-lg: var(--radius-lg, 8px);
+  --tw-radius-xl: var(--radius-xl, 10px);
+  --tw-radius-full: var(--radius-full, 999px);
+  --tw-font-sans: var(--font-sans);
+  --tw-font-heading: var(--font-heading);
+  --tw-font-mono: var(--font-mono);
+
+  /* ===== PRIMITIVE PALETTE ===== */
+
+  /* brand (purple) */
+  --brand-50: #f2f7ff;
+  --brand-100: #e5eaff;
+  --brand-200: #cfd8ff;
+  --brand-300: #aab7ff;
+  --brand-400: #8894ff;
+  --brand-500: #6a6fff;
+  --brand-600: #4b3fe3;
+  --brand-700: #3f31c6;
+  --brand-800: #2c2290;
+  --brand-900: #1a1759;
+  --brand-950: #010109;
+
+  /* brand-grey (neutral) */
+  --brand-grey-50: #fafafa;
+  --brand-grey-100: #f5f5f5;
+  --brand-grey-200: #e5e5e5;
+  --brand-grey-300: #d4d4d4;
+  --brand-grey-400: #a1a1a1;
+  --brand-grey-500: #737373;
+  --brand-grey-600: #525252;
+  --brand-grey-700: #404040;
+  --brand-grey-800: #262626;
+  --brand-grey-900: #171717;
+  --brand-grey-950: #0a0a0a;
+
+  /* brand-red */
+  --brand-red-100: #ffe5e5;
+  --brand-red-200: #ffcccc;
+  --brand-red-300: #ffb2b2;
+  --brand-red-400: #ff9999;
+  --brand-red-500: #ff8080;
+  --brand-red-600: #ff6464;
+  --brand-red-700: #e63737;
+  --brand-red-800: #cb1010;
+  --brand-red-900: #8f0505;
+  --brand-red-1000: #4d0000;
+
+  /* brand-yellow */
+  --brand-yellow-100: #fff6e5;
+  --brand-yellow-200: #ffeccc;
+  --brand-yellow-300: #ffe3b2;
+  --brand-yellow-400: #ffda99;
+  --brand-yellow-500: #ffd080;
+  --brand-yellow-600: #ffc864;
+  --brand-yellow-700: #e6a637;
+  --brand-yellow-800: #cb8710;
+  --brand-yellow-900: #8f5c05;
+  --brand-yellow-1000: #4d3000;
+
+  /* brand-blue */
+  --brand-blue-100: #e5f3ff;
+  --brand-blue-200: #cce6ff;
+  --brand-blue-300: #b2daff;
+  --brand-blue-400: #99ceff;
+  --brand-blue-500: #80c1ff;
+  --brand-blue-600: #64b4ff;
+  --brand-blue-700: #3792e6;
+  --brand-blue-800: #1071cb;
+  --brand-blue-900: #054c8f;
+  --brand-blue-1000: #00284d;
+
+  /* brand-purple */
+  --brand-purple-100: #e8e5ff;
+  --brand-purple-200: #d2ccff;
+  --brand-purple-300: #bbb2ff;
+  --brand-purple-400: #a599ff;
+  --brand-purple-500: #8e80ff;
+  --brand-purple-600: #7864ff;
+  --brand-purple-700: #4c37e6;
+  --brand-purple-800: #2610cb;
+  --brand-purple-900: #15058f;
+  --brand-purple-1000: #09004d;
+
+  /* brand-neutral-grey */
+  --brand-neutral-grey-100: #f2f2f2;
+  --brand-neutral-grey-200: #e3e3e3;
+  --brand-neutral-grey-300: #d6d6d6;
+  --brand-neutral-grey-400: #c7c7c7;
+  --brand-neutral-grey-500: #bababa;
+  --brand-neutral-grey-600: #ababab;
+  --brand-neutral-grey-700: #8a8a8a;
+  --brand-neutral-grey-800: #686868;
+  --brand-neutral-grey-900: #474747;
+  --brand-neutral-grey-1000: #262626;
+
+  /* brand-blue-grey */
+  --brand-blue-grey-100: #f1eff4;
+  --brand-blue-grey-200: #e0e1e6;
+  --brand-blue-grey-300: #cfd3d8;
+  --brand-blue-grey-400: #bfc5ca;
+  --brand-blue-grey-500: #b0b5ba;
+  --brand-blue-grey-600: #a0a6ab;
+  --brand-blue-grey-700: #80898e;
+  --brand-blue-grey-800: #5e696e;
+  --brand-blue-grey-900: #404a4f;
+  --brand-blue-grey-1000: #21262b;
+
+  /* brand-green-grey */
+  --brand-green-grey-100: #f1f4f4;
+  --brand-green-grey-200: #e0e6e6;
+  --brand-green-grey-300: #cfd8d8;
+  --brand-green-grey-400: #bfcaca;
+  --brand-green-grey-500: #b0baba;
+  --brand-green-grey-600: #a0abab;
+  --brand-green-grey-700: #808e8e;
+  --brand-green-grey-800: #5e6e6e;
+  --brand-green-grey-900: #404f4f;
+  --brand-green-grey-1000: #212b2b;
+
+  /* ===== SEMANTIC ROLES - light ===== */
+
+  /* background */
+  --bg-base-default: #ffffff;
+  --bg-base-secondary: #f5f5f5;
+  --bg-base-tertiary: #e5e5e5;
+  --bg-overlay-l1: rgba(115,115,115,0.08);
+  --bg-overlay-l2: rgba(115,115,115,0.12);
+  --bg-overlay-l3: rgba(115,115,115,0.16);
+  --bg-overlay-l4: rgba(115,115,115,0.20);
+  --bg-white: #ffffff;
+  --bg-menu: #ffffff;
+  --bg-tooltip: #ffffff;
+  --bg-invert: #262626;
+  --bg-invert-hover: #404040;
+  --bg-invert-active: #171717;
+  --bg-invert-disabled: rgba(115,115,115,0.20);
+  --color-background: #ffffff;
+  --color-surface: #f5f5f5;
+  --color-surface-variant: #e5e5e5;
+  --color-card: #f5f5f5;
+  --color-tooltip: #ffffff;
+  --color-menu: #ffffff;
+
+  /* brand background */
+  --bg-brand: #4b3fe3;
+  --bg-brand-hover: #6a6fff;
+  --bg-brand-active: #3f31c6;
+  --bg-brand-disabled: rgba(75,63,227,0.22);
+  --bg-brand-popup: rgba(170,183,255,0.36);
+  --color-primary: #4b3fe3;
+  --color-primary-hover: #6a6fff;
+  --color-primary-disabled: rgba(75,63,227,0.22);
+  --color-primary-soft: rgba(170,183,255,0.36);
+  --color-accent: #4b3fe3;
+
+  /* icon */
+  --icon-default: #262626;
+  --icon-default-hover: #171717;
+  --icon-default-active: #171717;
+  --icon-secondary: #404040;
+  --icon-secondary-hover: #262626;
+  --icon-secondary-active: #262626;
+  --icon-tertiary: #737373;
+  --icon-disabled: #a1a1a1;
+  --icon-onbrand: #ffffff;
+  --icon-onaccent: #ffffff;
+  --icon-white: #ffffff;
+  --icon-brand: #4b3fe3;
+  --icon-brand-hover: #6a6fff;
+
+  /* text */
+  --text-default: #171717;
+  --text-default-hover: #262626;
+  --text-default-active: #262626;
+  --text-secondary: #404040;
+  --text-secondary-hover: #171717;
+  --text-secondary-active: #171717;
+  --text-tertiary: #737373;
+  --text-disabled: #a1a1a1;
+  --text-onbrand: #ffffff;
+  --text-onaccent: #ffffff;
+  --text-white: #ffffff;
+  --text-brand: #4b3fe3;
+  --text-brand-hover: #6a6fff;
+  --color-foreground: #171717;
+  --color-foreground-hover: #262626;
+  --color-on-surface: #171717;
+  --color-on-surface-variant: #404040;
+  --color-muted-foreground: #404040;
+  --color-disabled-foreground: #a1a1a1;
+  --color-on-primary: #ffffff;
+
+  /* border */
+  --border-neutral-l1: rgba(115,115,115,0.12);
+  --border-neutral-l2: rgba(115,115,115,0.18);
+  --border-neutral-l3: rgba(115,115,115,0.36);
+  --border-contrast: #000000;
+  --border-brand: #4b3fe3;
+  --color-border: rgba(115,115,115,0.12);
+  --color-border-strong: rgba(115,115,115,0.18);
+  --color-border-stronger: rgba(115,115,115,0.36);
+  --color-border-contrast: #000000;
+  --color-outline: rgba(115,115,115,0.12);
+
+  /* status */
+  --status-primary-default: #2f74ff;
+  --status-primary-hover: #4c88ff;
+  --status-primary-active: #1759dd;
+  --status-primary-surface-l1: rgba(47,116,255,0.12);
+  --status-primary-surface-l2: rgba(47,116,255,0.18);
+  --status-primary-surface-l3: rgba(47,116,255,0.36);
+  --status-success-default: #15a877;
+  --status-success-hover: #2fb287;
+  --status-success-active: #1e8b56;
+  --status-success-surface-l1: rgba(64,176,139,0.12);
+  --status-success-surface-l2: rgba(64,176,139,0.18);
+  --status-success-surface-l3: rgba(64,176,139,0.36);
+  --status-alert-default: #fea900;
+  --status-alert-hover: #ffb700;
+  --status-alert-active: #e59100;
+  --status-alert-surface-l1: rgba(254,169,0,0.14);
+  --status-alert-surface-l2: rgba(254,169,0,0.20);
+  --status-alert-surface-l3: rgba(254,169,0,0.36);
+  --status-warning-default: #e27900;
+  --status-warning-hover: #f39a35;
+  --status-warning-active: #c46f11;
+  --status-warning-surface-l1: rgba(226,121,0,0.12);
+  --status-warning-surface-l2: rgba(226,121,0,0.16);
+  --status-warning-surface-l3: rgba(226,121,0,0.36);
+  --status-error-default: #e8463a;
+  --status-error-hover: #ea574c;
+  --status-error-active: #c9382f;
+  --status-error-surface-l1: rgba(232,70,58,0.12);
+  --status-error-surface-l2: rgba(232,70,58,0.16);
+  --status-error-surface-l3: rgba(232,70,58,0.36);
+  --color-info: #2f74ff;
+  --color-success: #15a877;
+  --color-warning: #e27900;
+  --color-error: #e8463a;
+  --color-error-soft: rgba(232,70,58,0.12);
+
+  /* accent */
+  --accent-teal: #00b983;
+  --accent-coral: #ff6b45;
+  --accent-amber: #f2a90c;
+  --accent-lime: #5fc000;
+  --accent-cyan: #00b6f5;
+  --accent-blue: #3f85ff;
+  --accent-magenta: #f53cff;
+  --accent-violet: #9570ff;
+  --accent-slate: #747e94;
+
+  /* viz series */
+  --viz-series-brand: #4b3fe3;
+  --viz-series-brand-soft: #aab7ff;
+  --viz-series-brand-mid: #6a6fff;
+  --viz-series-brand-deep: #3f31c6;
+  --viz-series-neutral: #737373;
+  --viz-series-coral: #f87454;
+  --viz-series-amber: #edaa45;
+  --viz-series-mint: #1dc981;
+  --viz-series-teal: #59e8e8;
+  --viz-series-sky: #22a5f7;
+  --viz-series-violet: #b655fc;
+  --viz-series-magenta: #fb9dd7;
+  --viz-series-indigo: #b6a3ff;
+  --viz-series-lime: #a6ea39;
+  --viz-series-slate: #859ead;
+  --viz-ui-bg-chart: #ffffff;
+  --viz-ui-bg-tooltip: #ffffff;
+  --viz-ui-chart-title: #171717;
+  --viz-ui-chart-subtitle: #404040;
+  --viz-ui-chart-axis: rgba(115,115,115,0.18);
+  --viz-ui-chart-tick: #404040;
+  --viz-ui-legend-label: #404040;
+  --viz-ui-legend-value: #171717;
+
+  /* code */
+  --code-text: #17181a;
+  --code-doc: #8393a3;
+  --code-link: #2f74ff;
+  --code-number: #e54595;
+  --code-action: #5f36b2;
+  --code-instruction: #b15ef2;
+  --code-function: #ff5d4d;
+  --code-constant: #175ce6;
+  --code-parameter: #4da621;
+  --code-attribute: #c99100;
+  --code-tag: #e24864;
+
+  /* special */
+  --special-white: #ffffff;
+  --special-black: #000000;
+  --special-bgtabsoverlay: rgba(255,255,255,0.12);
+  --special-bggoldoverlay: rgba(210,181,19,0.12);
+
+  /* layout aliases */
+  --brand-1: #4b3fe3;
+  --brand-2: #6a6fff;
+  --brand-3: #aab7ff;
+  --brand-4: #e5eaff;
+  --site-canvas: #ffffff;
+  --bg-layout-1: #f5f5f5;
+  --bg-layout-2: rgba(115,115,115,0.08);
+  --border-1: rgba(115,115,115,0.12);
+
+  /* agent brand colors */
+  --agent-claude: #e6a637;
+  --agent-claude-light: #cb8710;
+  --agent-codex: #00b983;
+  --agent-codex-light: #1dc981;
+  --agent-trae: #4b3fe3;
+  --agent-trae-light: #6a6fff;
+  --agent-qoder: #00b6f5;
+  --agent-qoder-light: #22a5f7;
+  --agent-mimo: #ff6b45;
+  --agent-mimo-light: #f87454;
+  --agent-zcode: #9570ff;
+  --agent-zcode-light: #b655fc;
+
+  /* TYPOGRAPHY */
+  --font-sans: "SF Pro Text", "PingFang SC", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "SF Pro", "PingFang SC", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-metric: "Inter", "SF Pro Text", "PingFang SC", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --tracking-normal: 0em;
+
+  /* RADIUS */
+  --radius-0: 0px;
+  --radius-2: 2px;
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-10: 10px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-32: 32px;
+  --radius-full: 999px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --radius: 8px;
+
+  /* SHADOWS */
+  --shadow-2xs: 0 1px 2px -1px rgba(0,0,0,0.04);
+  --shadow-xs: 0 1px 2px 0 rgba(0,0,0,0.04);
+  --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05), 0 1px 3px -1px rgba(0,0,0,0.05);
+  --shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 8px -2px rgba(0,0,0,0.06), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-lg: 0 8px 24px -8px rgba(0,0,0,0.08), 0 4px 8px -4px rgba(0,0,0,0.05);
+  --shadow-xl: 0 16px 40px -10px rgba(0,0,0,0.10), 0 8px 16px -8px rgba(0,0,0,0.06);
+  --shadow-2xl: 0 24px 64px -12px rgba(0,0,0,0.12);
+
+  /* SPACING */
+  --spacer-0: 0px;
+  --spacer-2: 2px;
+  --spacer-3: 3px;
+  --spacer-4: 4px;
+  --spacer-6: 6px;
+  --spacer-8: 8px;
+  --spacer-10: 10px;
+  --spacer-12: 12px;
+  --spacer-16: 16px;
+  --spacer-20: 20px;
+  --spacer-24: 24px;
+  --spacer-32: 32px;
+  --spacer-40: 40px;
+  --spacer-48: 48px;
+  --spacer-64: 64px;
+  --spacing: 4px;
+
+  /* BORDER WIDTH */
+  --border-width-default: 1px;
+
+  /* ICON SIZES */
+  --icon-size-12: 12px;
+  --icon-size-14: 14px;
+  --icon-size-16: 16px;
+  --icon-size-20: 20px;
+  --icon-size-24: 24px;
+}
+
+/* ===== SEMANTIC ROLES - dark ===== */
+.dark {
+  /* background */
+  --bg-base-default: #0a0a0a;
+  --bg-base-secondary: #171717;
+  --bg-base-tertiary: #262626;
+  --bg-overlay-l1: rgba(255,255,255,0.08);
+  --bg-overlay-l2: rgba(255,255,255,0.12);
+  --bg-overlay-l3: rgba(255,255,255,0.16);
+  --bg-overlay-l4: rgba(255,255,255,0.20);
+  --bg-white: #171717;
+  --bg-menu: #262626;
+  --bg-tooltip: #262626;
+  --bg-invert: #f5f5f5;
+  --bg-invert-hover: #e5e5e5;
+  --bg-invert-active: #ffffff;
+  --bg-invert-disabled: rgba(115,115,115,0.20);
+  --color-background: #0a0a0a;
+  --color-surface: #171717;
+  --color-surface-variant: #262626;
+  --color-card: #171717;
+  --color-tooltip: #262626;
+  --color-menu: #262626;
+
+  /* brand background */
+  --bg-brand: #6a6fff;
+  --bg-brand-hover: #8894ff;
+  --bg-brand-active: #4b3fe3;
+  --bg-brand-disabled: rgba(106,111,255,0.22);
+  --bg-brand-popup: rgba(170,183,255,0.36);
+  --color-primary: #6a6fff;
+  --color-primary-hover: #8894ff;
+  --color-primary-disabled: rgba(106,111,255,0.22);
+  --color-primary-soft: rgba(170,183,255,0.36);
+  --color-accent: #6a6fff;
+
+  /* icon */
+  --icon-default: #f5f5f5;
+  --icon-default-hover: #ffffff;
+  --icon-default-active: #ffffff;
+  --icon-secondary: #d4d4d4;
+  --icon-secondary-hover: #f5f5f5;
+  --icon-secondary-active: #f5f5f5;
+  --icon-tertiary: #a1a1a1;
+  --icon-disabled: #525252;
+  --icon-onbrand: #ffffff;
+  --icon-onaccent: #ffffff;
+  --icon-white: #ffffff;
+  --icon-brand: #6a6fff;
+  --icon-brand-hover: #8894ff;
+
+  /* text */
+  --text-default: #f5f5f5;
+  --text-default-hover: #ffffff;
+  --text-default-active: #ffffff;
+  --text-secondary: #d4d4d4;
+  --text-secondary-hover: #f5f5f5;
+  --text-secondary-active: #f5f5f5;
+  --text-tertiary: #a1a1a1;
+  --text-disabled: #525252;
+  --text-onbrand: #ffffff;
+  --text-onaccent: #ffffff;
+  --text-white: #ffffff;
+  --text-brand: #6a6fff;
+  --text-brand-hover: #8894ff;
+  --color-foreground: #f5f5f5;
+  --color-foreground-hover: #ffffff;
+  --color-on-surface: #f5f5f5;
+  --color-on-surface-variant: #d4d4d4;
+  --color-muted-foreground: #a1a1a1;
+  --color-disabled-foreground: #525252;
+  --color-on-primary: #ffffff;
+
+  /* border */
+  --border-neutral-l1: rgba(255,255,255,0.12);
+  --border-neutral-l2: rgba(255,255,255,0.18);
+  --border-neutral-l3: rgba(255,255,255,0.36);
+  --border-contrast: #ffffff;
+  --border-brand: #6a6fff;
+  --color-border: rgba(255,255,255,0.12);
+  --color-border-strong: rgba(255,255,255,0.18);
+  --color-border-stronger: rgba(255,255,255,0.36);
+  --color-border-contrast: #ffffff;
+  --color-outline: rgba(255,255,255,0.12);
+
+  /* status (dark adjusted) */
+  --status-primary-default: #4c88ff;
+  --status-primary-hover: #6a9fff;
+  --status-primary-active: #1759dd;
+  --status-success-default: #2fb287;
+  --status-success-hover: #4dbc97;
+  --status-success-active: #1e8b56;
+  --status-alert-default: #ffb700;
+  --status-alert-hover: #ffc833;
+  --status-alert-active: #e59100;
+  --status-warning-default: #f39a35;
+  --status-warning-hover: #ffb700;
+  --status-warning-active: #c46f11;
+  --status-error-default: #ea574c;
+  --status-error-hover: #f07060;
+  --status-error-active: #c9382f;
+  --color-info: #4c88ff;
+  --color-success: #2fb287;
+  --color-warning: #f39a35;
+  --color-error: #ea574c;
+  --color-error-soft: rgba(234,87,76,0.16);
+
+  /* layout aliases */
+  --brand-1: #6a6fff;
+  --brand-2: #8894ff;
+  --brand-3: #aab7ff;
+  --brand-4: rgba(170,183,255,0.12);
+  --site-canvas: #0a0a0a;
+  --bg-layout-1: #171717;
+  --bg-layout-2: rgba(255,255,255,0.08);
+  --border-1: rgba(255,255,255,0.12);
+
+  /* dark shadows */
+  --shadow-2xs: 0 1px 2px -1px rgba(0,0,0,0.30);
+  --shadow-xs: 0 1px 2px 0 rgba(0,0,0,0.30);
+  --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.36), 0 1px 3px -1px rgba(0,0,0,0.36);
+  --shadow: 0 2px 4px -1px rgba(0,0,0,0.40), 0 1px 2px -1px rgba(0,0,0,0.36);
+  --shadow-md: 0 4px 8px -2px rgba(0,0,0,0.44), 0 2px 4px -2px rgba(0,0,0,0.36);
+  --shadow-lg: 0 8px 24px -8px rgba(0,0,0,0.50), 0 4px 8px -4px rgba(0,0,0,0.40);
+  --shadow-xl: 0 16px 40px -10px rgba(0,0,0,0.55), 0 8px 16px -8px rgba(0,0,0,0.44);
+  --shadow-2xl: 0 24px 64px -12px rgba(0,0,0,0.60);
+
+  /* dark consumption aliases */
+  --tw-background: var(--bg-base-default, #0a0a0a);
+  --tw-foreground: var(--text-default, #f5f5f5);
+  --tw-card: var(--bg-base-secondary, #171717);
+  --tw-card-foreground: var(--text-default, #f5f5f5);
+  --tw-popover: var(--bg-menu, #262626);
+  --tw-popover-foreground: var(--text-default, #f5f5f5);
+  --tw-primary: var(--brand-500, #6a6fff);
+  --tw-primary-foreground: var(--text-onbrand, #ffffff);
+  --tw-secondary: var(--bg-base-secondary, #171717);
+  --tw-secondary-foreground: var(--text-secondary, #d4d4d4);
+  --tw-muted: var(--bg-base-secondary, #171717);
+  --tw-muted-foreground: var(--text-tertiary, #a1a1a1);
+  --tw-accent: var(--brand-4, rgba(170,183,255,0.12));
+  --tw-accent-foreground: var(--brand-500, #6a6fff);
+  --tw-destructive: var(--status-error-default, #ea574c);
+  --tw-destructive-foreground: var(--text-onbrand, #ffffff);
+  --tw-border: var(--border-neutral-l1, rgba(255,255,255,0.12));
+  --tw-input: var(--border-neutral-l2, rgba(255,255,255,0.18));
+  --tw-ring: var(--brand-500, #6a6fff);
+  --tw-sidebar: var(--bg-base-secondary, #171717);
+  --tw-sidebar-foreground: var(--text-default, #f5f5f5);
+  --tw-sidebar-primary: var(--brand-500, #6a6fff);
+  --tw-sidebar-primary-foreground: var(--text-onbrand, #ffffff);
+  --tw-sidebar-accent: var(--brand-4, rgba(170,183,255,0.12));
+  --tw-sidebar-accent-foreground: var(--brand-500, #6a6fff);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--tw-background);
+    --color-foreground: var(--tw-foreground);
+    --color-card: var(--tw-card);
+    --color-card-foreground: var(--tw-card-foreground);
+    --color-popover: var(--tw-popover);
+    --color-popover-foreground: var(--tw-popover-foreground);
+    --color-primary: var(--tw-primary);
+    --color-primary-foreground: var(--tw-primary-foreground);
+    --color-secondary: var(--tw-secondary);
+    --color-secondary-foreground: var(--tw-secondary-foreground);
+    --color-muted: var(--tw-muted);
+    --color-muted-foreground: var(--tw-muted-foreground);
+    --color-accent: var(--tw-accent);
+    --color-accent-foreground: var(--tw-accent-foreground);
+    --color-destructive: var(--tw-destructive);
+    --color-destructive-foreground: var(--tw-destructive-foreground);
+    --color-border: var(--tw-border);
+    --color-input: var(--tw-input);
+    --color-ring: var(--tw-ring);
+    --color-sidebar: var(--tw-sidebar);
+    --color-sidebar-foreground: var(--tw-sidebar-foreground);
+    --color-sidebar-primary: var(--tw-sidebar-primary);
+    --color-sidebar-primary-foreground: var(--tw-sidebar-primary-foreground);
+    --color-sidebar-accent: var(--tw-sidebar-accent);
+    --color-sidebar-accent-foreground: var(--tw-sidebar-accent-foreground);
+    --radius-sm: var(--tw-radius-sm);
+    --radius-md: var(--tw-radius-md);
+    --radius-lg: var(--tw-radius-lg);
+    --radius-xl: var(--tw-radius-xl);
+  }
+  @layer base {
+    body { background: var(--tw-background); color: var(--tw-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--tw-background); }
+      .text-background { color: var(--tw-background); }
+      .border-background { border-color: var(--tw-background); }
+      .ring-background { --tw-ring-color: var(--tw-background); }
+      .bg-foreground { background-color: var(--tw-foreground); }
+      .text-foreground { color: var(--tw-foreground); }
+      .border-foreground { border-color: var(--tw-foreground); }
+      .ring-foreground { --tw-ring-color: var(--tw-foreground); }
+      .bg-card { background-color: var(--tw-card); }
+      .text-card { color: var(--tw-card); }
+      .border-card { border-color: var(--tw-card); }
+      .ring-card { --tw-ring-color: var(--tw-card); }
+      .bg-card-foreground { background-color: var(--tw-card-foreground); }
+      .text-card-foreground { color: var(--tw-card-foreground); }
+      .border-card-foreground { border-color: var(--tw-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--tw-card-foreground); }
+      .bg-popover { background-color: var(--tw-popover); }
+      .text-popover { color: var(--tw-popover); }
+      .border-popover { border-color: var(--tw-popover); }
+      .ring-popover { --tw-ring-color: var(--tw-popover); }
+      .bg-popover-foreground { background-color: var(--tw-popover-foreground); }
+      .text-popover-foreground { color: var(--tw-popover-foreground); }
+      .border-popover-foreground { border-color: var(--tw-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--tw-popover-foreground); }
+      .bg-primary { background-color: var(--tw-primary); }
+      .text-primary { color: var(--tw-primary); }
+      .border-primary { border-color: var(--tw-primary); }
+      .ring-primary { --tw-ring-color: var(--tw-primary); }
+      .bg-primary-foreground { background-color: var(--tw-primary-foreground); }
+      .text-primary-foreground { color: var(--tw-primary-foreground); }
+      .border-primary-foreground { border-color: var(--tw-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--tw-primary-foreground); }
+      .bg-secondary { background-color: var(--tw-secondary); }
+      .text-secondary { color: var(--tw-secondary); }
+      .border-secondary { border-color: var(--tw-secondary); }
+      .ring-secondary { --tw-ring-color: var(--tw-secondary); }
+      .bg-secondary-foreground { background-color: var(--tw-secondary-foreground); }
+      .text-secondary-foreground { color: var(--tw-secondary-foreground); }
+      .border-secondary-foreground { border-color: var(--tw-secondary-foreground); }
+      .ring-secondary-foreground { --tw-ring-color: var(--tw-secondary-foreground); }
+      .bg-muted { background-color: var(--tw-muted); }
+      .text-muted { color: var(--tw-muted); }
+      .border-muted { border-color: var(--tw-muted); }
+      .ring-muted { --tw-ring-color: var(--tw-muted); }
+      .bg-muted-foreground { background-color: var(--tw-muted-foreground); }
+      .text-muted-foreground { color: var(--tw-muted-foreground); }
+      .border-muted-foreground { border-color: var(--tw-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--tw-muted-foreground); }
+      .bg-accent { background-color: var(--tw-accent); }
+      .text-accent { color: var(--tw-accent); }
+      .border-accent { border-color: var(--tw-accent); }
+      .ring-accent { --tw-ring-color: var(--tw-accent); }
+      .bg-accent-foreground { background-color: var(--tw-accent-foreground); }
+      .text-accent-foreground { color: var(--tw-accent-foreground); }
+      .border-accent-foreground { border-color: var(--tw-accent-foreground); }
+      .ring-accent-foreground { --tw-ring-color: var(--tw-accent-foreground); }
+      .bg-destructive { background-color: var(--tw-destructive); }
+      .text-destructive { color: var(--tw-destructive); }
+      .border-destructive { border-color: var(--tw-destructive); }
+      .ring-destructive { --tw-ring-color: var(--tw-destructive); }
+      .bg-destructive-foreground { background-color: var(--tw-destructive-foreground); }
+      .text-destructive-foreground { color: var(--tw-destructive-foreground); }
+      .border-destructive-foreground { border-color: var(--tw-destructive-foreground); }
+      .ring-destructive-foreground { --tw-ring-color: var(--tw-destructive-foreground); }
+      .bg-border { background-color: var(--tw-border); }
+      .text-border { color: var(--tw-border); }
+      .border-border { border-color: var(--tw-border); }
+      .ring-border { --tw-ring-color: var(--tw-border); }
+      .bg-input { background-color: var(--tw-input); }
+      .text-input { color: var(--tw-input); }
+      .border-input { border-color: var(--tw-input); }
+      .ring-input { --tw-ring-color: var(--tw-input); }
+      .bg-ring { background-color: var(--tw-ring); }
+      .text-ring { color: var(--tw-ring); }
+      .border-ring { border-color: var(--tw-ring); }
+      .ring-ring { --tw-ring-color: var(--tw-ring); }
+      .bg-sidebar { background-color: var(--tw-sidebar); }
+      .text-sidebar { color: var(--tw-sidebar); }
+      .border-sidebar { border-color: var(--tw-sidebar); }
+      .ring-sidebar { --tw-ring-color: var(--tw-sidebar); }
+      .bg-sidebar-foreground { background-color: var(--tw-sidebar-foreground); }
+      .text-sidebar-foreground { color: var(--tw-sidebar-foreground); }
+      .border-sidebar-foreground { border-color: var(--tw-sidebar-foreground); }
+      .ring-sidebar-foreground { --tw-ring-color: var(--tw-sidebar-foreground); }
+      .bg-sidebar-primary { background-color: var(--tw-sidebar-primary); }
+      .text-sidebar-primary { color: var(--tw-sidebar-primary); }
+      .border-sidebar-primary { border-color: var(--tw-sidebar-primary); }
+      .ring-sidebar-primary { --tw-ring-color: var(--tw-sidebar-primary); }
+      .bg-sidebar-primary-foreground { background-color: var(--tw-sidebar-primary-foreground); }
+      .text-sidebar-primary-foreground { color: var(--tw-sidebar-primary-foreground); }
+      .border-sidebar-primary-foreground { border-color: var(--tw-sidebar-primary-foreground); }
+      .ring-sidebar-primary-foreground { --tw-ring-color: var(--tw-sidebar-primary-foreground); }
+      .bg-sidebar-accent { background-color: var(--tw-sidebar-accent); }
+      .text-sidebar-accent { color: var(--tw-sidebar-accent); }
+      .border-sidebar-accent { border-color: var(--tw-sidebar-accent); }
+      .ring-sidebar-accent { --tw-ring-color: var(--tw-sidebar-accent); }
+      .bg-sidebar-accent-foreground { background-color: var(--tw-sidebar-accent-foreground); }
+      .text-sidebar-accent-foreground { color: var(--tw-sidebar-accent-foreground); }
+      .border-sidebar-accent-foreground { border-color: var(--tw-sidebar-accent-foreground); }
+      .ring-sidebar-accent-foreground { --tw-ring-color: var(--tw-sidebar-accent-foreground); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="h-screen font-sans antialiased">
+    <main>
+        <style id="critical-layout">
+            *, *::before, *::after { box-sizing: border-box; }
+            body { margin: 0 !important; padding: 0 !important; height: 100vh; overflow: hidden; }
+
+            /* ===== TraeWork Typography Scale ===== */
+            .text-eyebrow { font: 600 11px/16px var(--font-sans); text-transform: uppercase; letter-spacing: 0; }
+            .text-heading-xl { font: 600 24px/32px var(--font-heading); }
+            .text-heading-lg { font: 600 22px/30px var(--font-heading); }
+            .text-heading-md { font: 600 20px/28px var(--font-heading); }
+            .text-heading-sm { font: 600 16px/24px var(--font-sans); }
+            .text-heading-xs { font: 600 13px/20px var(--font-sans); }
+            .text-heading-2xs { font: 600 12px/18px var(--font-sans); }
+            .text-heading-3xs { font: 600 11px/16px var(--font-sans); text-transform: uppercase; }
+            .text-body-lg { font: 400 18px/28px var(--font-sans); letter-spacing: -0.02em; }
+            .text-body-base { font: 400 14px/20px var(--font-sans); letter-spacing: -0.02em; }
+            .text-body-base-strong { font: 500 14px/20px var(--font-sans); letter-spacing: -0.02em; }
+            .text-body-md { font: 400 12px/18px var(--font-sans); }
+            .text-body-md-strong { font: 500 12px/18px var(--font-sans); }
+            .text-body-sm { font: 400 11px/16px var(--font-sans); }
+            .text-body-sm-strong { font: 500 11px/16px var(--font-sans); }
+            .text-body-xs { font: 400 10px/14px var(--font-sans); }
+            .text-body-xs-strong { font: 500 10px/14px var(--font-sans); }
+
+            /* ===== APP SHELL GRID ===== */
+            .app-shell {
+                display: grid;
+                grid-template-columns: 260px 1fr;
+                grid-template-rows: auto 1fr;
+                height: 100vh;
+                overflow: hidden;
+                background: var(--site-canvas);
+            }
+
+            /* ===== TOPBAR ===== */
+            .topbar {
+                grid-column: 1 / -1;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: var(--spacer-12) var(--spacer-24);
+                background: var(--site-canvas);
+                border-bottom: 1px solid var(--border-neutral-l1);
+                height: 60px;
+            }
+            .logo-mark {
+                width: 36px; height: 36px;
+                border-radius: var(--radius-8);
+                background: linear-gradient(135deg, var(--brand-600), var(--brand-400));
+                color: var(--text-onbrand);
+                font: 700 14px/36px var(--font-sans);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            /* ===== SIDEBAR ===== */
+            .sidebar {
+                grid-column: 1;
+                grid-row: 2;
+                overflow-y: auto;
+                background: var(--bg-layout-1);
+                border-right: 1px solid var(--border-neutral-l1);
+                padding: var(--spacer-20);
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* ===== MAIN CONTENT ===== */
+            .main-content {
+                grid-column: 2;
+                grid-row: 2;
+                overflow-y: auto;
+                background: var(--site-canvas);
+                padding: var(--spacer-24);
+            }
+
+            /* ===== CHIP ===== */
+            .chip {
+                display: inline-flex;
+                align-items: center;
+                gap: var(--spacer-6);
+                padding: var(--spacer-4) var(--spacer-12);
+                border-radius: var(--radius-full);
+                font: 500 12px/18px var(--font-sans);
+                color: var(--text-secondary);
+                background: transparent;
+                border: 1px solid var(--border-neutral-l1);
+                cursor: pointer;
+                transition: all 0.15s ease;
+                white-space: nowrap;
+            }
+            .chip:hover { background: var(--bg-overlay-l1); border-color: var(--border-neutral-l2); }
+            .chip.active {
+                background: var(--tw-accent);
+                color: var(--tw-accent-foreground);
+                border-color: var(--border-brand);
+            }
+            .dot {
+                width: 8px; height: 8px;
+                border-radius: var(--radius-full);
+                flex-shrink: 0;
+            }
+
+            /* ===== FIELD (path input) ===== */
+            .field {
+                display: flex;
+                align-items: center;
+                gap: var(--spacer-8);
+                padding: var(--spacer-6) var(--spacer-12);
+                border-radius: var(--radius-8);
+                background: var(--tw-card);
+                border: 1px solid var(--border-neutral-l2);
+                color: var(--text-secondary);
+            }
+
+            /* ===== BUTTON ===== */
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                gap: var(--spacer-6);
+                padding: var(--spacer-8) var(--spacer-16);
+                border-radius: var(--radius-8);
+                font: 600 13px/20px var(--font-sans);
+                cursor: pointer;
+                border: none;
+                transition: all 0.15s ease;
+                white-space: nowrap;
+            }
+            .btn-primary {
+                background: var(--brand-1);
+                color: var(--text-onbrand);
+            }
+            .btn-primary:hover { background: var(--brand-2); }
+            .btn-primary:active { background: var(--bg-brand-active); }
+            .btn-ghost {
+                background: transparent;
+                color: var(--tw-accent-foreground);
+                border: 1px solid var(--border-neutral-l1);
+            }
+            .btn-ghost:hover { background: var(--bg-overlay-l1); border-color: var(--border-neutral-l2); }
+            .btn-ghost:active { background: var(--bg-overlay-l2); }
+
+            /* ===== TAB ===== */
+            .tab {
+                padding: var(--spacer-6) var(--spacer-12);
+                font: 500 13px/20px var(--font-sans);
+                color: var(--text-tertiary);
+                border-bottom: 2px solid transparent;
+                cursor: pointer;
+                transition: all 0.15s ease;
+                background: transparent;
+                border-left: none;
+                border-right: none;
+                border-top: none;
+            }
+            .tab:hover { color: var(--text-secondary); }
+            .tab.active {
+                color: var(--tw-foreground);
+                border-bottom-color: var(--border-brand);
+            }
+
+            /* ===== SEARCH INPUT ===== */
+            .search-input {
+                padding: var(--spacer-6) var(--spacer-12);
+                border-radius: var(--radius-8);
+                border: 1px solid var(--border-neutral-l2);
+                background: var(--site-canvas);
+                color: var(--tw-foreground);
+                font: 400 13px/20px var(--font-sans);
+                outline: none;
+                width: 280px;
+                transition: border-color 0.15s ease;
+            }
+            .search-input:focus { border-color: var(--border-neutral-l3); }
+            .search-input::placeholder { color: var(--text-tertiary); }
+
+            /* ===== CARD GRID ===== */
+            .card-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+                gap: var(--spacer-16);
+            }
+
+            /* ===== ID CARD ===== */
+            .id-card {
+                display: flex;
+                gap: var(--spacer-12);
+                padding: var(--spacer-16);
+                border: 1px solid var(--border-neutral-l1);
+                border-radius: var(--radius-10);
+                background: var(--tw-card);
+                box-shadow: var(--shadow-sm);
+                transition: all 0.2s ease;
+            }
+            .id-card:hover {
+                box-shadow: var(--shadow-md);
+                border-color: var(--border-neutral-l2);
+                background: var(--site-canvas);
+            }
+            .card-avatar {
+                width: 60px; height: 60px;
+                border-radius: var(--radius-full);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                color: var(--text-onbrand);
+                font: 600 16px/24px var(--font-sans);
+            }
+            .avatar-claude { background: linear-gradient(135deg, var(--agent-claude), var(--agent-claude-light)); }
+            .avatar-codex { background: linear-gradient(135deg, var(--agent-codex), var(--agent-codex-light)); }
+            .avatar-trae  { background: linear-gradient(135deg, var(--agent-trae), var(--agent-trae-light)); }
+            .avatar-qoder { background: linear-gradient(135deg, var(--agent-qoder), var(--agent-qoder-light)); }
+            .avatar-mimo  { background: linear-gradient(135deg, var(--agent-mimo), var(--agent-mimo-light)); }
+            .avatar-zcode { background: linear-gradient(135deg, var(--agent-zcode), var(--agent-zcode-light)); }
+            .card-avatar img, .drawer-avatar img {
+                width: 100%; height: 100%;
+                object-fit: cover;
+                border-radius: inherit;
+                display: block;
+            }
+
+            .card-body { flex: 1; min-width: 0; }
+            .card-head {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: var(--spacer-8);
+                margin-bottom: var(--spacer-4);
+            }
+            .card-name {
+                font: 500 14px/20px var(--font-mono);
+                letter-spacing: -0.02em;
+                color: var(--tw-foreground);
+                margin: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .card-desc {
+                font: 400 12px/18px var(--font-sans);
+                color: var(--tw-muted-foreground);
+                margin: 0 0 var(--spacer-10);
+            }
+            .card-meta {
+                display: flex;
+                align-items: center;
+                gap: var(--spacer-6);
+                flex-wrap: wrap;
+                margin-bottom: var(--spacer-8);
+            }
+            .card-tools {
+                display: flex;
+                align-items: center;
+                gap: var(--spacer-4);
+                flex-wrap: wrap;
+            }
+
+            /* ===== BADGES ===== */
+            .agent-badge {
+                font: 600 11px/16px var(--font-sans);
+                padding: var(--spacer-2) var(--spacer-8);
+                border-radius: var(--radius-4);
+            }
+            .agent-badge-claude { background: color-mix(in srgb, var(--agent-claude) 14%, transparent); color: var(--agent-claude); }
+            .agent-badge-codex  { background: color-mix(in srgb, var(--agent-codex) 14%, transparent); color: var(--agent-codex); }
+            .agent-badge-trae   { background: color-mix(in srgb, var(--agent-trae) 14%, transparent); color: var(--agent-trae); }
+            .agent-badge-qoder  { background: color-mix(in srgb, var(--agent-qoder) 14%, transparent); color: var(--agent-qoder); }
+            .agent-badge-mimo   { background: color-mix(in srgb, var(--agent-mimo) 14%, transparent); color: var(--agent-mimo); }
+            .agent-badge-zcode  { background: color-mix(in srgb, var(--agent-zcode) 14%, transparent); color: var(--agent-zcode); }
+
+            .type-badge {
+                font: 500 11px/16px var(--font-sans);
+                padding: var(--spacer-2) var(--spacer-8);
+                border-radius: var(--radius-4);
+                background: var(--bg-overlay-l1);
+                color: var(--text-secondary);
+            }
+            .scope-tag {
+                font: 400 11px/16px var(--font-sans);
+                color: var(--text-tertiary);
+                display: inline-flex;
+                align-items: center;
+                gap: var(--spacer-4);
+            }
+
+            /* ===== STATUS BADGE ===== */
+            .status-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: var(--spacer-4);
+                font: 600 12px/18px var(--font-sans);
+                padding: var(--spacer-2) var(--spacer-8);
+                border-radius: var(--radius-4);
+                flex-shrink: 0;
+            }
+            .status-pass  { background: var(--status-success-surface-l1); color: var(--status-success-default); }
+            .status-alert { background: var(--status-alert-surface-l1);   color: var(--status-alert-default); }
+            .status-warn  { background: var(--status-warning-surface-l1); color: var(--status-warning-default); }
+            .status-fail  { background: var(--status-error-surface-l1);   color: var(--status-error-default); }
+
+            /* ===== TOOL PILL ===== */
+            .tool-pill {
+                font: 400 10px/14px var(--font-mono);
+                padding: var(--spacer-2) var(--spacer-8);
+                border-radius: var(--radius-4);
+                background: var(--bg-overlay-l1);
+                color: var(--text-tertiary);
+                border: 1px solid var(--border-neutral-l1);
+            }
+
+            /* ===== DETAIL DRAWER ===== */
+            .drawer-backdrop {
+                position: fixed;
+                inset: 0;
+                background: color-mix(in srgb, var(--tw-foreground) 32%, transparent);
+                z-index: 40;
+            }
+            .detail-drawer {
+                position: fixed;
+                top: 0; right: 0;
+                width: 480px;
+                height: 100vh;
+                background: var(--tw-popover);
+                border-left: 1px solid var(--border-neutral-l2);
+                box-shadow: var(--shadow-xl);
+                z-index: 50;
+                display: flex;
+                flex-direction: column;
+            }
+            .drawer-header {
+                display: flex;
+                align-items: center;
+                gap: var(--spacer-12);
+                padding: var(--spacer-16) var(--spacer-20);
+                border-bottom: 1px solid var(--border-neutral-l1);
+            }
+            .drawer-avatar {
+                width: 44px; height: 44px;
+                border-radius: var(--radius-full);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--text-onbrand);
+                font: 600 16px/24px var(--font-sans);
+                flex-shrink: 0;
+            }
+            .drawer-close {
+                margin-left: auto;
+                width: 28px; height: 28px;
+                border-radius: var(--radius-6);
+                border: none;
+                background: transparent;
+                color: var(--text-tertiary);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.15s ease;
+            }
+            .drawer-close:hover {
+                background: var(--bg-overlay-l1);
+                color: var(--text-secondary);
+            }
+            .drawer-close:active {
+                background: var(--bg-overlay-l2);
+            }
+            .drawer-tabs {
+                display: flex;
+                padding: 0 var(--spacer-20);
+                border-bottom: 1px solid var(--border-neutral-l1);
+            }
+            .drawer-body {
+                flex: 1;
+                overflow-y: auto;
+                padding: var(--spacer-20);
+            }
+
+            /* ===== SCORE BAR ===== */
+            .score-bar-track {
+                width: 100%;
+                height: 8px;
+                border-radius: var(--radius-full);
+                background: var(--bg-overlay-l2);
+                overflow: hidden;
+            }
+            .score-bar-fill {
+                height: 100%;
+                border-radius: var(--radius-full);
+            }
+
+            /* ===== INFO TABLE ===== */
+            .info-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            .info-table th,
+            .info-table td {
+                padding: var(--spacer-8) 0;
+                border-bottom: 1px solid var(--border-neutral-l1);
+                text-align: left;
+                vertical-align: top;
+            }
+            .info-table th {
+                font: 500 12px/18px var(--font-sans);
+                color: var(--text-tertiary);
+                width: 72px;
+            }
+            .info-table td {
+                font: 500 14px/20px var(--font-sans);
+                letter-spacing: -0.02em;
+                color: var(--tw-foreground);
+            }
+
+            /* ===== SIDEBAR STATS ===== */
+            .sidebar-stats {
+                margin-top: auto;
+                padding-top: var(--spacer-16);
+                border-top: 1px solid var(--border-neutral-l1);
+            }
+
+            /* ===== SECTION SPACING ===== */
+            .filter-group { margin-bottom: var(--spacer-20); }
+
+            /* ===== RESPONSIVE ===== */
+            @media (max-width: 900px) {
+                .sidebar { display: none; }
+                .app-shell { grid-template-columns: 1fr; }
+                .detail-drawer { width: 100%; }
+                .card-grid { grid-template-columns: 1fr; }
+            }
+        </style>
+
+        <!-- ============ APP SHELL ============ -->
+        <div class="app-shell" data-viewport-mode="app-shell">
+
+            <!-- ====== TOPBAR ====== -->
+            <header class="topbar">
+                <div class="flex items-center gap-3">
+                    <div class="logo-mark">AM</div>
+                    <div class="flex flex-col">
+                        <span class="text-heading-sm" style="color: var(--tw-foreground);">AI Mange</span>
+                        <span class="text-body-md" style="color: var(--tw-muted-foreground);">Subagent &amp; Skill 管理台</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="field" style="width: 320px;">
+                        <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/folder-open.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/folder-open.svg'); color: var(--icon-tertiary);" class="w-4 h-4"></span>
+                        <span class="text-body-md" style="font-family: var(--font-mono);">D:\workspace\demo</span>
+                    </div>
+                    <button class="btn btn-primary">扫描</button>
+                </div>
+            </header>
+
+            <!-- ====== SIDEBAR ====== -->
+            <aside class="sidebar">
+                <!-- Agent filter -->
+                <div class="filter-group">
+                    <div class="text-eyebrow" style="color: var(--text-tertiary); margin-bottom: var(--spacer-8);">Agent</div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <button class="chip active">全部</button>
+                        <button class="chip"><span class="dot" style="background: var(--agent-claude);"></span>Claude</button>
+                        <button class="chip"><span class="dot" style="background: var(--agent-codex);"></span>Codex</button>
+                        <button class="chip"><span class="dot" style="background: var(--agent-trae);"></span>Trae</button>
+                        <button class="chip"><span class="dot" style="background: var(--agent-qoder);"></span>Qoder</button>
+                        <button class="chip"><span class="dot" style="background: var(--agent-mimo);"></span>MiMo</button>
+                        <button class="chip"><span class="dot" style="background: var(--agent-zcode);"></span>ZCode</button>
+                    </div>
+                </div>
+
+                <!-- 类型 filter -->
+                <div class="filter-group">
+                    <div class="text-eyebrow" style="color: var(--text-tertiary); margin-bottom: var(--spacer-8);">类型</div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <button class="chip">Skill</button>
+                        <button class="chip">Subagent</button>
+                        <button class="chip">MCP</button>
+                        <button class="chip">Prompt</button>
+                    </div>
+                </div>
+
+                <!-- 范围 filter -->
+                <div class="filter-group">
+                    <div class="text-eyebrow" style="color: var(--text-tertiary); margin-bottom: var(--spacer-8);">范围</div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <button class="chip">全局</button>
+                        <button class="chip">项目</button>
+                        <button class="chip">局部</button>
+                    </div>
+                </div>
+
+                <!-- 状态 filter -->
+                <div class="filter-group">
+                    <div class="text-eyebrow" style="color: var(--text-tertiary); margin-bottom: var(--spacer-8);">状态</div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <button class="chip active">全部</button>
+                        <button class="chip">已校验</button>
+                        <button class="chip">待校验</button>
+                        <button class="chip">异常</button>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="sidebar-stats">
+                    <div class="flex items-center justify-between" style="margin-bottom: var(--spacer-8);">
+                        <span class="text-body-md" style="color: var(--text-tertiary);">总计</span>
+                        <span class="text-body-base-strong" style="color: var(--tw-foreground);">24 条</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="flex items-center text-body-md" style="color: var(--text-tertiary); gap: var(--spacer-6);">
+                            <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/check.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/check.svg'); color: var(--status-success-default);" class="w-3 h-3"></span>
+                            已校验
+                        </span>
+                        <span class="text-body-base-strong" style="color: var(--status-success-default);">18</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ====== MAIN CONTENT ====== -->
+            <section class="main-content overflow-y-auto" data-scroll-region="primary">
+                <!-- Header row -->
+                <div class="flex items-end justify-between" style="margin-bottom: var(--spacer-20);">
+                    <div>
+                        <h2 class="text-heading-lg m-0" style="color: var(--tw-foreground);">全部条目</h2>
+                        <p class="text-body-md m-0" style="color: var(--tw-muted-foreground); margin-top: var(--spacer-4);">24 / 24 条 · 项目 D:\workspace\demo</p>
+                    </div>
+                    <button class="btn btn-ghost">
+                        <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/pen-line.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/pen-line.svg'); color: var(--tw-accent-foreground);" class="w-4 h-4"></span>
+                        生成新条目
+                    </button>
+                </div>
+
+                <!-- Filter bar -->
+                <div class="flex items-center justify-between" style="margin-bottom: var(--spacer-20);">
+                    <div class="flex items-center gap-1">
+                        <button class="tab active">全部</button>
+                        <button class="tab">最近</button>
+                        <button class="tab">高分</button>
+                        <button class="tab">异常</button>
+                    </div>
+                    <input type="text" class="search-input" placeholder="搜索条目名称、工具、Agent..." />
+                </div>
+
+                <!-- Card Grid -->
+                <div class="card-grid">
+
+                    <!-- Card 1: demo-code-reviewer (Claude, Skill, pass 85%) -->
+                    <div class="id-card">
+                        <div class="card-avatar"><img src="../../assets/ui/avatars/code-reviewer.jpg" alt="demo-code-reviewer"></div>
+                        <div class="card-body">
+                            <div class="card-head">
+                                <h3 class="card-name">demo-code-reviewer</h3>
+                                <span class="status-badge status-pass">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/circle-check.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/circle-check.svg');" class="w-3 h-3"></span>
+                                    85%
+                                </span>
+                            </div>
+                            <p class="card-desc">面向 PR 的自动化代码审查助手，扫描 Git 差异并给出改进建议</p>
+                            <div class="card-meta">
+                                <span class="agent-badge agent-badge-claude">Claude</span>
+                                <span class="type-badge">Skill</span>
+                                <span class="scope-tag">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); color: var(--icon-tertiary);" class="w-3 h-3"></span>
+                                    项目
+                                </span>
+                            </div>
+                            <div class="card-tools">
+                                <span class="tool-pill">file-read</span>
+                                <span class="tool-pill">edit</span>
+                                <span class="tool-pill">shell</span>
+                                <span class="tool-pill">grep</span>
+                                <span class="tool-pill">glob</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: demo-test-runner (Trae, Subagent, pass 92%) -->
+                    <div class="id-card">
+                        <div class="card-avatar"><img src="../../assets/ui/avatars/test-runner.jpg" alt="demo-test-runner"></div>
+                        <div class="card-body">
+                            <div class="card-head">
+                                <h3 class="card-name">demo-test-runner</h3>
+                                <span class="status-badge status-pass">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/circle-check.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/circle-check.svg');" class="w-3 h-3"></span>
+                                    92%
+                                </span>
+                            </div>
+                            <p class="card-desc">自动运行单元与集成测试，汇总通过率与失败原因</p>
+                            <div class="card-meta">
+                                <span class="agent-badge agent-badge-trae">Trae</span>
+                                <span class="type-badge">Subagent</span>
+                                <span class="scope-tag">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); color: var(--icon-tertiary);" class="w-3 h-3"></span>
+                                    项目
+                                </span>
+                            </div>
+                            <div class="card-tools">
+                                <span class="tool-pill">shell</span>
+                                <span class="tool-pill">edit</span>
+                                <span class="tool-pill">file-read</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: demo-refactor-bot (Qoder, Skill, alert 67%) -->
+                    <div class="id-card">
+                        <div class="card-avatar"><img src="../../assets/ui/avatars/refactor-bot.jpg" alt="demo-refactor-bot"></div>
+                        <div class="card-body">
+                            <div class="card-head">
+                                <h3 class="card-name">demo-refactor-bot</h3>
+                                <span class="status-badge status-alert">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/triangle-alert.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/triangle-alert.svg');" class="w-3 h-3"></span>
+                                    67%
+                                </span>
+                            </div>
+                            <p class="card-desc">识别代码异味并生成重构方案，待人工确认后执行</p>
+                            <div class="card-meta">
+                                <span class="agent-badge agent-badge-qoder">Qoder</span>
+                                <span class="type-badge">Skill</span>
+                                <span class="scope-tag">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); color: var(--icon-tertiary);" class="w-3 h-3"></span>
+                                    局部
+                                </span>
+                            </div>
+                            <div class="card-tools">
+                                <span class="tool-pill">edit</span>
+                                <span class="tool-pill">grep</span>
+                                <span class="tool-pill">glob</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: demo-doc-gen (Claude, Subagent, pass 78%) -->
+                    <div class="id-card">
+                        <div class="card-avatar"><img src="../../assets/ui/avatars/doc-gen.jpg" alt="demo-doc-gen"></div>
+                        <div class="card-body">
+                            <div class="card-head">
+                                <h3 class="card-name">demo-doc-gen</h3>
+                                <span class="status-badge status-pass">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/circle-check.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/circle-check.svg');" class="w-3 h-3"></span>
+                                    78%
+                                </span>
+                            </div>
+                            <p class="card-desc">根据源码与注释自动生成 API 文档与使用示例</p>
+                            <div class="card-meta">
+                                <span class="agent-badge agent-badge-claude">Claude</span>
+                                <span class="type-badge">Subagent</span>
+                                <span class="scope-tag">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); color: var(--icon-tertiary);" class="w-3 h-3"></span>
+                                    全局
+                                </span>
+                            </div>
+                            <div class="card-tools">
+                                <span class="tool-pill">file-read</span>
+                                <span class="tool-pill">edit</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: demo-bug-finder (Codex, MCP, pass 90%) -->
+                    <div class="id-card">
+                        <div class="card-avatar"><img src="../../assets/ui/avatars/bug-finder.jpg" alt="demo-bug-finder"></div>
+                        <div class="card-body">
+                            <div class="card-head">
+                                <h3 class="card-name">demo-bug-finder</h3>
+                                <span class="status-badge status-pass">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/circle-check.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/circle-check.svg');" class="w-3 h-3"></span>
+                                    90%
+                                </span>
+                            </div>
+                            <p class="card-desc">静态分析与模式匹配定位潜在缺陷，输出修复建议</p>
+                            <div class="card-meta">
+                                <span class="agent-badge agent-badge-codex">Codex</span>
+                                <span class="type-badge">MCP</span>
+                                <span class="scope-tag">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); color: var(--icon-tertiary);" class="w-3 h-3"></span>
+                                    项目
+                                </span>
+                            </div>
+                            <div class="card-tools">
+                                <span class="tool-pill">grep</span>
+                                <span class="tool-pill">glob</span>
+                                <span class="tool-pill">shell</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 6: demo-api-mock (MiMo, Prompt, warning 45%) -->
+                    <div class="id-card">
+                        <div class="card-avatar"><img src="../../assets/ui/avatars/api-mock.jpg" alt="demo-api-mock"></div>
+                        <div class="card-body">
+                            <div class="card-head">
+                                <h3 class="card-name">demo-api-mock</h3>
+                                <span class="status-badge status-warn">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/triangle-alert.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/triangle-alert.svg');" class="w-3 h-3"></span>
+                                    45%
+                                </span>
+                            </div>
+                            <p class="card-desc">根据接口定义生成 Mock 服务与测试数据，校验未通过</p>
+                            <div class="card-meta">
+                                <span class="agent-badge agent-badge-mimo">MiMo</span>
+                                <span class="type-badge">Prompt</span>
+                                <span class="scope-tag">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); color: var(--icon-tertiary);" class="w-3 h-3"></span>
+                                    局部
+                                </span>
+                            </div>
+                            <div class="card-tools">
+                                <span class="tool-pill">edit</span>
+                                <span class="tool-pill">shell</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 7: demo-perf-check (ZCode, Skill, pass 88%) -->
+                    <div class="id-card">
+                        <div class="card-avatar"><img src="../../assets/ui/avatars/perf-check.jpg" alt="demo-perf-check"></div>
+                        <div class="card-body">
+                            <div class="card-head">
+                                <h3 class="card-name">demo-perf-check</h3>
+                                <span class="status-badge status-pass">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/circle-check.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/circle-check.svg');" class="w-3 h-3"></span>
+                                    88%
+                                </span>
+                            </div>
+                            <p class="card-desc">性能基线检测与瓶颈分析，生成优化报告</p>
+                            <div class="card-meta">
+                                <span class="agent-badge agent-badge-zcode">ZCode</span>
+                                <span class="type-badge">Skill</span>
+                                <span class="scope-tag">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); color: var(--icon-tertiary);" class="w-3 h-3"></span>
+                                    项目
+                                </span>
+                            </div>
+                            <div class="card-tools">
+                                <span class="tool-pill">shell</span>
+                                <span class="tool-pill">file-read</span>
+                                <span class="tool-pill">grep</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 8: demo-sec-scan (Claude, MCP, fail 23%) -->
+                    <div class="id-card">
+                        <div class="card-avatar"><img src="../../assets/ui/avatars/sec-scan.jpg" alt="demo-sec-scan"></div>
+                        <div class="card-body">
+                            <div class="card-head">
+                                <h3 class="card-name">demo-sec-scan</h3>
+                                <span class="status-badge status-fail">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/circle-alert.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/circle-alert.svg');" class="w-3 h-3"></span>
+                                    23%
+                                </span>
+                            </div>
+                            <p class="card-desc">依赖漏洞与安全配置扫描，存在多项高风险告警</p>
+                            <div class="card-meta">
+                                <span class="agent-badge agent-badge-claude">Claude</span>
+                                <span class="type-badge">MCP</span>
+                                <span class="scope-tag">
+                                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/tag.svg'); color: var(--icon-tertiary);" class="w-3 h-3"></span>
+                                    全局
+                                </span>
+                            </div>
+                            <div class="card-tools">
+                                <span class="tool-pill">grep</span>
+                                <span class="tool-pill">glob</span>
+                                <span class="tool-pill">shell</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /card-grid -->
+            </section>
+
+        </div><!-- /app-shell -->
+
+        <!-- ====== DETAIL DRAWER ====== -->
+        <div class="drawer-backdrop"></div>
+        <aside class="detail-drawer">
+            <!-- Header -->
+            <div class="drawer-header">
+                <div class="drawer-avatar"><img src="../../assets/ui/avatars/code-reviewer.jpg" alt="demo-code-reviewer"></div>
+                <div class="flex flex-col">
+                    <span class="text-body-base-strong" style="color: var(--tw-foreground); font-family: var(--font-mono);">demo-code-reviewer</span>
+                    <span class="agent-badge agent-badge-claude" style="align-self: flex-start; margin-top: var(--spacer-4);">Claude</span>
+                </div>
+                <button class="drawer-close">
+                    <span data-icon style="mask-image:url('../assets/icons/dl_builtin_trae_work/chevron-right.svg'); -webkit-mask-image:url('../assets/icons/dl_builtin_trae_work/chevron-right.svg');" class="w-4 h-4"></span>
+                </button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="drawer-tabs">
+                <button class="tab active">概览</button>
+                <button class="tab">原文</button>
+                <button class="tab">校验</button>
+                <button class="tab">跨Agent生成</button>
+            </div>
+
+            <!-- Body -->
+            <div class="drawer-body">
+                <!-- Score section -->
+                <div style="margin-bottom: var(--spacer-24);">
+                    <div class="flex items-center justify-between" style="margin-bottom: var(--spacer-8);">
+                        <span class="text-eyebrow" style="color: var(--text-tertiary);">校验得分</span>
+                        <span class="text-heading-md" style="color: var(--status-success-default);">85%</span>
+                    </div>
+                    <div class="score-bar-track">
+                        <div class="score-bar-fill" style="width: 85%; background: var(--status-success-default);"></div>
+                    </div>
+                </div>
+
+                <!-- Info table -->
+                <table class="info-table" style="margin-bottom: var(--spacer-24);">
+                    <tbody>
+                        <tr><th>名称</th><td>demo-code-reviewer</td></tr>
+                        <tr><th>Agent</th><td>Claude</td></tr>
+                        <tr><th>类型</th><td>Skill</td></tr>
+                        <tr><th>范围</th><td>项目</td></tr>
+                        <tr><th>状态</th><td style="color: var(--status-success-default);">已校验</td></tr>
+                    </tbody>
+                </table>
+
+                <!-- Tools -->
+                <div style="margin-bottom: var(--spacer-24);">
+                    <div class="text-eyebrow" style="color: var(--text-tertiary); margin-bottom: var(--spacer-8);">工具</div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="tool-pill">file-read</span>
+                        <span class="tool-pill">edit</span>
+                        <span class="tool-pill">shell</span>
+                        <span class="tool-pill">grep</span>
+                        <span class="tool-pill">glob</span>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <div class="text-eyebrow" style="color: var(--text-tertiary); margin-bottom: var(--spacer-8);">描述</div>
+                    <p class="text-body-base m-0" style="color: var(--text-secondary);">
+                        面向 Pull Request 的自动化代码审查助手。扫描 Git diff，识别潜在缺陷、风格违规与安全风险，并给出可操作的修改建议。支持多语言项目，可与 Claude Agent 协同完成深度语义审查。
+                    </p>
+                </div>
+            </div>
+        </aside>
+
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
